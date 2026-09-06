@@ -1,20 +1,62 @@
 {
-	// pages 数组中第一项表示应用启动页,参考:https://uniapp.dcloud.io/collocation/pages
+	// pages 数组中第一项是启动页。参考:https://uniapp.dcloud.io/collocation/pages
 	"pages": [
 		{
 			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "汕头乡会"
-			}
+			"style": { "navigationBarTitleText": "汕头乡会" }
+		},
+		{
+			// 地图页要沉浸式,所以隐藏原生导航栏;顶部安全区由页面自己处理
+			"path": "pages/map/index",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/member/list",
+			"style": { "navigationBarTitleText": "乡贤名录" }
+		},
+		{
+			"path": "pages/member/detail",
+			"style": { "navigationBarTitleText": "成员资料" }
+		},
+		{
+			"path": "pages/event/list",
+			"style": { "navigationBarTitleText": "乡会活动" }
+		},
+		{
+			"path": "pages/event/detail",
+			"style": { "navigationBarTitleText": "活动详情" }
+		},
+		{
+			"path": "pages/notice/detail",
+			"style": { "navigationBarTitleText": "公告" }
+		},
+		{
+			"path": "pages/mine/index",
+			"style": { "navigationBarTitleText": "我的" }
 		}
 	],
-	// easycom:TDesign 官方推荐的按需自动导入方式。
-	// 配置后模板里直接写 <t-button> 即可,无需 import;不要改成 app.use() 全量导入,
-	// 官方明确说明全量导入在小程序下有兼容性问题。
+	// easycom:TDesign 官方推荐的按需自动导入。模板里直接写 <t-button> 即可。
+	// 不要改成 main.ts 里 app.use() 全量导入 —— 官方明确说明小程序下会有兼容问题。
 	"easycom": {
 		"custom": {
 			"^t-(.*)": "@tdesign/uniapp/$1/$1.vue"
 		}
+	},
+	// ★ 当前刻意不配 iconPath:微信小程序 tabBar 的图标是可选字段,缺省即纯文字。
+	//   素材到位后,给每个 list 项补 "iconPath" 与 "selectedIconPath" 两个字段,
+	//   文件放 src/static/tabbar/,必须是 PNG(SVG 不被支持),建议 81×81。
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#0052d9",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "white",
+		"list": [
+			{ "pagePath": "pages/index/index", "text": "首页" },
+			{ "pagePath": "pages/map/index", "text": "地图" },
+			{ "pagePath": "pages/member/list", "text": "乡贤" },
+			{ "pagePath": "pages/event/list", "text": "活动" },
+			{ "pagePath": "pages/mine/index", "text": "我的" }
+		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

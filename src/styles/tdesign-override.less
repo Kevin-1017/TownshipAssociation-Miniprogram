@@ -1,0 +1,33 @@
+/**
+ * TDesign 设计 token 覆盖 —— 全项目唯一的主题色出口。
+ *
+ * 用法:换乡会 VI 时只改这个文件,所有组件与页面跟着变。
+ * 顺序要求在 main.ts 里保证(theme.less 先,本文件后)。
+ *
+ * TDesign 用 CSS 自定义属性驱动主题,所以这里覆盖变量而不是重写组件样式 ——
+ * 后者会在升级组件库时全丢掉。
+ */
+
+page {
+  /* 品牌色:主按钮、选中态、tabBar 高亮 */
+  --td-brand-color: #0052d9;
+  --td-brand-color-light: #d9e1ff;
+  --td-brand-color-disabled: #a5b8ff;
+  --td-brand-color-focus: #e8f0ff;
+  --td-brand-color-active: #003cab;
+
+  /* 文字 */
+  --td-text-color-primary: rgba(0, 0, 0, 0.9);
+  --td-text-color-secondary: rgba(0, 0, 0, 0.6);
+  --td-text-color-placeholder: rgba(0, 0, 0, 0.4);
+
+  /* 背景与描边 */
+  --td-bg-color-page: #f5f5f5;
+  --td-bg-color-container: #ffffff;
+  --td-border-level-1-color: #e7e7e7;
+  --td-component-border: #dcdcdc;
+
+  /* 圆角:乡会偏稳重,比默认略收一点 */
+  --td-radius-default: 12rpx;
+  --td-radius-large: 16rpx;
+}

@@ -1,0 +1,10 @@
+dist
+node_modules
+unpackage
+package-lock.json
+
+# ★ uni-app 的这两个配置文件带 // 注释(Prettier 的 JSON 解析器不支持注释,
+#   强行格式化会报错或吃掉注释)。这两个文件由 DCloud 的 lenient 解析器读取,
+#   保持手写格式,不要交给 Prettier。
+src/pages.json
+src/manifest.json

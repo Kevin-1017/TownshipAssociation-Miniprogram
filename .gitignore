@@ -26,3 +26,5 @@ unpackage/
 *.njsproj
 *.sln
 *.sw?
+# husky 生成的运行时装载脚本,不提交
+.husky/_
