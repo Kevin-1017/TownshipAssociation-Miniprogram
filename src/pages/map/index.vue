@@ -1,74 +1,3 @@
-<template>
-  <view class="map-page">
-    <map
-      id="memberMap"
-      class="map-page__map"
-      :latitude="center.lat"
-      :longitude="center.lng"
-      :scale="scale"
-      :markers="markers"
-      :enable-zoom="true"
-      :enable-scroll="true"
-      :enable-rotate="false"
-      :show-location="false"
-      @markertap="onMarkerTap"
-      @callouttap="onMarkerTap"
-    />
-
-    <!--
-      ★ map 是原生组件,层级高于普通 view。浮在它上面的 UI 必须用 cover-view / cover-image。
-        微信基础库支持同层渲染后 t-popup 也能盖住 map,但旧版本上会穿帮 ——
-        所以成员卡片这类"必须浮在地图上"的用 cover-view,筛选面板这种
-        打开后就该盖住地图的用 t-popup。详见 docs/MAP.md。
-    -->
-
-    <cover-view class="map-page__stat" :style="{ top: topInset + 'px' }">
-      <cover-view class="map-page__stat-num">{{ shown }} / {{ total }}</cover-view>
-      <cover-view class="map-page__stat-label">位乡贤在图</cover-view>
-    </cover-view>
-
-    <cover-view class="map-page__views" :style="{ top: topInset + 'px' }">
-      <cover-view
-        class="map-page__view-btn"
-        :class="{ 'is-on': view === 'hometown' }"
-        @tap="goHometown"
-      >
-        家乡
-      </cover-view>
-      <cover-view
-        class="map-page__view-btn"
-        :class="{ 'is-on': view === 'nation' }"
-        @tap="goNation"
-      >
-        全国
-      </cover-view>
-    </cover-view>
-
-    <cover-view class="map-page__filter" @tap="showFilter = true">
-      <cover-view class="map-page__filter-text">{{ store.label || '筛选条件' }}</cover-view>
-      <cover-view class="map-page__filter-arrow">⌄</cover-view>
-    </cover-view>
-
-    <cover-view v-if="selected" class="map-page__popup safe-bottom" @tap="goDetail">
-      <cover-image v-if="selected.avatar" class="map-page__avatar" :src="selected.avatar" />
-      <cover-view v-else class="map-page__avatar map-page__avatar--char">
-        {{ selected.name.slice(0, 1) }}
-      </cover-view>
-      <cover-view class="map-page__popup-body">
-        <cover-view class="map-page__popup-name">{{ selected.name }}</cover-view>
-        <cover-view class="map-page__popup-meta">
-          {{ selected.city.replace('市', '') }} · {{ industryLabel(selected.industry) }}
-        </cover-view>
-      </cover-view>
-      <cover-view class="map-page__popup-go">查看资料 ›</cover-view>
-    </cover-view>
-
-    <t-popup v-model:visible="showFilter" placement="bottom">
-      <TsaFilterBar :all-points="allPoints" @confirm="onFilterConfirm" />
-    </t-popup>
-  </view>
-</template>
-
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { memberApi } from '@/api/member'
@@ -133,18 +62,6 @@ const markers = computed(() =>
   })),
 )
 
-onMounted(async () => {
-  // navigationStyle: custom,所以要自己让开状态栏,否则按钮压在信号栏上
-  try {
-    const info = uni.getSystemInfoSync()
-    topInset.value = (info.statusBarHeight ?? 20) + 12
-  } catch {
-    topInset.value = 44
-  }
-
-  allPoints.value = await memberApi.getMapData()
-})
-
 function onMarkerTap(e: MarkerTapDetail | { detail: MarkerTapDetail }) {
   const detail = (e as { detail?: MarkerTapDetail }).detail ?? (e as MarkerTapDetail)
   const id = detail.markerId ?? detail.marker?.id
@@ -177,7 +94,90 @@ function goDetail() {
   if (!selected.value) return
   uni.navigateTo({ url: `/pages/member/detail?id=${selected.value.id}` })
 }
+
+onMounted(async () => {
+  // navigationStyle: custom,所以要自己让开状态栏,否则按钮压在信号栏上
+  try {
+    const info = uni.getSystemInfoSync()
+    topInset.value = (info.statusBarHeight ?? 20) + 12
+  } catch {
+    topInset.value = 44
+  }
+
+  allPoints.value = await memberApi.getMapData()
+})
 </script>
+
+<template>
+  <view class="map-page">
+    <map
+      id="memberMap"
+      class="map-page__map"
+      :latitude="center.lat"
+      :longitude="center.lng"
+      :scale="scale"
+      :markers="markers"
+      :enable-zoom="true"
+      :enable-scroll="true"
+      :enable-rotate="false"
+      :show-location="false"
+      @markertap="onMarkerTap"
+      @callouttap="onMarkerTap"
+    />
+
+    <!--
+      ★ map 是原生组件,层级高于普通 view。浮在它上面的 UI 必须用 cover-view / cover-image。
+        微信基础库支持同层渲染后 t-popup 也能盖住 map,但旧版本上会穿帮 ——
+        所以成员卡片这类"必须浮在地图上"的用 cover-view,筛选面板这种
+        打开后就该盖住地图的用 t-popup。详见 docs/TECHNOLOGY.md §6。
+    -->
+
+    <cover-view class="map-page__stat" :style="{ top: topInset + 'px' }">
+      <cover-view class="map-page__stat-num">{{ shown }} / {{ total }}</cover-view>
+      <cover-view class="map-page__stat-label">位乡贤在图</cover-view>
+    </cover-view>
+
+    <cover-view class="map-page__views" :style="{ top: topInset + 'px' }">
+      <cover-view
+        class="map-page__view-btn"
+        :class="{ 'is-on': view === 'hometown' }"
+        @tap="goHometown"
+      >
+        家乡
+      </cover-view>
+      <cover-view
+        class="map-page__view-btn"
+        :class="{ 'is-on': view === 'nation' }"
+        @tap="goNation"
+      >
+        全国
+      </cover-view>
+    </cover-view>
+
+    <cover-view class="map-page__filter" @tap="showFilter = true">
+      <cover-view class="map-page__filter-text">{{ store.label || '筛选条件' }}</cover-view>
+      <cover-view class="map-page__filter-arrow">⌄</cover-view>
+    </cover-view>
+
+    <cover-view v-if="selected" class="map-page__popup safe-bottom" @tap="goDetail">
+      <cover-image v-if="selected.avatar" class="map-page__avatar" :src="selected.avatar" />
+      <cover-view v-else class="map-page__avatar map-page__avatar--char">
+        {{ selected.name.slice(0, 1) }}
+      </cover-view>
+      <cover-view class="map-page__popup-body">
+        <cover-view class="map-page__popup-name">{{ selected.name }}</cover-view>
+        <cover-view class="map-page__popup-meta">
+          {{ selected.city.replace('市', '') }} · {{ industryLabel(selected.industry) }}
+        </cover-view>
+      </cover-view>
+      <cover-view class="map-page__popup-go">查看资料 ›</cover-view>
+    </cover-view>
+
+    <t-popup v-model:visible="showFilter" placement="bottom">
+      <TsaFilterBar :all-points="allPoints" @confirm="onFilterConfirm" />
+    </t-popup>
+  </view>
+</template>
 
 <style lang="less" scoped>
 .map-page {

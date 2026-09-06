@@ -1,50 +1,3 @@
-<template>
-  <view class="page elist">
-    <view class="elist__tabs">
-      <text
-        v-for="t in TABS"
-        :key="t.value"
-        class="elist__tab"
-        :class="{ 'is-on': active === t.value }"
-        @click="switchTab(t.value)"
-      >
-        {{ t.label }}
-      </text>
-    </view>
-
-    <view v-for="e in list" :key="e.id" class="card elist__item" @click="goDetail(e.id)">
-      <view class="row row--between">
-        <t-tag :theme="statusTheme(e.status)" variant="light" size="small">
-          {{ statusLabel(e.status) }}
-        </t-tag>
-        <text class="text-placeholder">{{ e.city }}</text>
-      </view>
-
-      <text class="elist__title ellipsis-2">{{ e.title }}</text>
-      <text class="elist__time">{{ formatMonthDay(e.startTime) }} 开始</text>
-      <text class="elist__addr ellipsis">{{ e.address }}</text>
-
-      <view class="row row--between elist__foot">
-        <text class="text-secondary">
-          已报 {{ e.registeredCount }}
-          <text v-if="e.quota">/ {{ e.quota }}</text>
-          人
-        </text>
-        <text class="elist__btn" :class="{ 'is-off': e.status !== 'upcoming' }">
-          {{ e.status === 'upcoming' ? '查看详情' : '查看回顾' }}
-        </text>
-      </view>
-    </view>
-
-    <view v-if="!loading && list.length === 0" class="elist__empty">
-      <t-empty description="这个状态下还没有活动" />
-    </view>
-    <view v-if="loading" class="elist__loading">
-      <t-loading theme="circular" size="40rpx" text="加载中" />
-    </view>
-  </view>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
@@ -92,10 +45,57 @@ function switchTab(v: EventStatus | '') {
   load()
 }
 
-onShow(load)
-
 const goDetail = (id: string) => uni.navigateTo({ url: `/pages/event/detail?id=${id}` })
+
+onShow(load)
 </script>
+
+<template>
+  <view class="page elist">
+    <view class="elist__tabs">
+      <text
+        v-for="t in TABS"
+        :key="t.value"
+        class="elist__tab"
+        :class="{ 'is-on': active === t.value }"
+        @click="switchTab(t.value)"
+      >
+        {{ t.label }}
+      </text>
+    </view>
+
+    <view v-for="e in list" :key="e.id" class="card elist__item" @click="goDetail(e.id)">
+      <view class="row row--between">
+        <t-tag :theme="statusTheme(e.status)" variant="light" size="small">
+          {{ statusLabel(e.status) }}
+        </t-tag>
+        <text class="text-placeholder">{{ e.city }}</text>
+      </view>
+
+      <text class="elist__title ellipsis-2">{{ e.title }}</text>
+      <text class="elist__time">{{ formatMonthDay(e.startTime) }} 开始</text>
+      <text class="elist__addr ellipsis">{{ e.address }}</text>
+
+      <view class="row row--between elist__foot">
+        <text class="text-secondary">
+          已报 {{ e.registeredCount }}
+          <text v-if="e.quota">/ {{ e.quota }}</text>
+          人
+        </text>
+        <text class="elist__btn" :class="{ 'is-off': e.status !== 'upcoming' }">
+          {{ e.status === 'upcoming' ? '查看详情' : '查看回顾' }}
+        </text>
+      </view>
+    </view>
+
+    <view v-if="!loading && list.length === 0" class="elist__empty">
+      <t-empty description="这个状态下还没有活动" />
+    </view>
+    <view v-if="loading" class="elist__loading">
+      <t-loading theme="circular" size="40rpx" text="加载中" />
+    </view>
+  </view>
+</template>
 
 <style lang="less" scoped>
 .elist__tabs {

@@ -1,3 +1,55 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
+import { memberApi } from '@/api/member'
+import { industryLabel } from '@/constants/industry'
+import { formatGrade } from '@/utils/format'
+import type { MemberDetail } from '@/types/member'
+
+/**
+ * 成员详情。
+ *
+ * contactVisible 在这里控制**前端渲染**,但真正的权限过滤必须在后端做 ——
+ * 前端隐藏不等于数据没下发。这条已记入 docs/API.md 的「隐私」一节。
+ */
+
+const member = ref<MemberDetail | null>(null)
+
+const basicRows = computed(() => {
+  const m = member.value
+  if (!m) return []
+  return [
+    { k: '性别', v: m.gender === 1 ? '男' : m.gender === 2 ? '女' : '未填' },
+    { k: '常驻地', v: `${m.province} ${m.city}${m.district ? ' ' + m.district : ''}` },
+    { k: '行业', v: industryLabel(m.industry) },
+    { k: '毕业院校', v: m.school },
+    { k: '专业', v: m.major },
+    { k: '届别', v: formatGrade(m.graduationYear) },
+    { k: '入会时间', v: m.joinedAt },
+  ]
+})
+
+function copyContact() {
+  if (!member.value?.contactVisible) return
+  uni.setClipboardData({
+    data: member.value.wechatId ?? '',
+    success: () => uni.showToast({ title: '微信号已复制', icon: 'success' }),
+  })
+}
+
+onLoad(async (query) => {
+  const id = (query as Record<string, string>)?.id
+  if (!id) {
+    uni.showToast({ title: '缺少成员 id', icon: 'none' })
+    return
+  }
+  member.value = await memberApi.getDetail(id)
+  if (member.value) {
+    uni.setNavigationBarTitle({ title: member.value.name })
+  }
+})
+</script>
+
 <template>
   <view class="page detail">
     <view v-if="!member" class="detail__loading">
@@ -63,58 +115,6 @@
     </template>
   </view>
 </template>
-
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
-import { memberApi } from '@/api/member'
-import { industryLabel } from '@/constants/industry'
-import { formatGrade } from '@/utils/format'
-import type { MemberDetail } from '@/types/member'
-
-/**
- * 成员详情。
- *
- * contactVisible 在这里控制**前端渲染**,但真正的权限过滤必须在后端做 ——
- * 前端隐藏不等于数据没下发。这条已记入 docs/API.md 的「隐私」一节。
- */
-
-const member = ref<MemberDetail | null>(null)
-
-const basicRows = computed(() => {
-  const m = member.value
-  if (!m) return []
-  return [
-    { k: '性别', v: m.gender === 1 ? '男' : m.gender === 2 ? '女' : '未填' },
-    { k: '常驻地', v: `${m.province} ${m.city}${m.district ? ' ' + m.district : ''}` },
-    { k: '行业', v: industryLabel(m.industry) },
-    { k: '毕业院校', v: m.school },
-    { k: '专业', v: m.major },
-    { k: '届别', v: formatGrade(m.graduationYear) },
-    { k: '入会时间', v: m.joinedAt },
-  ]
-})
-
-onLoad(async (query) => {
-  const id = (query as Record<string, string>)?.id
-  if (!id) {
-    uni.showToast({ title: '缺少成员 id', icon: 'none' })
-    return
-  }
-  member.value = await memberApi.getDetail(id)
-  if (member.value) {
-    uni.setNavigationBarTitle({ title: member.value.name })
-  }
-})
-
-function copyContact() {
-  if (!member.value?.contactVisible) return
-  uni.setClipboardData({
-    data: member.value.wechatId ?? '',
-    success: () => uni.showToast({ title: '微信号已复制', icon: 'success' }),
-  })
-}
-</script>
 
 <style lang="less" scoped>
 .detail {

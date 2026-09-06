@@ -49,6 +49,22 @@ export default [
 
   {
     rules: {
+      // ── SFC 结构:块顺序与宏顺序 ────────────────────────────
+      // 本项目约定 <script> → <template> → <style>(与 Vue 官方默认相反)。
+      // 理由:先读逻辑再读结构,滚动时"这个组件做什么"在最上面。
+      // 本条可 autofix,eslint --fix 会自动重排块。
+      // 注:eslint-plugin-vue v10 里叫 vue/block-order,
+      //     旧名 vue/component-tags-order 已移除,写了会在启动时直接 TypeError。
+      'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
+      // script setup 内部第一层必须是 defineProps / defineEmits —— 组件接口先行。
+      // 更细的 refs→computed→watch→methods→lifecycle 顺序无法用规则表达,
+      // 由 docs/DEVELOPMENT.md 与 vue-sfc-spec skill 约束。
+      'vue/define-macros-order': [
+        'error',
+        { order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'] },
+      ],
+
+      // ── 其余规则 ──────────────────────────────────────────
       // uni-app 页面约定:pages/xxx/index.vue、list.vue、detail.vue
       'vue/multi-word-component-names': 'off',
       // 小程序页面样式需要全局生效的能力,不强求

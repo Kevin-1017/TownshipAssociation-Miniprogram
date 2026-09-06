@@ -12,7 +12,7 @@ import './styles/common.less'
 
 export function createApp() {
   const app = createSSRApp(App)
-  // 只建两个 store,见 docs/ARCHITECTURE.md 的「什么状态该进 Pinia」
+  // 只建两个 store,见 docs/DEVELOPMENT.md 的「什么状态该进 Pinia」
   app.use(createPinia())
   return { app }
 }

@@ -42,7 +42,7 @@ const jitter = (v, deg) => v + (rng() - 0.5) * 2 * deg
 
 // ---------- 家乡:汕头 ----------
 // 坐标为 GCJ-02(腾讯/高德地图拾取器出来的即是),与微信 map 底图同坐标系。
-// 详见 docs/MAP.md 的坐标系一节。
+// 坐标系与偏移说明见 docs/TECHNOLOGY.md §6。
 const HOMETOWN = {
   province: '广东省',
   city: '汕头市',

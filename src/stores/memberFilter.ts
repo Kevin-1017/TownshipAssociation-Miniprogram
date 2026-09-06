@@ -11,7 +11,7 @@ import type { MemberMapPoint } from '@/types/member'
  * 这是真实的跨页面共享状态,不是「为了用 Pinia 而用」。
  *
  * 对比:当前选中的某个成员、弹窗开合、表单草稿,这些都是单页面内的临时状态,
- * 该留在组件里的 ref,不要往这里塞。判断标准见 docs/ARCHITECTURE.md。
+ * 该留在组件里的 ref,不要往这里塞。判断标准见 docs/DEVELOPMENT.md §5。
  */
 export const useMemberFilterStore = defineStore('memberFilter', () => {
   const province = ref<string>('')

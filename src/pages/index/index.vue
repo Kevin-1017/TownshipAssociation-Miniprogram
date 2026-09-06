@@ -1,3 +1,47 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
+import { memberApi } from '@/api/member'
+import { noticeApi } from '@/api/notice'
+import { eventApi } from '@/api/event'
+import { formatDate, formatRelative } from '@/utils/format'
+import type { NoticeItem } from '@/types/notice'
+import type { ProvinceStat } from '@/types/member'
+
+/** 首页只做取数与展示,不做业务判断 —— 见 docs/DEVELOPMENT.md §3 */
+
+const notices = ref<NoticeItem[]>([])
+const topProvinces = ref<ProvinceStat[]>([])
+const memberTotal = ref(0)
+const upcomingCount = ref(0)
+
+const today = formatDate(new Date().toISOString())
+
+// 排行榜条宽按最大值归一
+const maxCount = computed(() => topProvinces.value[0]?.count || 1)
+function barWidth(count: number) {
+  return `${Math.max(6, Math.round((count / maxCount.value) * 100))}%`
+}
+
+async function load() {
+  const [stats, noticeList, events] = await Promise.all([
+    memberApi.getProvinceStats(),
+    noticeApi.getList(),
+    eventApi.getList({ pageSize: 50 }),
+  ])
+  topProvinces.value = stats
+  memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
+  notices.value = noticeList
+  upcomingCount.value = events.list.filter((e) => e.status === 'upcoming').length
+}
+
+const goMap = () => uni.switchTab({ url: '/pages/map/index' })
+const goNotice = (id: string) => uni.navigateTo({ url: `/pages/notice/detail?id=${id}` })
+
+// 用 onShow 而不是 onMounted:从地图页返回时也要刷新统计
+onShow(load)
+</script>
+
 <template>
   <view class="page home">
     <!-- 乡会简介 -->
@@ -68,50 +112,6 @@
     </view>
   </view>
 </template>
-
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
-import { memberApi } from '@/api/member'
-import { noticeApi } from '@/api/notice'
-import { eventApi } from '@/api/event'
-import { formatDate, formatRelative } from '@/utils/format'
-import type { NoticeItem } from '@/types/notice'
-import type { ProvinceStat } from '@/types/member'
-
-/** 首页只做取数与展示,不做业务判断 —— 见 docs/ARCHITECTURE.md */
-
-const notices = ref<NoticeItem[]>([])
-const topProvinces = ref<ProvinceStat[]>([])
-const memberTotal = ref(0)
-const upcomingCount = ref(0)
-
-const today = formatDate(new Date().toISOString())
-
-// 排行榜条宽按最大值归一
-const maxCount = computed(() => topProvinces.value[0]?.count || 1)
-function barWidth(count: number) {
-  return `${Math.max(6, Math.round((count / maxCount.value) * 100))}%`
-}
-
-async function load() {
-  const [stats, noticeList, events] = await Promise.all([
-    memberApi.getProvinceStats(),
-    noticeApi.getList(),
-    eventApi.getList({ pageSize: 50 }),
-  ])
-  topProvinces.value = stats
-  memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
-  notices.value = noticeList
-  upcomingCount.value = events.list.filter((e) => e.status === 'upcoming').length
-}
-
-// 用 onShow 而不是 onMounted:从地图页返回时也要刷新统计
-onShow(load)
-
-const goMap = () => uni.switchTab({ url: '/pages/map/index' })
-const goNotice = (id: string) => uni.navigateTo({ url: `/pages/notice/detail?id=${id}` })
-</script>
 
 <style lang="less" scoped>
 .home {

@@ -1,3 +1,24 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
+import { eventApi } from '@/api/event'
+import { formatMonthDay } from '@/utils/format'
+import type { EventDetail } from '@/types/event'
+
+const event = ref<EventDetail | null>(null)
+
+function callOrganizer() {
+  if (!event.value) return
+  uni.makePhoneCall({ phoneNumber: event.value.contactPhone })
+}
+
+onLoad(async (query) => {
+  const id = (query as Record<string, string>)?.id
+  if (id) event.value = await eventApi.getDetail(id)
+  if (event.value) uni.setNavigationBarTitle({ title: event.value.title })
+})
+</script>
+
 <template>
   <view class="page edetail">
     <template v-if="event">
@@ -60,27 +81,6 @@
     </view>
   </view>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
-import { eventApi } from '@/api/event'
-import { formatMonthDay } from '@/utils/format'
-import type { EventDetail } from '@/types/event'
-
-const event = ref<EventDetail | null>(null)
-
-onLoad(async (query) => {
-  const id = (query as Record<string, string>)?.id
-  if (id) event.value = await eventApi.getDetail(id)
-  if (event.value) uni.setNavigationBarTitle({ title: event.value.title })
-})
-
-function callOrganizer() {
-  if (!event.value) return
-  uni.makePhoneCall({ phoneNumber: event.value.contactPhone })
-}
-</script>
 
 <style lang="less" scoped>
 .edetail {

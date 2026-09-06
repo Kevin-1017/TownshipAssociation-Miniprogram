@@ -29,7 +29,7 @@ export const CODE_UNAUTHORIZED = 401
  *     PromisifySuccessResultLegacy  → Promise<[any, Result]>
  *   走哪一套取决于 uni-app 版本与平台配置。显式传 success/fail 回调
  *   能把返回值形状锁死在自己手里,不受版本影响。
- *   这条已记入 docs/FAQ.md。
+ *   这条已记入 docs/DEVELOPMENT.md §6.2。
  */
 function rawRequest<T>(opts: RequestOptions): Promise<Result<T>> {
   return new Promise((resolve, reject) => {

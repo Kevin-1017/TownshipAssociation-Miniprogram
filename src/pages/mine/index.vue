@@ -1,3 +1,64 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
+import { memberApi } from '@/api/member'
+import { industryLabel } from '@/constants/industry'
+
+/**
+ * 我的 —— 第一阶段占位页。
+ *
+ * 「mock 登录」调的是假接口(不校验 code,直接发假 token),
+ * 只为了让这条链路在 UI 上走得通、可演示。真正的微信登录要等
+ * tsa-api 提供 code2session,见 docs/API.md「鉴权」。
+ */
+
+const version = '0.1.0'
+const nodeHint = '24 LTS'
+
+const MENUS = [
+  { label: '我的资料', hint: '第二阶段', action: 'todo' },
+  { label: '我的报名', hint: '第二阶段', action: 'todo' },
+  { label: '乡会架构与理事名单', hint: '待补内容', action: 'todo' },
+  { label: '联系秘书处', hint: '', action: 'call' },
+  { label: '意见反馈', hint: '', action: 'todo' },
+] as const
+
+const user = useUserStore()
+const { isLogin } = storeToRefs(user)
+
+const memberTotal = ref(0)
+const myCityCount = ref(0)
+
+async function onLogin() {
+  if (user.isLogin) {
+    user.logout()
+    uni.showToast({ title: '已退出(mock)', icon: 'none' })
+    return
+  }
+  await user.loginWithCode('mock-code')
+  uni.showToast({ title: 'mock 登录成功', icon: 'success' })
+}
+
+function onMenu(m: (typeof MENUS)[number]) {
+  if (m.action === 'call') {
+    uni.makePhoneCall({ phoneNumber: '07548888000' })
+    return
+  }
+  uni.showToast({ title: `${m.label}:该功能在第二阶段实现`, icon: 'none' })
+}
+
+onShow(async () => {
+  if (isLogin.value) await user.fetchProfile()
+  const stats = await memberApi.getProvinceStats()
+  memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
+  myCityCount.value = (
+    await memberApi.getList({ city: user.profile?.city || '汕头市', pageSize: 1 })
+  ).total
+})
+</script>
+
 <template>
   <view class="page mine">
     <view class="mine__hero">
@@ -51,66 +112,6 @@
     </view>
   </view>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/stores/user'
-import { memberApi } from '@/api/member'
-import { industryLabel } from '@/constants/industry'
-
-/**
- * 我的 —— 第一阶段占位页。
- *
- * 「mock 登录」调的是假接口(不校验 code,直接发假 token),
- * 只为了让这条链路在 UI 上走得通、可演示。真正的微信登录要等
- * tsa-api 提供 code2session,见 docs/API.md「鉴权」。
- */
-
-const user = useUserStore()
-const { isLogin } = storeToRefs(user)
-
-const memberTotal = ref(0)
-const myCityCount = ref(0)
-const version = '0.1.0'
-const nodeHint = '24 LTS'
-
-const MENUS = [
-  { label: '我的资料', hint: '第二阶段', action: 'todo' },
-  { label: '我的报名', hint: '第二阶段', action: 'todo' },
-  { label: '乡会架构与理事名单', hint: '待补内容', action: 'todo' },
-  { label: '联系秘书处', hint: '', action: 'call' },
-  { label: '意见反馈', hint: '', action: 'todo' },
-] as const
-
-onShow(async () => {
-  if (isLogin.value) await user.fetchProfile()
-  const stats = await memberApi.getProvinceStats()
-  memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
-  myCityCount.value = (
-    await memberApi.getList({ city: user.profile?.city || '汕头市', pageSize: 1 })
-  ).total
-})
-
-async function onLogin() {
-  if (user.isLogin) {
-    user.logout()
-    uni.showToast({ title: '已退出(mock)', icon: 'none' })
-    return
-  }
-  await user.loginWithCode('mock-code')
-  uni.showToast({ title: 'mock 登录成功', icon: 'success' })
-}
-
-function onMenu(m: (typeof MENUS)[number]) {
-  if (m.action === 'call') {
-    uni.makePhoneCall({ phoneNumber: '07548888000' })
-    return
-  }
-  uni.showToast({ title: `${m.label}:该功能在第二阶段实现`, icon: 'none' })
-}
-</script>
 
 <style lang="less" scoped>
 .mine {

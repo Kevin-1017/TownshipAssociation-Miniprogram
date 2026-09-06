@@ -145,7 +145,7 @@ GET /user/me   → MemberDetail | null    // 未登录返回 code=401
 | 时间一律 **ISO 8601 字符串带时区**(如 `2026-09-27T18:00:00+08:00`) | 数字时间戳没有时区语义;格式化在前端做,后端不返回中文日期 |
 | `id` 用字符串业务编号(`m0001` / `e001` / `n001`)                   | 不用数据库自增 int 暴露在 URL 上,避免被遍历猜量          |
 | 字典存 code,不存中文(`industry: "trade"`)                          | 中文改名不动数据;`src/constants/industry.ts` 是映射表    |
-| 坐标字段 `lat` / `lng`,GCJ-02                                      | 微信底图坐标系。见 [MAP.md](MAP.md)                      |
+| 坐标字段 `lat` / `lng`,GCJ-02                                      | 微信底图坐标系。见 [TECHNOLOGY.md](TECHNOLOGY.md) §6     |
 | `country` 恒为 `"中国"`,但保留字段                                 | 第二阶段要展示海外潮籍乡亲,现在留字段避免返工            |
 
 ---

@@ -1,3 +1,82 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onShow, onReachBottom } from '@dcloudio/uni-app'
+import { memberApi } from '@/api/member'
+import { useMemberFilterStore } from '@/stores/memberFilter'
+import TsaMemberCard from '@/components/TsaMemberCard/TsaMemberCard.vue'
+import TsaFilterBar from '@/components/TsaFilterBar/TsaFilterBar.vue'
+import type { MemberListItem } from '@/types/member'
+
+/**
+ * 乡贤名录。
+ *
+ * ★ 本页与地图页共用 useMemberFilterStore:在地图上筛「深圳市 / 互联网」,
+ *   切到底部「乡贤」tab,列表就是同一批人。这是本项目选 Pinia 的唯一硬性理由,
+ *   判断标准写在 docs/DEVELOPMENT.md。
+ *
+ * 注意:当前分页是 mock 层在做切片。真后端就绪后,筛选应改成带参数请求接口,
+ * 而不是继续把全量拉到前端过滤 —— 成员到几千人时全量下发会拖垮首屏。
+ */
+
+const PAGE_SIZE = 20
+
+const store = useMemberFilterStore()
+
+const list = ref<MemberListItem[]>([])
+const total = ref(0)
+const page = ref(1)
+const loading = ref(false)
+const finished = ref(false)
+const showFilter = ref(false)
+
+async function fetchPage(reset = false) {
+  if (loading.value) return
+  if (reset) {
+    page.value = 1
+    finished.value = false
+    list.value = []
+  }
+  loading.value = true
+  try {
+    const res = await memberApi.getList({
+      page: page.value,
+      pageSize: PAGE_SIZE,
+      province: store.province || undefined,
+      city: store.city || undefined,
+      industry: store.industry || undefined,
+      keyword: store.keyword || undefined,
+    })
+    list.value = reset ? res.list : [...list.value, ...res.list]
+    total.value = res.total
+    finished.value = list.value.length >= res.total
+    if (!finished.value) page.value += 1
+  } finally {
+    loading.value = false
+  }
+}
+
+function onFilterConfirm() {
+  showFilter.value = false
+  fetchPage(true)
+}
+
+function clearFilter() {
+  store.reset()
+  fetchPage(true)
+}
+
+function goDetail(m: MemberListItem) {
+  uni.navigateTo({ url: `/pages/member/detail?id=${m.id}` })
+}
+
+// 从详情页返回、或从地图页切过来时,按当前筛选重新取数
+onShow(() => fetchPage(true))
+
+onReachBottom(() => {
+  if (!finished.value) fetchPage()
+})
+</script>
+
 <template>
   <view class="page">
     <!-- 顶部筛选条:与地图页共享同一个 store,所以两边筛选结果始终一致 -->
@@ -30,84 +109,6 @@
     </t-popup>
   </view>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { onShow, onReachBottom } from '@dcloudio/uni-app'
-import { memberApi } from '@/api/member'
-import { useMemberFilterStore } from '@/stores/memberFilter'
-import TsaMemberCard from '@/components/TsaMemberCard/TsaMemberCard.vue'
-import TsaFilterBar from '@/components/TsaFilterBar/TsaFilterBar.vue'
-import type { MemberListItem } from '@/types/member'
-
-/**
- * 乡贤名录。
- *
- * ★ 本页与地图页共用 useMemberFilterStore:在地图上筛「深圳市 / 互联网」,
- *   切到底部「乡贤」tab,列表就是同一批人。这是本项目选 Pinia 的唯一硬性理由,
- *   判断标准写在 docs/ARCHITECTURE.md。
- *
- * 注意:当前分页是 mock 层在做切片。真后端就绪后,筛选应改成带参数请求接口,
- * 而不是继续把全量拉到前端过滤 —— 成员到几千人时全量下发会拖垮首屏。
- */
-
-const store = useMemberFilterStore()
-
-const list = ref<MemberListItem[]>([])
-const total = ref(0)
-const page = ref(1)
-const PAGE_SIZE = 20
-const loading = ref(false)
-const finished = ref(false)
-const showFilter = ref(false)
-
-async function fetchPage(reset = false) {
-  if (loading.value) return
-  if (reset) {
-    page.value = 1
-    finished.value = false
-    list.value = []
-  }
-  loading.value = true
-  try {
-    const res = await memberApi.getList({
-      page: page.value,
-      pageSize: PAGE_SIZE,
-      province: store.province || undefined,
-      city: store.city || undefined,
-      industry: store.industry || undefined,
-      keyword: store.keyword || undefined,
-    })
-    list.value = reset ? res.list : [...list.value, ...res.list]
-    total.value = res.total
-    finished.value = list.value.length >= res.total
-    if (!finished.value) page.value += 1
-  } finally {
-    loading.value = false
-  }
-}
-
-// 从详情页返回、或从地图页切过来时,按当前筛选重新取数
-onShow(() => fetchPage(true))
-
-onReachBottom(() => {
-  if (!finished.value) fetchPage()
-})
-
-function onFilterConfirm() {
-  showFilter.value = false
-  fetchPage(true)
-}
-
-function clearFilter() {
-  store.reset()
-  fetchPage(true)
-}
-
-function goDetail(m: MemberListItem) {
-  uni.navigateTo({ url: `/pages/member/detail?id=${m.id}` })
-}
-</script>
 
 <style lang="less" scoped>
 .mlist__bar {

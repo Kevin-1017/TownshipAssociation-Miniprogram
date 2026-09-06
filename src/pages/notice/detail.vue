@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
+import { noticeApi } from '@/api/notice'
+import { formatMonthDay } from '@/utils/format'
+import type { NoticeItem } from '@/types/notice'
+
+const notice = ref<NoticeItem | null>(null)
+
+onLoad(async (query) => {
+  const id = (query as Record<string, string>)?.id
+  if (id) notice.value = await noticeApi.getDetail(id)
+})
+</script>
+
 <template>
   <view class="page ndetail">
     <template v-if="notice">
@@ -16,21 +31,6 @@
     </view>
   </view>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
-import { noticeApi } from '@/api/notice'
-import { formatMonthDay } from '@/utils/format'
-import type { NoticeItem } from '@/types/notice'
-
-const notice = ref<NoticeItem | null>(null)
-
-onLoad(async (query) => {
-  const id = (query as Record<string, string>)?.id
-  if (id) notice.value = await noticeApi.getDetail(id)
-})
-</script>
 
 <style lang="less" scoped>
 .ndetail {
