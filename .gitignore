@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+.DS_Store
+dist
+*.local
+
+# 个人本地配置,不进仓库(.env.development / .env.production 不含密钥,需提交)
+.env.*.local
+.claude/settings.local.json
+
+# HBuilderX 构建产物(CLI 模式产物在 dist/,此项为防御性忽略)
+unpackage/
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

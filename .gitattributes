@@ -1,0 +1,25 @@
+# 统一换行符,避免 Windows/macOS 学生之间产生满屏假 diff。
+# 原理:仓库内一律存 LF,检出时按平台转换文本文件。
+* text=auto
+
+# 明确按文本处理的源码类型
+*.ts    text eol=lf
+*.vue   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.less  text eol=lf
+*.scss  text eol=lf
+*.css   text eol=lf
+*.html  text eol=lf
+*.md    text eol=lf
+
+# 二进制文件绝不能转换 —— 图片被改一个字节小程序就加载失败
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.ttf   binary
+*.woff  binary
+*.woff2 binary
