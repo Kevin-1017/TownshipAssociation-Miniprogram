@@ -48,6 +48,7 @@
     "format": "prettier --write \"src/**/*.{ts,vue,less,json}\" \"*.{mjs,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,vue,less,json}\"",
     "gen:mock": "node scripts/gen-mock.mjs",
+    "check:docs": "node scripts/check-doc-links.mjs",
     "prepare": "husky"
   },
   "dependencies": {
