@@ -14,15 +14,14 @@ description: 本项目(汕头乡会小程序)的 Vue SFC 与 TypeScript 开发�
 
 ## 1. SFC 块顺序(ESLint 强制,可 autofix)
 
-```vue
-<script setup lang="ts">
-← 第一
+```text
+<script setup lang="ts">     ← 第一
 </script>
 
-<template>← 第二</template>
+<template>                   ← 第二
+</template>
 
-<style lang="less" scoped>
-← 第三
+<style lang="less" scoped>   ← 第三
 </style>
 ```
 
