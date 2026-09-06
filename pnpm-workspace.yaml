@@ -1,0 +1,20 @@
+# 依赖构建脚本白名单 —— pnpm 12 默认拒绝执行任何依赖的 postinstall,
+# 不放行就报 ERR_PNPM_IGNORED_BUILDS 并中断安装。
+# 逐项写死 true/false,是为了让「谁被放行了」在 review 时一眼可见,
+# 而不是靠交互式 `pnpm approve-builds` 随手回车带过去。
+allowBuilds:
+  # 必需:下载平台原生二进制。不放行 → Vite 完全起不来
+  esbuild: true
+  # 必需:pinia 依赖它按 Vue 版本切换入口
+  vue-demi: true
+  # 不需要:脚本只是打印捐赠提示
+  core-js: false
+  core-js-pure: false
+  # 不需要:脚本只在检测到 Vue 2 时打印适配警告,本项目是 Vue 3
+  '@tdesign/uniapp': false
+
+# pnpm 12 默认拒绝安装「发布未满一段时间」的版本(防供应链抢发投毒)。
+# eslint-plugin-vue 10.11.0 刚发布即被拦,已确认是官方正常发版,单独豁免。
+# ⚠️ 只豁免单个精确版本,不要改成调低全局 minimumReleaseAge。
+minimumReleaseAgeExclude:
+  - eslint-plugin-vue@10.11.0

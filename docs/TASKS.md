@@ -28,7 +28,7 @@
 加「文化艺术」行业。
 
 - 涉及:`src/constants/industry.ts`、`scripts/gen-mock.mjs`(让它出现在数据里)
-- 验收:筛选面板出现新选项且能筛出人;`npm run gen:mock` 后总数仍是 300
+- 验收:筛选面板出现新选项且能筛出人;`pnpm run gen:mock` 后总数仍是 300
 
 ### L1-3 首页文案与乡会介绍
 
@@ -159,7 +159,7 @@
 
 ### L5-5 出 H5 版
 
-`npm run build:h5` 跑通并适配桌面布局。
+`pnpm run build:h5` 跑通并适配桌面布局。
 
 - **重点**:地图页在 H5 是另一套实现,`cover-view` 行为不同,必须单独回归
   (见 [MAP.md](MAP.md) 第 8 条)

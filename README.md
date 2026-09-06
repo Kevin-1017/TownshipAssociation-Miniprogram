@@ -8,16 +8,28 @@
 
 ## 5 分钟跑起来
 
+**本项目只用 pnpm**(12.3.4,由 `packageManager` 字段声明)。
+用 npm/yarn 会被 `preinstall` 钩子直接拦下 —— 是为了防止仓库里出现两份 lockfile、
+装出两棵不同的依赖树。
+
 ```bash
-# 1. Node 版本(必须 >= 20,推荐 24 LTS)
+# 0. 启用 pnpm(Node 自带的 corepack,只需做一次)
+corepack enable pnpm
+pnpm -v                      # 应输出 12.3.4
+
+# 1. 确认 Node 版本(必须 >= 20,推荐 24 LTS)
 node -v
 
 # 2. 装依赖
-npm install
+pnpm install
 
 # 3. 编译到微信小程序(进程常驻,监听改动)
-npm run dev:mp-weixin
+pnpm run dev:mp-weixin
 ```
+
+> 国内网络若 corepack 拉取很慢,加镜像:
+> `COREPACK_NPM_REGISTRY=https://registry.npmmirror.com corepack enable pnpm`
+> 依赖镜像已写在 `.npmrc` 里,`pnpm install` 不用额外参数。
 
 然后打开**微信开发者工具** → 导入项目 → 目录选:
 
@@ -29,7 +41,7 @@ AppID 已在 `src/manifest.json` 配好,直接就能预览。
 
 > ⚠️ 你导入的是 `dist/dev/mp-weixin`,**不是仓库根目录**。
 > `dist/` 是构建产物,被 gitignore 了,所以刚 clone 下来时它不存在 ——
-> 必须先跑一次 `npm run dev:mp-weixin`。这是新手最容易卡住的地方,
+> 必须先跑一次 `pnpm run dev:mp-weixin`。这是新手最容易卡住的地方,
 > 详见 [docs/SETUP.md](docs/SETUP.md)。
 
 跑起来后你应该看到:底部 5 个 tab,首页有乡贤分布排行与公告,
@@ -39,16 +51,17 @@ AppID 已在 `src/manifest.json` 配好,直接就能预览。
 
 ## 技术栈
 
-| 层         | 选型                      | 版本                      | 为什么                                                      |
-| ---------- | ------------------------- | ------------------------- | ----------------------------------------------------------- |
-| 跨端框架   | uni-app(CLI 模式)         | `3.0.0-5020420260813003`  | Vue 3 语法可迁移到Web 岗位;保留出 H5 的后路                 |
-| 框架       | Vue 3                     | `3.4.21`(被 uni-app 钉死) | —                                                           |
-| 语言       | TypeScript                | `~4.9` + `vue-tsc 1.x`    | **配套的一对,不要单独升 TS**                                |
-| 构建       | Vite                      | `5.2.8`                   | preset 锁定值,**不能升到 8**                                |
-| UI         | `@tdesign/uniapp`         | `0.10.3` 精确锁版         | 腾讯一方;与将来 React 官网的 `tdesign-react` 同一套设计语言 |
-| 状态       | Pinia                     | `2.2.4`                   | **不能装 2.2.5+/3.x**,它们要求 Vue ≥3.5.11                  |
-| 地图       | uni-app `<map>`(微信原生) | —                         | 底图即腾讯地图,打点与聚合免费、无需 key                     |
-| 样式预处理 | Less                      | `^4.9.1`                  | TDesign 的样式入口是 `theme.less`                           |
+| 层         | 选型                      | 版本                     | 为什么                                                       |
+| ---------- | ------------------------- | ------------------------ | ------------------------------------------------------------ |
+| 包管理器   | pnpm                      | `12.3.4`(corepack 管)    | 严格隔离依赖树;peer 校验可保持开启(见 FAQ)                   |
+| 跨端框架   | uni-app(CLI 模式)         | `3.0.0-5020420260813003` | Vue 3 语法可迁移到 Web 岗位;保留出 H5 的后路                 |
+| 框架       | Vue 3                     | `3.4.21`(精确锁版)       | `@dcloudio/uni-app` 硬依赖 `@vue/shared@3.4.21`,不能用 caret |
+| 语言       | TypeScript                | `~4.9` + `vue-tsc 1.x`   | **配套的一对,不要单独升 TS**                                 |
+| 构建       | Vite                      | `5.2.8`                  | preset 锁定值,**不能升到 8**                                 |
+| UI         | `@tdesign/uniapp`         | `0.10.3` 精确锁版        | 腾讯一方;与将来 React 官网的 `tdesign-react` 同一套设计语言  |
+| 状态       | Pinia                     | `2.2.4`                  | **不能装 2.2.5+/3.x**,它们要求 Vue ≥3.5.11                   |
+| 地图       | uni-app `<map>`(微信原生) | —                        | 底图即腾讯地图,打点与聚合免费、无需 key                      |
+| 样式预处理 | Less                      | `^4.9.1`                 | TDesign 的样式入口是 `theme.less`                            |
 
 完整版本约束与踩坑记录见 [docs/SETUP.md](docs/SETUP.md) 和 [docs/FAQ.md](docs/FAQ.md)。
 
@@ -76,15 +89,15 @@ src/
 
 ## 常用命令
 
-| 命令                        | 作用                                   |
-| --------------------------- | -------------------------------------- |
-| `npm run dev:mp-weixin`     | 开发编译,产物在 `dist/dev/mp-weixin`   |
-| `npm run build:mp-weixin`   | 生产构建,产物在 `dist/build/mp-weixin` |
-| `npm run type-check`        | `vue-tsc --noEmit`,提交前自查          |
-| `npm run lint` / `lint:fix` | ESLint 检查 / 自动修                   |
-| `npm run format`            | Prettier 格式化                        |
-| `npm run gen:mock`          | 重新生成 mock 成员数据                 |
-| `npm run check:docs`        | 检查文档内部相对链接是否失效           |
+| 命令                         | 作用                                   |
+| ---------------------------- | -------------------------------------- |
+| `pnpm run dev:mp-weixin`     | 开发编译,产物在 `dist/dev/mp-weixin`   |
+| `pnpm run build:mp-weixin`   | 生产构建,产物在 `dist/build/mp-weixin` |
+| `pnpm run type-check`        | `vue-tsc --noEmit`,提交前自查          |
+| `pnpm run lint` / `lint:fix` | ESLint 检查 / 自动修                   |
+| `pnpm run format`            | Prettier 格式化                        |
+| `pnpm run gen:mock`          | 重新生成 mock 成员数据                 |
+| `pnpm run check:docs`        | 检查文档内部相对链接是否失效           |
 
 ---
 

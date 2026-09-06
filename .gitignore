@@ -28,3 +28,7 @@ unpackage/
 *.sw?
 # husky 生成的运行时装载脚本,不提交
 .husky/_
+
+# pnpm
+.pnpm-store/
+# 注意:pnpm-lock.yaml 必须提交,不要加进这里

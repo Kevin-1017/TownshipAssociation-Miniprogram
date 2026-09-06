@@ -7,29 +7,59 @@
 
 ## 依赖解析
 
-### Q:为什么 `.npmrc` 里有 `legacy-peer-deps=true`?能不能去掉?
+### Q:为什么顶层 `vue` 要精确锁 `3.4.21`,而不是 preset 的 `^3.4.21`?
 
-**现在不能去。** 完整推导:
+**这是本项目最值得警惕的一个坑,而且它安静了很久。**
 
-1. `@dcloudio/uni-app` 硬依赖 `@vue/shared@3.4.21`(精确值),把整棵 Vue 树钉在 **3.4.21**;
-2. `pinia@2.2.4` 声明 `peerDependencies.vue = "^2.6.14 || ^3.3.0"` —— 这一条**是满足的**;
-3. 但它还声明了一个 **optional** peer:`@vue/composition-api@^1.4.0`(Vue 2 专用,要求 `vue >=2.5 <2.7`);
-4. npm 11 的解析器仍会尝试满足 optional peer,于是报:
+1. `@dcloudio/uni-app` 硬依赖 `@vue/shared@3.4.21`(**精确值**);
+2. preset 把顶层 `vue` 写成 `^3.4.21` —— caret 允许解析到 3.5.42;
+3. 两者可以同时存在,于是 **`vue` 和 `@vue/shared` 可能被装成不同版本**,
+   表现为各种难以定位的运行时行为异常。
+
+之前在 npm 下一直没事,是因为 `package-lock.json` 恰好锁在 3.4.21 ——
+**那是运气,不是配置正确**。实测证据:改用 pnpm 重新解析(没有 npm 的 lockfile 可依),
+`vue` 立刻解析成 **3.5.42**,而 `@vue/shared` 仍是 3.4.21。
+
+所以现在 `vue` 与 `@vue/runtime-core` 都钉死 `3.4.21`。
+**教训:当两个包必须同版本时,写精确值,不要写 caret 让解析器自己决定。**
+
+### Q:pnpm 下 esbuild / vue-demi 的构建脚本被拦了
+
+pnpm 12 默认**拒绝执行任何依赖的 postinstall**,而且是硬报错:
 
 ```
-Conflicting peer dependency: vue@3.5.42
-  peer vue@">= 2.5 < 2.7" from @vue/composition-api@1.7.2
+ERR_PNPM_IGNORED_BUILDS
+  × Ignored build scripts: esbuild@0.20.2, vue-demi@0.14.10, ...
 ```
 
-运行时用的是 Vue 3 分支,`composition-api` 那条路径根本不会被加载 —— 所以这是**误报**,
-不是真不兼容。`legacy-peer-deps=true` 是最小代价的解法。
+已在 `pnpm-workspace.yaml` 的 `allowBuilds` 里逐项放行(不是 `package.json` 的
+`allowScripts` —— 那是 npm 专用字段,**pnpm 完全不认**;
+也不是 `onlyBuiltDependencies` —— pnpm 12 已改用 `allowBuilds`)。
 
-**代价**:peer 严格校验被关掉了。引入新依赖时请自己看一眼它的 `peerDependencies`
-(`npm view <包> peerDependencies`),别指望 npm 替你报警。
+放行清单与理由:
+
+| 依赖                       | 放行     | 原因                                               |
+| -------------------------- | -------- | -------------------------------------------------- |
+| `esbuild`                  | ✅ true  | 下载平台原生二进制,不放行 Vite 起不来              |
+| `vue-demi`                 | ✅ true  | pinia 依赖它按 Vue 版本切换入口                    |
+| `core-js` / `core-js-pure` | ❌ false | 脚本只打印捐赠提示                                 |
+| `@tdesign/uniapp`          | ❌ false | 脚本只在检测到 Vue 2 时打印适配警告,本项目是 Vue 3 |
+
+**加新依赖时不要跑 `pnpm approve-builds` 一路回车** —— 那等于把"哪些第三方代码
+在我机器上执行了"这个决定权丢掉。请在 yaml 里手动加一行并写清原因。
+
+### Q:pnpm install 报 `minimumReleaseAge` / lockfile entries failed verification
+
+pnpm 12 默认拒绝安装发布未满一定时长的版本(防供应链抢发投毒)。
+本项目实际撞上过:`eslint-plugin-vue@10.11.0` 刚发布就被拦。
+
+解法是在 `pnpm-workspace.yaml` 的 `minimumReleaseAgeExclude` 里
+**豁免单个精确版本**,**不要**调低全局 `minimumReleaseAge` ——
+那道防线对教学项目是有价值的。
 
 ### Q:pinia 该装哪个版本?
 
-**`2.2.4`,并且是精确锁版。** 边界实测如下(peer 里的 vue 要求):
+**`2.2.4`,精确锁版。** 边界实测如下(看它 peer 里的 vue 要求):
 
 | 版本              | 要求的 vue | 能否用在 uni-app |
 | ----------------- | ---------- | ---------------- |
@@ -37,20 +67,34 @@ Conflicting peer dependency: vue@3.5.42
 | 2.2.5 ~ 2.2.8     | `^3.5.11`  | ❌               |
 | 2.3.x / 3.x       | `^3.5.11`  | ❌               |
 
-2.2.5 是分水岭。npm 的 `latest` tag 是 4.0.3,**装它会直接崩**。
+2.2.5 是分水岭。npm registry 的 `latest` tag 是 4.0.3,**装它会直接崩**。
 
-### Q:`npm i -D @dcloudio/vite-plugin-uni` 之后构建挂了
+### Q:为什么 `.npmrc` 里不再有 `legacy-peer-deps=true`?
 
-因为 DCloud 的 npm **`latest` dist-tag 指向 2021 年的 alpha**
+换 pnpm 时删掉的,这是白捡的安全收益。历史原因值得知道:
+
+1. `pinia@2.2.4` 的 `peerDependencies.vue = "^2.6.14 || ^3.3.0"` —— **本身是满足的**;
+2. 但它还带一个 **optional** peer:`@vue/composition-api@^1.4.0`(Vue 2 专用,要求 `vue <2.7`);
+3. **npm 11 的解析器会尝试满足 optional peer**,于是报 ERESOLVE:
+
+```
+Conflicting peer dependency: vue@3.5.42
+  peer vue@">= 2.5 < 2.7" from @vue/composition-api@1.7.2
+```
+
+4. 这是误报(运行时走 Vue 3 分支,composition-api 路径不会被加载),
+   但 npm 下只能靠 `legacy-peer-deps=true` 绕过 —— **代价是关掉了全部 peer 校验**。
+
+pnpm 正确处理 optional peer(未安装的可选 peer 直接跳过),
+所以**本项目的 peer 校验是开着的**,不需要任何绕过。
+
+### Q:`pnpm add -D @dcloudio/vite-plugin-uni` 之后构建挂了
+
+因为 DCloud 在 npm registry 上的 **`latest` dist-tag 指向 2021 年的 alpha**
 (`3.0.0-alpha-3000020210521001`)。正确版本只能来自 preset 的精确锁定值
 `3.0.0-5020420260813003`。同理 `@dcloudio/uni-app` 的 `latest` 也是 2.0.2-x 系列。
 
-**规则:凡是 `@dcloudio/*` 的包,永远不要手动 `npm i`,不要手动改版本号。**
-
-### Q:npm install 后 esbuild / vue-demi 的脚本被拦了
-
-见 [SETUP.md 第 1 节](SETUP.md)。这两个已写进 `package.json` 的 `allowScripts`。
-`core-js` 的脚本被拦无所谓 —— 它只是打印捐赠信息。
+**规则:凡是 `@dcloudio/*` 的包,永远不要手动 `pnpm add`,不要手动改版本号。**
 
 ### Q:为什么 `.gitignore` 里 `*.local` 匹配不到 `settings.local.json`?
 
@@ -160,7 +204,7 @@ git rm --cached -r . && git reset --soft HEAD
 
 ### Q:为什么 mock 数据是固定种子的伪随机?
 
-用 `Math.random()` 的话,每次 `npm run gen:mock` 数据都变,
+用 `Math.random()` 的话,每次 `pnpm run gen:mock` 数据都变,
 **bug 就复现不了** —— 上一秒能重现的渲染问题重新生成后就没了。
 `gen-mock.mjs` 顶部有 `SEED = 20260906`,想换一批数据改这个数,并且提交。
 

@@ -72,8 +72,8 @@ husky 配了两个钩子:
 所以请自己在提交前跑:
 
 ```bash
-npm run type-check    # 十几秒,但必须过
-npm run lint          # 快
+pnpm run type-check    # 十几秒,但必须过
+pnpm run lint          # 快
 ```
 
 ### 关于 `--no-verify`
@@ -116,9 +116,9 @@ npm run lint          # 快
 
 ## 怎么验证的
 
-- [ ] npm run type-check 通过
-- [ ] npm run lint 通过
-- [ ] npm run dev:mp-weixin,微信开发者工具里实际点了哪些路径
+- [ ] pnpm run type-check 通过
+- [ ] pnpm run lint 通过
+- [ ] pnpm run dev:mp-weixin,微信开发者工具里实际点了哪些路径
 
 ## 影响面
 

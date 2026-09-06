@@ -2,6 +2,7 @@
   "name": "tsa-miniprogram",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@12.3.4",
   "description": "汕头乡会小程序 — uni-app + Vue3 + TypeScript + TDesign",
   "engines": {
     "node": ">=20.0.0"
@@ -49,7 +50,8 @@
     "format:check": "prettier --check \"src/**/*.{ts,vue,less,json}\"",
     "gen:mock": "node scripts/gen-mock.mjs",
     "check:docs": "node scripts/check-doc-links.mjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preinstall": "npx --yes only-allow pnpm"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-5020420260813003",
@@ -70,7 +72,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-5020420260813003",
     "@tdesign/uniapp": "0.10.3",
     "pinia": "2.2.4",
-    "vue": "^3.4.21",
+    "vue": "3.4.21",
     "vue-i18n": "^9.1.9"
   },
   "devDependencies": {
@@ -81,7 +83,7 @@
     "@dcloudio/uni-cli-shared": "3.0.0-5020420260813003",
     "@dcloudio/uni-stacktracey": "3.0.0-5020420260813003",
     "@dcloudio/vite-plugin-uni": "3.0.0-5020420260813003",
-    "@vue/runtime-core": "^3.4.21",
+    "@vue/runtime-core": "3.4.21",
     "@vue/tsconfig": "^0.1.3",
     "eslint": "^9.39.4",
     "eslint-plugin-vue": "^10.11.0",
@@ -94,9 +96,5 @@
     "vite": "5.2.8",
     "vue-eslint-parser": "^10.4.1",
     "vue-tsc": "^1.0.24"
-  },
-  "allowScripts": {
-    "vue-demi@0.14.10": true,
-    "esbuild@0.20.2": true
   }
 }
