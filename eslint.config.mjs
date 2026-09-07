@@ -57,8 +57,8 @@ export default [
       //     旧名 vue/component-tags-order 已移除,写了会在启动时直接 TypeError。
       'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
       // script setup 内部第一层必须是 defineProps / defineEmits —— 组件接口先行。
-      // 更细的 refs→computed→watch→methods→lifecycle 顺序无法用规则表达,
-      // 由 docs/DEVELOPMENT.md 与 vue-sfc-spec skill 约束。
+      // 更细的 refs→computed→方法→watch→生命周期→defineExpose 顺序(声明先于使用,
+      // 方法排在 watch 前)无法用规则表达,由 docs/DEVELOPMENT.md 与 vue-sfc-spec skill 约束。
       'vue/define-macros-order': [
         'error',
         { order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'] },

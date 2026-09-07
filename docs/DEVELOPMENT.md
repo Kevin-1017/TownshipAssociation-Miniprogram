@@ -42,38 +42,46 @@
 
 ### 1.2 `<script setup>` 内部分区顺序
 
-自上而下分九段(有则写,无则跳过,不得回插):
+核心原则只有一条 —— **声明先于使用**:每一段只引用它**上方**已声明的符号,永不反向引用。
+自上而下读一遍,就是组件从接口到实现、从数据到行为、从声明到执行的完整数据流。
+
+自上而下分十段(有则写,无则跳过,不得回插):
 
 ```
-0. import
-1. 模块级常量        —— 不依赖组件实例的常量
-2. Props & Emits     —— 组件接口
-3. 依赖注入          —— store 实例、storeToRefs 解构
-4. refs / reactive   —— 原始状态
-5. computed          —— 派生状态
-6. watch / watchEffect —— 副作用
-7. 函数与方法        —— 业务逻辑
-8. 生命周期钩子      —— 永远放在最后
+0. import              —— 分组:框架(vue/@dcloudio/pinia)→ 第三方 → @/ 别名 → 相对路径;组间空行
+1. 类型 & 模块级常量    —— 无响应式的纯定义;仅本组件用的 interface/type 就近放这里,跨组件复用的进 @/types
+2. Props & Emits       —— 组件接口
+3. 外部状态接入        —— store 实例、storeToRefs 解构、组合式函数
+4. refs / reactive     —— 原始状态
+5. computed            —— 派生状态
+6. 函数与方法          —— 业务逻辑(放在 watch 之前,见下文)
+7. watch / watchEffect —— 副作用
+8. 生命周期钩子
+9. defineExpose        —— 可选,仅当父组件要拿本组件的方法;永远放最末尾
 ```
 
-完整示例(这是本项目所有 `.vue` 的标准骨架):
+记忆口诀:**导入 → 定义 → 接口 → 外部状态 → 内部状态 → 派生 → 方法 → 监听 → 生命周期 → 暴露**。
+"从外到内、从数据到行为、从声明到使用" —— 每层只依赖它上面的层。
+
+完整示例(这是本项目所有 `.vue` 的标准骨架;第 9 段 `defineExpose` 见后文说明,页面与多数组件没有):
 
 > 示例里的 `// ── N. xxx ──` 分区注释**是可选的**,本项目不要求每个文件都加 ——
-> 九段都写一遍只会制造噪音,且很快与代码脱节。
+> 十段都写一遍只会制造噪音,且很快与代码脱节。
 > **顺序本身是强制的**,注释按需:只有在某个文件分区多、容易读串时才加。
 
 ```vue
 <script setup lang="ts">
 // ── 0. import ────────────────────────────────────────────
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { onShow, onReachBottom } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
+
 import { memberApi } from '@/api/member'
 import { useMemberFilterStore } from '@/stores/memberFilter'
 import TsaMemberCard from '@/components/TsaMemberCard/TsaMemberCard.vue'
 import type { MemberListItem } from '@/types/member'
 
-// ── 1. 模块级常量 ────────────────────────────────────────
+// ── 1. 类型 & 模块级常量 ─────────────────────────────────
 // 提到模块作用域:每次组件实例化都重建的数组是白费的开销
 const PAGE_SIZE = 20
 
@@ -81,7 +89,7 @@ const PAGE_SIZE = 20
 const props = defineProps<{ presetCity?: string }>()
 const emit = defineEmits<{ (e: 'picked', m: MemberListItem): void }>()
 
-// ── 3. 依赖注入 ──────────────────────────────────────────
+// ── 3. 外部状态接入 ──────────────────────────────────────
 const store = useMemberFilterStore()
 const { keyword } = storeToRefs(store)
 
@@ -94,15 +102,7 @@ const finished = ref(false)
 // ── 5. 派生状态 ──────────────────────────────────────────
 const isEmpty = computed(() => !loading.value && list.value.length === 0)
 
-// ── 6. 副作用 ────────────────────────────────────────────
-watch(
-  () => props.presetCity,
-  (city) => {
-    if (city) fetchPage(true)
-  },
-)
-
-// ── 7. 业务逻辑 ──────────────────────────────────────────
+// ── 6. 业务逻辑 ──────────────────────────────────────────
 async function fetchPage(reset = false) {
   /* ... */
 }
@@ -111,26 +111,55 @@ function goDetail(m: MemberListItem) {
   emit('picked', m)
 }
 
+// ── 7. 副作用 ────────────────────────────────────────────
+watch(
+  () => props.presetCity,
+  (city) => {
+    if (city) fetchPage(true)
+  },
+)
+
 // ── 8. 生命周期:放在最末尾 ──────────────────────────────
 onShow(() => fetchPage(true))
 onReachBottom(() => !finished.value && fetchPage())
 </script>
 ```
 
-#### 为什么生命周期必须在最后
+#### 为什么方法要排在 watch 之前
 
-生命周期钩子是这个组件的**执行入口**。写在中间时,读代码的人要上下翻动才能
-拼出"什么时候发生了什么";放在末尾,自上而下读一遍就是完整的执行流。
+watch 的回调(尤其带 `{ immediate: true }` 的)、生命周期钩子,都是方法的**调用方**。
+若方法排在它们下面,只有两种结局:
+
+- 写成 `function` 声明 —— 靠提升侥幸能跑,但违反「声明先于使用」,读的时候仍要下翻再回看;
+- 写成 `const fn = () => {}` —— `immediate: true` 同步触发时直接 TDZ 报错。
+
+把方法挪到上方,两种问题一起消失:引用永远朝上,全文件一遍读到底。
+
+#### 为什么生命周期与 defineExpose 必须在最后
+
+生命周期钩子是这个组件的**执行入口**,`defineExpose` 是这个组件的**出口能力**。
+写在中间时,读代码的人要上下翻动才能拼出"什么时候发生了什么";放在末尾,自上而下读一遍就是完整的执行流。
 
 这也是本项目最常见的违规点 —— 习惯上会顺手把 `onShow(load)` 写在几个函数中间。
 
+#### 第 9 段:defineExpose(按需)
+
+`<script setup>` 编译出的组件默认是**封闭的**:父组件拿不到它的任何内部方法。
+只有当父组件确实需要通过 template ref 调用子组件方法(如筛选面板的 `reset()`)时才显式暴露,且永远放最末尾:
+
+```ts
+defineExpose({ reset })
+```
+
+**没用就不写** —— 本项目现有组件全部走 props/emit 通信,零个用到它。
+不要为了"看起来规范"而暴露一堆方法,那是把封装性白送出去。
+
 #### ⚠️ 移动语句时注意 TDZ
 
-`const` / `let` 声明无提升。把生命周期钩子移到末尾时:
+`const` / `let` 声明无提升。按本节顺序写时,所有引用天然朝上,本来不会踩 TDZ;
+会踩到的都是**插错了位置**的语句:
 
-- ✅ `onShow(load)`,而 `load` 是 `async function load()` —— 函数声明有提升,安全
-- ✅ 钩子移到末尾后,它引用的所有变量都在其上方,天然安全
-- ⚠️ `watch` 的 getter 与第二个参数是**立即求值/注册**的,其引用的变量必须在它之前
+- ⚠️ `watch` 的 getter 与第二个参数是**立即求值/注册**的,`{ immediate: true }` 还会立即执行回调 —— 它们引用的变量必须在 `watch` 之前
 - ❌ 把 `const x = ref(0)` 移到使用它的 `computed` 之后 → 运行时 `Cannot access 'x' before initialization`
 
 移动完成后必须跑 `pnpm run type-check`,它会抓出大部分此类问题。
@@ -226,6 +255,8 @@ import { computed, MemberListItem } from '...'
   ```
 
 - 接口返回类型一律引自 `src/types/`,不在页面里就地内联对象字面量类型。
+- **仅组件内部使用的辅助类型**(如某个菜单项、某段草稿的形状)就近定义在 script 第 1 段
+  (§1.2);一旦出现第二个使用者,立刻搬进 `src/types/`。
 - 路径别名 `@/` 指向 `src/`,禁止 `../../utils/xxx` 式相对深跳。
 - 可为空的接口字段用 `?`,不要 `| undefined` 与 `?` 混用。
 - 枚举语义优先用**字符串字面量联合**,不用 TS `enum`(小程序产物体积与可读性):
@@ -497,7 +528,7 @@ pnpm run type-check && pnpm run lint
 1. **契约是否三处同步**(types / API.md / mock 路由表)—— 最高优先级
 2. 依赖方向有没有越界(页面直接 `uni.request`?组件 import 了 api?)
 3. 有没有把页面私有状态塞进 store
-4. 生命周期钩子是否仍在 script 末尾
+4. 分区顺序:方法是否仍在 watch 之前、生命周期/`defineExpose` 是否仍在 script 末尾
 5. 有没有硬编码色值 / `px` / 缺 `scoped`
 6. 那些"看起来多余"的代码,注释还在不在
 7. `any` 有没有增加
@@ -517,6 +548,8 @@ pnpm run type-check && pnpm run lint
 | `any` 满天飞                                          | 类型是这个项目分层设计的地基                                    |
 | 页面私有状态进 store                                  | store 会变成全局变量垃圾桶                                      |
 | 生命周期写在函数中间                                  | 破坏自上而下的执行流可读性                                      |
+| `watch` 写在它所调用方法的上方                        | 靠函数提升才勉强能跑;写成箭头函数时 `immediate` 直接 TDZ        |
+| 没有 template ref 需求却 `defineExpose` 一堆方法      | 组件默认封闭是特性,白白送掉封装性                               |
 | 删掉"解释为什么"的注释                                | 下一个人会以为是写得烂并改掉它                                  |
 | 把 `pages.json` 交给 Prettier 格式化                  | 注释会被吃掉                                                    |
 | 在 `cover-view` 里放 TDesign 组件                     | 原生层不渲染                                                    |
@@ -528,15 +561,15 @@ pnpm run type-check && pnpm run lint
 
 ## 15. 规范的强制方式
 
-| 条目                                                    | 由谁强制                                  |
-| ------------------------------------------------------- | ----------------------------------------- |
-| 块顺序 script→template→style                            | ESLint `vue/block-order`(+ autofix)       |
-| defineProps/defineEmits 在最前                          | ESLint `vue/define-macros-order`          |
-| 未用变量、真 bug 类规则                                 | ESLint `typescript-eslint` recommended    |
-| 缩进、引号、分号、换行                                  | Prettier                                  |
-| commit message 格式                                     | commitlint + husky                        |
-| **script 内部 refs/computed/watch/method/生命周期顺序** | ⚠️ **无自动检查,靠 code review 与 skill** |
-| 分层依赖方向、禁组件发请求、注释质量、样式规范          | ⚠️ **无自动检查,靠 code review 与 skill** |
+| 条目                                           | 由谁强制                                  |
+| ---------------------------------------------- | ----------------------------------------- |
+| 块顺序 script→template→style                   | ESLint `vue/block-order`(+ autofix)       |
+| defineProps/defineEmits 在最前                 | ESLint `vue/define-macros-order`          |
+| 未用变量、真 bug 类规则                        | ESLint `typescript-eslint` recommended    |
+| 缩进、引号、分号、换行                         | Prettier                                  |
+| commit message 格式                            | commitlint + husky                        |
+| **script 内部分区顺序(含"方法先于 watch")**    | ⚠️ **无自动检查,靠 code review 与 skill** |
+| 分层依赖方向、禁组件发请求、注释质量、样式规范 | ⚠️ **无自动检查,靠 code review 与 skill** |
 
 最后两行是本规范的软肋 —— 目前靠人工评审 + AI skill 兜底。
 后续可考虑用 ESLint 自定义规则或 `import/no-restricted-paths` 把分层边界做成硬约束。

@@ -1,6 +1,6 @@
 ---
 name: vue-sfc-spec
-description: 本项目(汕头乡会小程序)的 Vue SFC 与 TypeScript 开发规范。编辑、新建或审查 src/ 下任何 .vue 或 .ts 文件时必须先应用本规范。约束 SFC 块顺序(script→template→style)、<script setup> 内部分区顺序(import→props/emits→store→refs→computed→watch→methods→生命周期)、注释语言、分层调用边界、Pinia 状态归属、mock 与 API 契约同步。
+description: 本项目(汕头乡会小程序)的 Vue SFC 与 TypeScript 开发规范。编辑、新建或审查 src/ 下任何 .vue 或 .ts 文件时必须先应用本规范。约束 SFC 块顺序(script→template→style)、<script setup> 内部分区顺序(声明先于使用:import→类型常量→props/emits→store→refs→computed→方法→watch→生命周期→defineExpose)、注释语言、分层调用边界、Pinia 状态归属、mock 与 API 契约同步。
 ---
 
 # Vue SFC 开发规范(强制执行)
@@ -30,57 +30,69 @@ description: 本项目(汕头乡会小程序)的 Vue SFC 与 TypeScript 开发�
 
 ---
 
-## 2. `<script setup>` 内部分区顺序(必须遵守,ESLint 管不了第 4 节以后)
+## 2. `<script setup>` 内部分区顺序(ESLint 只管块顺序与宏在最前,以下靠自觉)
+
+核心原则:**声明先于使用** —— 每一段只引用它上方已声明的符号,永不反向引用。
+口诀:导入 → 定义 → 接口 → 外部状态 → 内部状态 → 派生 → 方法 → 监听 → 生命周期 → 暴露。
 
 ```ts
-// ── 0. import ─────────────────────────────────
-import { ref, computed } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+// ── 0. import(框架 → 第三方 → @/ 别名 → 相对路径,组间空行)
+import { ref, computed, watch } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
+import { storeToRefs } from 'pinia'
+
 import { memberApi } from '@/api/member'
 import type { MemberListItem } from '@/types/member'
 
-// ── 1. 模块级常量(不依赖组件实例)─────────────
+// ── 1. 类型 & 模块级常量(仅本组件用的类型就近定义,复用了就搬进 @/types)
 const PAGE_SIZE = 20
 const TABS = [{ label: '全部', value: '' }]
 
-// ── 2. Props & Emits:组件接口,最先声明 ────────
+// ── 2. Props & Emits:组件接口,最先声明,类型必须收窄、禁止 any
 const props = defineProps<{ member: MemberListItem }>()
 const emit = defineEmits<{ (e: 'click', m: MemberListItem): void }>()
 
-// ── 3. 依赖注入:store 实例 ─────────────────────
+// ── 3. 外部状态接入:store 实例、组合式函数 ────────────
 const store = useMemberFilterStore()
 const { isLogin } = storeToRefs(store)
 
-// ── 4. refs / reactive:原始状态 ────────────────
+// ── 4. refs / reactive:原始状态 ────────────────────────
 const list = ref<MemberListItem[]>([])
 const loading = ref(false)
 
-// ── 5. computed:派生状态 ───────────────────────
+// ── 5. computed:派生状态 ───────────────────────────────
 const total = computed(() => list.value.length)
 
-// ── 6. watch / watchEffect:副作用 ──────────────
-watch(
-  () => props.member,
-  () => {
-    /* ... */
-  },
-)
-
-// ── 7. 函数/方法:业务逻辑 ──────────────────────
+// ── 6. 函数/方法:业务逻辑(必须排在 watch 之前)────────
 async function fetchPage() {
   /* ... */
 }
 
-// ── 8. 生命周期:永远放最后 ─────────────────────
+// ── 7. watch / watchEffect:副作用(回调只朝上引用)─────
+watch(
+  () => props.member,
+  () => {
+    fetchPage()
+  },
+)
+
+// ── 8. 生命周期 ────────────────────────────────────────
 onShow(() => fetchPage(true))
-onReachBottom(fetchPage)
+
+// ── 9. defineExpose(可选,永远放最末尾)─────────────────
+// 仅当父组件要用 template ref 调本组件方法时才写。
+// <script setup> 默认封闭是特性,本项目现有组件一个都没用到 —— 没用就别写。
 ```
 
-**第 8 节必须在 script 块的最末尾。** 这是最常见的违规点 ——
+**第 6 段必须排在第 7 段之前。** watch 回调(尤其 `{ immediate: true }`)与生命周期都是方法的
+调用方;方法放下面,写成 `const` 箭头函数就是同步 TDZ 报错,写成 `function` 也只是靠提升侥幸能跑。
+
+**第 8/9 段必须在 script 块的最末尾。** 这是最常见的违规点 ——
 习惯上会把 `onShow(load)` 写在几个函数中间,读的时候要找"这组件什么时候动"得上下翻。
 
-**注意引入 TDZ**:`const` 声明无提升。生命周期钩子移到末尾后天然安全;
-但 `watch` 的 getter 是立即求值的,其引用的变量必须在它之前声明。
+**注意引入 TDZ**:`const` 声明无提升。按上述顺序写,引用天然全部朝上;
+踩坑的都是插错位置的语句 —— `watch` 的 getter 与 `{ immediate: true }` 的回调是立即执行的,
+其引用的变量必须在它之前声明。
 
 ---
 
