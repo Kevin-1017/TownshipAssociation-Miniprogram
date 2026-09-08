@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@12.3.4",
-  "description": "汕头乡会小程序 — uni-app + Vue3 + TypeScript + TDesign",
+  "description": "潮阳潮南校友会小程序 — uni-app + Vue3 + TypeScript + TDesign",
   "engines": {
     "node": ">=20.0.0"
   },

@@ -30,7 +30,7 @@ const view = ref<MapView>('hometown')
 const allPoints = ref<MemberMapPoint[]>([])
 const selected = ref<MemberMapPoint | null>(null)
 const showFilter = ref(false)
-const topInset = ref(20)
+const topInset = ref(0)
 
 const points = computed(() => store.apply(allPoints.value))
 const total = computed(() => allPoints.value.length)
@@ -99,9 +99,9 @@ onMounted(async () => {
   // navigationStyle: custom,所以要自己让开状态栏,否则按钮压在信号栏上
   try {
     const info = uni.getSystemInfoSync()
-    topInset.value = (info.statusBarHeight ?? 20) + 12
+    topInset.value = (info.statusBarHeight ?? 20) + 40
   } catch {
-    topInset.value = 44
+    topInset.value = 60
   }
 
   allPoints.value = await memberApi.getMapData()
@@ -160,7 +160,7 @@ onMounted(async () => {
     </cover-view>
 
     <cover-view v-if="selected" class="map-page__popup safe-bottom" @tap="goDetail">
-      <cover-image v-if="selected.avatar" class="map-page__avatar" :src="selected.avatar" />
+      <cover-image v-if="selected.avatarUrl" class="map-page__avatar" :src="selected.avatarUrl" />
       <cover-view v-else class="map-page__avatar map-page__avatar--char">
         {{ selected.name.slice(0, 1) }}
       </cover-view>
@@ -169,6 +169,7 @@ onMounted(async () => {
         <cover-view class="map-page__popup-meta">
           {{ selected.city.replace('市', '') }} · {{ industryLabel(selected.industry) }}
         </cover-view>
+        <cover-view class="map-page__popup-tip">乡会会员可看完整资料</cover-view>
       </cover-view>
       <cover-view class="map-page__popup-go">查看资料 ›</cover-view>
     </cover-view>
@@ -284,6 +285,11 @@ onMounted(async () => {
   margin-top: 8rpx;
   font-size: 24rpx;
   color: #8a8a8a;
+}
+.map-page__popup-tip {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: #b0b0b0;
 }
 .map-page__popup-go {
   font-size: 24rpx;

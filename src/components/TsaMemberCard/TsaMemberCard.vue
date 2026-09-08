@@ -6,7 +6,7 @@ import type { MemberListItem } from '@/types/member'
 /**
  * 乡贤列表项。
  *
- * avatar 为空时由 t-avatar 的默认插槽渲染姓氏首字 —— 这样第一阶段不需要
+ * avatarUrl 为空时由 t-avatar 的默认插槽渲染姓氏首字 —— 这样第一阶段不需要
  * 任何头像图片资源,也就避开了「image 域名要配白名单」这个额外的报错来源。
  */
 const props = defineProps<{ member: MemberListItem }>()
@@ -21,7 +21,7 @@ const location = computed(() => {
 
 <template>
   <view class="member-card" @click="emit('click', member)">
-    <t-avatar :image="member.avatar" size="large" shape="circle">
+    <t-avatar :image="member.avatarUrl" size="large" shape="circle">
       {{ member.name.slice(0, 1) }}
     </t-avatar>
 

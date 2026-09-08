@@ -64,7 +64,7 @@ onLoad(async (query) => {
         </view>
       </view>
 
-      <view class="section-title"><text>活动说明</text></view>
+      <view class="section-title"><text>事件说明</text></view>
       <view class="card">
         <text class="edetail__content">{{ event.content }}</text>
       </view>

@@ -1,13 +1,13 @@
 import type { PageQuery } from './api'
 
-/** 活动状态,与后端字典一致 */
+/** 事件状态,与后端字典一致 */
 export type EventStatus = 'upcoming' | 'ongoing' | 'past' | 'cancelled'
 
 export interface EventListItem {
   id: string
   title: string
   cover: string
-  /** 活动时间,ISO 8601 字符串(不要传时间戳,避免时区歧义) */
+  /** 事件时间,ISO 8601 字符串(不要传时间戳,避免时区歧义) */
   startTime: string
   endTime: string
   city: string
@@ -24,7 +24,7 @@ export interface EventDetail extends EventListItem {
   content: string
   organizer: string
   contactPhone: string
-  /** 活动举办地坐标,用于地图与将来的路线规划(GCJ-02) */
+  /** 事件举办地坐标,用于地图与将来的路线规划(GCJ-02) */
   lat: number
   lng: number
 }

@@ -1,4 +1,5 @@
 import type { RequestOptions } from '@/utils/request'
+import { ASSOC_TOKEN_HEADER } from '@/utils/request'
 import type { Result, PageResult } from '@/types/api'
 import type {
   MemberDetail,
@@ -38,7 +39,7 @@ function toMapPoint(m: MemberDetail): MemberMapPoint {
   return {
     id: m.id,
     name: m.name,
-    avatar: m.avatar,
+    avatarUrl: m.avatarUrl,
     lat: m.lat,
     lng: m.lng,
     province: m.province,
@@ -52,7 +53,7 @@ function toListItem(m: MemberDetail): MemberListItem {
   return {
     id: m.id,
     name: m.name,
-    avatar: m.avatar,
+    avatarUrl: m.avatarUrl,
     lat: m.lat,
     lng: m.lng,
     province: m.province,
@@ -140,16 +141,67 @@ function currentUser(): MemberDetail | null {
   return members[0] ?? null
 }
 
+/**
+ * 详情投影:显式列举字段(契约变化第一时间暴露),并按隐私规则
+ * contactVisible=false 时**剔除** wechatId/phone,与真实后端行为一致。
+ */
+function toDetailProjection(m: MemberDetail): MemberDetail {
+  const detail: MemberDetail = {
+    id: m.id,
+    name: m.name,
+    avatarUrl: m.avatarUrl,
+    gender: m.gender,
+    province: m.province,
+    city: m.city,
+    district: m.district,
+    country: m.country,
+    lat: m.lat,
+    lng: m.lng,
+    industry: m.industry,
+    company: m.company,
+    title: m.title,
+    school: m.school,
+    major: m.major,
+    graduationYear: m.graduationYear,
+    seniority: m.seniority,
+    intro: m.intro,
+    contactVisible: m.contactVisible,
+    createdAt: m.createdAt,
+  }
+  if (m.contactVisible) {
+    detail.wechatId = m.wechatId
+    detail.phone = m.phone
+  }
+  return detail
+}
+
+// ---------- 乡会身份 mock ----------
+/** mock 阶段固定令牌:verify-phone 下发它,详情接口认它 */
+const MOCK_ASSOC_TOKEN = 'mock-assoc-token'
+
 // ---------- 路由表 ----------
 type Handler = (opts: RequestOptions) => unknown
 
 const staticRoutes: Record<string, Handler> = {
-  'GET /members/map-data': () => members.map(toMapPoint),
-  'GET /members': (o) => pageMembers((o.data ?? {}) as MemberQuery),
-  'GET /members/stats/province': () => countByProvince(),
-  'GET /events': (o) => pageEvents((o.data ?? {}) as EventQuery),
-  'GET /notices': () => notices.slice().sort((a, b) => Number(b.pinned) - Number(a.pinned)),
-  'GET /user/me': () => currentUser(),
+  'GET /tsa/members/map-data': () => members.map(toMapPoint),
+  'GET /tsa/members': (o) => pageMembers((o.data ?? {}) as MemberQuery),
+  'GET /tsa/members/stats/province': () => countByProvince(),
+  'GET /tsa/events': (o) => pageEvents((o.data ?? {}) as EventQuery),
+  'GET /tsa/notices': () => notices.slice().sort((a, b) => Number(b.pinned) - Number(a.pinned)),
+  'GET /tsa/user/me': () => currentUser(),
+  'POST /tsa/auth/verify-phone': (o) => {
+    // mock 验证不了真实微信链路,职责是跑通「闸门与拒绝态」——
+    // 除哨兵值外一律视为命中,拒绝路径用 mock-external-phone 手测
+    const code = (o.data as Record<string, unknown> | undefined)?.code as string | undefined
+    if (!code) return { code: 400, message: '缺少手机号授权码', data: null }
+    if (code === 'mock-external-phone') return { verified: false }
+    return {
+      verified: true,
+      token: MOCK_ASSOC_TOKEN,
+      name: members[0]?.name ?? '测试会员',
+      role: '会员',
+    }
+  },
 }
 
 /** 带路径参数的接口,如 GET /members/m0001 */
@@ -160,23 +212,33 @@ const dynamicRoutes: Array<{
 }> = [
   {
     method: 'GET',
-    pattern: /^\/members\/(m\d{4})$/,
-    handler: (m) => members.find((x) => x.id === m[1]) ?? null,
+    pattern: /^\/tsa\/members\/(m\d{4})$/,
+    handler: (m, o) => {
+      // 成员详情是乡会用户专享:mock 里用 X-Assoc-Token 头模拟 1301 闸门,
+      // 未核验(无头/令牌不符)返回业务错误壳,与真实后端同语义
+      const auth = (o.header ?? {})[ASSOC_TOKEN_HEADER]
+      if (auth !== MOCK_ASSOC_TOKEN) {
+        return { code: 1301, message: '查看资料仅限乡会会员', data: null }
+      }
+      const member = members.find((x) => x.id === m[1])
+      if (!member) return { code: 1002, message: '数据不存在', data: null }
+      return toDetailProjection(member)
+    },
   },
   {
     method: 'GET',
-    pattern: /^\/events\/(e\d{3})$/,
+    pattern: /^\/tsa\/events\/(e\d{3})$/,
     handler: (m) => events.find((x) => x.id === m[1]) ?? null,
   },
   {
     method: 'GET',
-    pattern: /^\/notices\/(n\d{3})$/,
+    pattern: /^\/tsa\/notices\/(n\d{3})$/,
     handler: (m) => notices.find((x) => x.id === m[1]) ?? null,
   },
   // 登录/注册在 mock 阶段是假接口:不校验 code,直接发一个假 token
   {
     method: 'POST',
-    pattern: /^\/auth\/wechat-login$/,
+    pattern: /^\/tsa\/auth\/wechat-login$/,
     handler: () => ({ token: 'mock-token-for-development-only', user: currentUser() }),
   },
 ]
@@ -203,5 +265,11 @@ export async function mockDispatch<T>(opts: RequestOptions): Promise<Result<T>> 
     return { code: 404, message: `mock 未实现: ${key}`, data: null as unknown as T }
   }
 
-  return { code: 0, message: 'ok', data: handler(opts) as T }
+  const result = handler(opts)
+  // handler 可返回 data(包 200 壳),也可返回完整 {code,message,data} 壳
+  // 模拟业务错误(1301/1002/400)。判断标准:带 code 键的按壳原样透传
+  if (result !== null && typeof result === 'object' && 'code' in (result as object)) {
+    return result as Result<T>
+  }
+  return { code: 200, message: 'ok', data: result as T }
 }

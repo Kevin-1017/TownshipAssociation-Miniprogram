@@ -3,7 +3,7 @@
 	"pages": [
 		{
 			"path": "pages/index/index",
-			"style": { "navigationBarTitleText": "汕头乡会" }
+			"style": { "navigationBarTitleText": "潮阳潮南校友会" }
 		},
 		{
 			// 地图页要沉浸式,所以隐藏原生导航栏;顶部安全区由页面自己处理
@@ -11,20 +11,28 @@
 			"style": { "navigationStyle": "custom" }
 		},
 		{
-			"path": "pages/member/list",
-			"style": { "navigationBarTitleText": "乡贤名录" }
-		},
-		{
 			"path": "pages/member/detail",
 			"style": { "navigationBarTitleText": "成员资料" }
 		},
 		{
+			"path": "pages/community/index",
+			"style": { "navigationBarTitleText": "社区" }
+		},
+		{
+			"path": "pages/community/subpage",
+			"style": { "navigationBarTitleText": "社区" }
+		},
+		{
+			"path": "pages/community/detail",
+			"style": { "navigationBarTitleText": "动态详情" }
+		},
+		{
 			"path": "pages/event/list",
-			"style": { "navigationBarTitleText": "乡会活动" }
+			"style": { "navigationBarTitleText": "乡会事件" }
 		},
 		{
 			"path": "pages/event/detail",
-			"style": { "navigationBarTitleText": "活动详情" }
+			"style": { "navigationBarTitleText": "事件详情" }
 		},
 		{
 			"path": "pages/notice/detail",
@@ -53,14 +61,14 @@
 		"list": [
 			{ "pagePath": "pages/index/index", "text": "首页" },
 			{ "pagePath": "pages/map/index", "text": "地图" },
-			{ "pagePath": "pages/member/list", "text": "乡贤" },
-			{ "pagePath": "pages/event/list", "text": "活动" },
+			{ "pagePath": "pages/community/index", "text": "社区" },
+			{ "pagePath": "pages/event/list", "text": "事件" },
 			{ "pagePath": "pages/mine/index", "text": "我的" }
 		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "汕头乡会",
+		"navigationBarTitleText": "潮阳潮南校友会",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#F5F5F5"
 	}

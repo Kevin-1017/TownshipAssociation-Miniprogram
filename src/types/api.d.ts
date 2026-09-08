@@ -1,14 +1,14 @@
 /**
  * 后端统一响应壳 —— 这是与 tsa-api 的**契约**,不是随便定的。
  *
- * 将来 Spring Boot 侧必须返回同样形状:
- *   { "code": 0, "message": "ok", "data": {...} }
+ * Spring Boot 侧返回同样形状:
+ *   { "code": 200, "message": "操作成功", "data": {...} }
  *
  * 原因见 docs/API.md。小程序的 utils/request.ts 依赖这个形状做统一拆壳,
  * 页面因此永远只拿到 data,不需要处理 code/message。
  */
 export interface Result<T> {
-  /** 0 = 成功;非 0 为业务错误码,见 docs/API.md 错误码表 */
+  /** 200 = 成功;其余为业务错误码,见 docs/API.md 错误码表 */
   code: number
   message: string
   data: T

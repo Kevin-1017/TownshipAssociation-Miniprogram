@@ -46,7 +46,7 @@ onShow(load)
   <view class="page home">
     <!-- 乡会简介 -->
     <view class="home__hero">
-      <text class="home__hero-title">汕头乡会</text>
+      <text class="home__hero-title">潮阳潮南校友会</text>
       <text class="home__hero-sub">团结潮人,互助乡邻,传承潮汕文化</text>
       <view class="home__hero-stats">
         <view class="home__stat">
@@ -59,7 +59,7 @@ onShow(load)
         </view>
         <view class="home__stat">
           <text class="home__stat-num">{{ upcomingCount }}</text>
-          <text class="home__stat-label">近期活动</text>
+          <text class="home__stat-label">近期事件</text>
         </view>
       </view>
     </view>
@@ -71,21 +71,6 @@ onShow(load)
         <text class="home__cta-desc">看看老乡们都在哪里,支持按省市与行业筛选</text>
       </view>
       <text class="home__cta-arrow">›</text>
-    </view>
-
-    <!-- 省籍排行:验证 /members/stats/province 接口 -->
-    <view class="section-title">
-      <text>乡贤集中的省市</text>
-      <text class="section-title__more">截至 {{ today }}</text>
-    </view>
-    <view class="card">
-      <view v-for="p in topProvinces" :key="p.province" class="home__rank">
-        <text class="home__rank-name">{{ p.province }}</text>
-        <view class="home__rank-bar">
-          <view class="home__rank-fill" :style="{ width: barWidth(p.count) }" />
-        </view>
-        <text class="home__rank-num">{{ p.count }}</text>
-      </view>
     </view>
 
     <!-- 公告 -->

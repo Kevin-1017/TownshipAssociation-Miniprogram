@@ -1,6 +1,6 @@
 # 项目技术文档
 
-汕头乡会小程序(`tsa-miniprogram`)的技术事实:选型与理由、版本约束、环境、
+潮阳潮南校友会小程序(`tsa-miniprogram`)的技术事实:选型与理由、版本约束、环境、
 架构现状、地图方案、领域模型、平台限制。
 
 **编码规范不在这里** —— 见 [DEVELOPMENT.md](DEVELOPMENT.md);
@@ -32,16 +32,17 @@ TownshipAssociation/
 
 ## 2. 技术选型与理由
 
+
 | 层         | 选型                                   | 理由                                                                                                                                                | 代价                                          |
 | ---------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
 | 跨端框架   | **uni-app,CLI 模式**                   | Vue 3 语法是国内前端岗第一需求,技能可迁移;保留将来编译 H5 的后路。CLI 模式便于 VSCode + Git + CI,比 HBuilderX 更适合多人协作                        | 多一层编译抽象;地图等新组件能力滞后于微信原生 |
 | 包管理器   | **pnpm 12**                            | 严格隔离依赖树,幽灵依赖写不出来;peer 校验可保持开启;构建脚本默认拒绝执行(供应链安全)                                                                | 需 corepack;配置项位置与 npm 不通             |
 | UI 库      | **`@tdesign/uniapp`**                  | 腾讯一方,与微信设计语言同源;中文文档质量高;关键优势是**同一套设计体系覆盖小程序 + uni-app + React + Vue**,将来官网用 `tdesign-react` 可保持视觉一致 | **pre-1.0(0.10.x)**,可能破坏性变更            |
-| 状态       | **Pinia**                              | Vue 3 官方推荐,TS 推导好                                                                                                                            | 版本受 uni-app 的 Vue 钉死(见 §3)             |
+| 状态       | **Pinia**                              | Vue 3 官方推荐,TS 推导好                                                                                                                            | 版本受 uni-app 的 Vue 钉死(见 §3)            |
 | HTTP       | **自写 `uni.request` 封装,不用 axios** | 小程序运行环境没有 XHR/fetch,axios 默认 adapter 跑不起来;`uni.request` 天然跨端;省约 13KB                                                           | 拦截器、取消请求等要自己实现                  |
 | 地图       | **`<map>` 透传微信原生地图**           | 底图即腾讯地图;打点/气泡/**点聚合免费且无需任何 key**                                                                                               | 原生组件层级问题、新属性滞后                  |
 | 地理服务   | **腾讯位置服务,后端代理**              | 逆地理编码/搜索/路线需要 key,**key 绝不能出现在小程序端**(包可解包)                                                                                 | 必须等后端                                    |
-| 样式预处理 | **Less**                               | TDesign 的样式入口是 `theme.less`                                                                                                                   | 与 preset 自带的 `uni.scss` 并存,只用 Less    |
+| 样式预处理 | **Less**                               | TDesign 的样式入口是`theme.less`                                                                                                                    | 与 preset 自带的`uni.scss` 并存,只用 Less     |
 
 ### 为什么不是原生小程序 / Taro
 
@@ -59,16 +60,17 @@ TownshipAssociation/
 
 以下数值全部实测验证过。**改一个必须同时通过:type-check + build + 真机预览。**
 
-| 包                  | 锁定                     | 原因                                                |
-| ------------------- | ------------------------ | --------------------------------------------------- |
-| `vue`               | **`3.4.21` 精确,无 `^`** | 见下方专节                                          |
-| `@vue/runtime-core` | `3.4.21` 精确            | 与 `vue` 同版本                                     |
-| `vite`              | `5.2.8`                  | npm 最新 8.x 与 uni-app 插件不兼容                  |
-| `@dcloudio/*`       | `3.0.0-5020420260813003` | npm 的 `latest` tag 指向 **2021 年**废 alpha        |
-| `typescript`        | `^4.9.4`                 | 与 `vue-tsc@^1.0.24` 配套;单独升 TS 会挂 type-check |
-| `vue-tsc`           | `^1.0.24`                | 同上                                                |
-| `pinia`             | **`2.2.4`**              | 2.2.5 起要求 `vue ^3.5.11`,与 uni-app 冲突          |
-| `@tdesign/uniapp`   | `0.10.3` 精确            | pre-1.0                                             |
+
+| 包                  | 锁定                     | 原因                                               |
+| ------------------- | ------------------------ | -------------------------------------------------- |
+| `vue`               | **`3.4.21` 精确,无 `^`** | 见下方专节                                         |
+| `@vue/runtime-core` | `3.4.21` 精确            | 与`vue` 同版本                                     |
+| `vite`              | `5.2.8`                  | npm 最新 8.x 与 uni-app 插件不兼容                 |
+| `@dcloudio/*`       | `3.0.0-5020420260813003` | npm 的`latest` tag 指向 **2021 年**废 alpha        |
+| `typescript`        | `^4.9.4`                 | 与`vue-tsc@^1.0.24` 配套;单独升 TS 会挂 type-check |
+| `vue-tsc`           | `^1.0.24`                | 同上                                               |
+| `pinia`             | **`2.2.4`**              | 2.2.5 起要求`vue ^3.5.11`,与 uni-app 冲突          |
+| `@tdesign/uniapp`   | `0.10.3` 精确            | pre-1.0                                            |
 
 ### ⚠️ `vue` 为什么必须精确锁版(本项目最值得警惕的坑)
 
@@ -85,13 +87,14 @@ TownshipAssociation/
 
 ### pnpm 相关配置
 
-| 文件                                                               | 作用                                                                                                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `package.json` → `packageManager: "pnpm@12.3.4"`                   | corepack 据此自动切版本                                                                                                                     |
-| `package.json` → `scripts.preinstall: "npx --yes only-allow pnpm"` | 误用 npm/yarn 直接报错退出,防止出现两份 lockfile                                                                                            |
-| `pnpm-workspace.yaml` → `allowBuilds`                              | pnpm 12 默认拒绝执行依赖 postinstall,需逐项放行 `esbuild`/`vue-demi`(**不是** npm 的 `allowScripts`,也**不是**旧版 `onlyBuiltDependencies`) |
-| `pnpm-workspace.yaml` → `minimumReleaseAgeExclude`                 | pnpm 12 默认拒装发布未满一定时长的版本(防供应链抢发),按需豁免单个精确版本                                                                   |
-| `.npmrc`                                                           | **只放 `registry`**。pnpm 专有键写在这里会让 only-allow 调 npm 时报 `Unknown project config`                                                |
+
+| 文件                                                                | 作用                                                                                                                                       |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `package.json` → `packageManager: "pnpm@12.3.4"`                   | corepack 据此自动切版本                                                                                                                    |
+| `package.json` → `scripts.preinstall: "npx --yes only-allow pnpm"` | 误用 npm/yarn 直接报错退出,防止出现两份 lockfile                                                                                           |
+| `pnpm-workspace.yaml` → `allowBuilds`                              | pnpm 12 默认拒绝执行依赖 postinstall,需逐项放行`esbuild`/`vue-demi`(**不是** npm 的 `allowScripts`,也**不是**旧版 `onlyBuiltDependencies`) |
+| `pnpm-workspace.yaml` → `minimumReleaseAgeExclude`                 | pnpm 12 默认拒装发布未满一定时长的版本(防供应链抢发),按需豁免单个精确版本                                                                  |
+| `.npmrc`                                                            | **只放 `registry`**。pnpm 专有键写在这里会让 only-allow 调 npm 时报 `Unknown project config`                                               |
 
 **换 pnpm 白捡的收益**:npm 11 会误判 pinia 的 optional peer
 (`@vue/composition-api`,要求 `vue <2.7`)从而报 ERESOLVE,只能靠
@@ -104,12 +107,13 @@ TownshipAssociation/
 
 ### 前置
 
-| 工具           | 要求                                | 检查                                                                      |
-| -------------- | ----------------------------------- | ------------------------------------------------------------------------- |
-| Node.js        | ≥ 20,推荐 **24.20.0 LTS (Krypton)** | `node -v`                                                                 |
-| pnpm           | 12.3.4(corepack 管)                 | `pnpm -v`                                                                 |
-| Git            | 任意近年版本                        | `git --version`                                                           |
-| 微信开发者工具 | 最新稳定版                          | <https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html> |
+
+| 工具           | 要求                                | 检查                                                                                                                                               |
+| -------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js        | ≥ 20,推荐**24.20.0 LTS (Krypton)** | `node -v`                                                                                                                                          |
+| pnpm           | 12.3.4(corepack 管)                 | `pnpm -v`                                                                                                                                          |
+| Git            | 任意近年版本                        | `git --version`                                                                                                                                    |
+| 微信开发者工具 | 最新稳定版                          | [https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html) |
 
 ```bash
 corepack enable pnpm          # 一次性。国内慢就加
@@ -145,10 +149,11 @@ pnpm run dev:mp-weixin     # 保持进程,监听改动
 
 ### 命令一览
 
+
 | 命令                         | 作用                              |
 | ---------------------------- | --------------------------------- |
-| `pnpm run dev:mp-weixin`     | 开发编译 → `dist/dev/mp-weixin`   |
-| `pnpm run build:mp-weixin`   | 生产构建 → `dist/build/mp-weixin` |
+| `pnpm run dev:mp-weixin`     | 开发编译 →`dist/dev/mp-weixin`   |
+| `pnpm run build:mp-weixin`   | 生产构建 →`dist/build/mp-weixin` |
 | `pnpm run type-check`        | `vue-tsc --noEmit`                |
 | `pnpm run lint` / `lint:fix` | ESLint / 自动修(含 SFC 块重排)    |
 | `pnpm run format`            | Prettier                          |
@@ -235,6 +240,7 @@ src/
 
 ### 成本边界
 
+
 | 能力                           | 实现                      | 要不要 key / 花钱          |
 | ------------------------------ | ------------------------- | -------------------------- |
 | 底图                           | `<map>`(底图即腾讯地图)   | ❌ 免费无 key              |
@@ -247,13 +253,14 @@ src/
 
 mock 的 300 条**刻意不均匀**(潮汕乡会的真实人口结构):
 
-| 区域                                  | 条数 | 占比 | 作用                         |
-| ------------------------------------- | ---- | ---- | ---------------------------- |
-| 潮汕本地(汕头 92 + 潮州 14 + 揭阳 14) | 120  | 40%  | 演示 `join-cluster` 的主战场 |
-| 珠三角(广深莞佛珠中惠)                | 99   | 33%  | 潮商在外最密集区             |
-| 长三角(沪杭甬温苏宁)                  | 36   | 12%  |                              |
-| 京津冀(京、津)                        | 24   | 8%   |                              |
-| 其他省会(蓉汉长厦闽昆陕)              | 21   | 7%   | 稀疏点,演示缩放层次          |
+
+| 区域                                  | 条数 | 占比 | 作用                        |
+| ------------------------------------- | ---- | ---- | --------------------------- |
+| 潮汕本地(汕头 92 + 潮州 14 + 揭阳 14) | 120  | 40%  | 演示`join-cluster` 的主战场 |
+| 珠三角(广深莞佛珠中惠)                | 99   | 33%  | 潮商在外最密集区            |
+| 长三角(沪杭甬温苏宁)                  | 36   | 12%  |                             |
+| 京津冀(京、津)                        | 24   | 8%   |                             |
+| 其他省会(蓉汉长厦闽昆陕)              | 21   | 7%   | 稀疏点,演示缩放层次         |
 
 坐标 = 真实城市经纬度 ± `0.15°`(外地)/ `0.05°`(区县内)扰动,
 避免几百点叠在同一像素。扰动用固定种子。
@@ -306,10 +313,11 @@ uni.createMapContext('memberMap').includePoints({ points, padding: [60, 40, 60, 
 
 一个成员 = 一个地理点 + 一份职业身份。关键字段设计理由:
 
+
 | 字段                              | 为什么这样设计                                                                            |
 | --------------------------------- | ----------------------------------------------------------------------------------------- |
 | `id` 用 `m0001` 字符串业务编号    | 不用自增 int 暴露在 URL,避免被遍历猜出会员量                                              |
-| `province`/`city` 存**中文全称**  | 与前端字典一致,省一层映射。字典类字段(如 `industry`)相反,存 code                          |
+| `province`/`city` 存**中文全称**  | 与前端字典一致,省一层映射。字典类字段(如`industry`)相反,存 code                           |
 | `district` 仅汕头会员有值         | 汕头六区一县是家乡本地成员的主要细分维度                                                  |
 | `lat`/`lng` 精度 6 位小数(GCJ-02) | 约 0.1 米精度,足够                                                                        |
 | `industry` 存 code                | 中文改名不动数据;`constants/industry.ts` 是映射表                                         |
@@ -342,16 +350,17 @@ uni.createMapContext('memberMap').includePoints({ points, padding: [60, 40, 60, 
 
 ## 8. 已知平台约束与踩坑
 
+
 | 现象                                      | 原因 / 解法                                                                                                                                      |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `.vue` 全报 `Parsing error: '>' expected` | `.vue` 顶层 parser 必须是 `vue-eslint-parser`,TS parser 只能挂在它 `parserOptions.parser` 下;且配置数组里 `tseslint` 要排在 `pluginVue` **之前** |
-| `import x from './a.json'` 报找不到模块   | preset 未开 `resolveJsonModule`,已在 `tsconfig.json` 打开                                                                                        |
-| 传查询对象报 `Index signature is missing` | TS 只在 type 别名上推导隐式索引签名,见 DEVELOPMENT §4                                                                                            |
-| `eslint` ignores 写 `*.d.ts` 不生效       | 只匹配根目录一层,要写 `**/*.d.ts`                                                                                                                |
-| `*.local` 匹配不到 `settings.local.json`  | 它匹配"以 `.local` 结尾",该文件以 `.json` 结尾                                                                                                   |
-| Prettier 改坏 `pages.json`                | 这俩文件带 `//`,已从 `.prettierignore` 排除                                                                                                      |
+| `import x from './a.json'` 报找不到模块   | preset 未开`resolveJsonModule`,已在 `tsconfig.json` 打开                                                                                         |
+| 传查询对象报`Index signature is missing`  | TS 只在 type 别名上推导隐式索引签名,见 DEVELOPMENT §4                                                                                           |
+| `eslint` ignores 写 `*.d.ts` 不生效       | 只匹配根目录一层,要写`**/*.d.ts`                                                                                                                 |
+| `*.local` 匹配不到 `settings.local.json`  | 它匹配"以`.local` 结尾",该文件以 `.json` 结尾                                                                                                    |
+| Prettier 改坏`pages.json`                 | 这俩文件带`//`,已从 `.prettierignore` 排除                                                                                                       |
 | 坐标偏移几百米                            | GCJ-02 vs WGS-84;用腾讯拾取器坐标                                                                                                                |
-| mock 数据进了生产包                       | 忘了用动态 `import()`                                                                                                                            |
+| mock 数据进了生产包                       | 忘了用动态`import()`                                                                                                                             |
 
 ---
 
@@ -365,15 +374,16 @@ uni.createMapContext('memberMap').includePoints({ points, padding: [60, 40, 60, 
 
 ### 明确不做(推迟原因)
 
+
 | 不做                           | 原因                                                                                                          | 阶段           |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------- | -------------- |
-| 真实微信登录                   | 需正式 AppID + 后端 `code2session`                                                                            | 二             |
-| 用户定位与隐私授权             | 会引入 `scope.userLocation` 整条合规链路,而第一阶段不需要                                                     | 二             |
+| 真实微信登录                   | 需正式 AppID + 后端`code2session`                                                                             | 二             |
+| 用户定位与隐私授权             | 会引入`scope.userLocation` 整条合规链路,而第一阶段不需要                                                      | 二             |
 | 腾讯位置服务(逆编码/搜索/路线) | 需 key,且必须后端代理                                                                                         | 二             |
 | 海外潮籍乡亲分布               | `country` 字段已预留,不返工                                                                                   | 二             |
 | 活动报名/签到                  | 涉及并发与幂等,要写接口                                                                                       | 二             |
 | 文件上传(头像)                 | 需 OSS/MinIO                                                                                                  | 二             |
-| tabBar 图标                    | 微信允许纯文字 tab,不阻塞任何功能。素材到位后加 10 张 PNG(81×81)并给每个 tab 补 `iconPath`/`selectedIconPath` | 随时           |
+| tabBar 图标                    | 微信允许纯文字 tab,不阻塞任何功能。素材到位后加 10 张 PNG(81×81)并给每个 tab 补`iconPath`/`selectedIconPath` | 随时           |
 | 消息通知                       | 需订阅消息模板审核                                                                                            | 三             |
 | CI/CD                          | 学生团队稳定后再引入                                                                                          | 三             |
 | H5 编译                        | 地图页在 H5 表现不同,需单独回归                                                                               | 与官网一并规划 |

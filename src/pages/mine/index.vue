@@ -62,7 +62,7 @@ onShow(async () => {
 <template>
   <view class="page mine">
     <view class="mine__hero">
-      <t-avatar :image="user.profile?.avatar ?? ''" size="large" shape="circle">
+      <t-avatar :image="user.profile?.avatarUrl ?? ''" size="large" shape="circle">
         {{ user.displayName.slice(0, 1) }}
       </t-avatar>
       <view class="mine__hero-body">
@@ -105,7 +105,7 @@ onShow(async () => {
     <view class="card mine__about">
       <text class="mine__about-title">关于本小程序</text>
       <text class="mine__about-body">
-        汕头乡会官方小程序,基于 uni-app(Vue 3 + TypeScript)构建, UI 使用腾讯 TDesign
+        潮阳潮南校友会官方小程序,基于 uni-app(Vue 3 + TypeScript)构建, UI 使用腾讯 TDesign
         组件库,数据当前来自本地 mock。 它与将来的 React 官网共用同一套 Spring Boot 后端接口。
       </text>
       <text class="mine__version">版本 {{ version }} · 编译器 Node {{ nodeHint }}</text>

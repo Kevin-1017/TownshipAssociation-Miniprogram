@@ -2,7 +2,6 @@
   {
     "id": "m0001",
     "name": "谢锐丹",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -20,13 +19,13 @@
     "contactVisible": false,
     "wechatId": "stua_0001",
     "phone": "13294609677",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2018-02-15"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2018-02-15"
   },
   {
     "id": "m0002",
     "name": "沈娟",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -44,13 +43,13 @@
     "contactVisible": true,
     "wechatId": "stua_0002",
     "phone": "13375334823",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-04-06"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-04-06"
   },
   {
     "id": "m0003",
     "name": "郭纯琪",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -68,13 +67,13 @@
     "contactVisible": false,
     "wechatId": "stua_0003",
     "phone": "13687975649",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2021-01-17"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2021-01-17"
   },
   {
     "id": "m0004",
     "name": "苏强忠",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -92,13 +91,13 @@
     "contactVisible": true,
     "wechatId": "stua_0004",
     "phone": "13123377287",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2021-07-17"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2021-07-17"
   },
   {
     "id": "m0005",
     "name": "郑8贤",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -116,13 +115,13 @@
     "contactVisible": false,
     "wechatId": "stua_0005",
     "phone": "13920047876",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2024-11-07"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2024-11-07"
   },
   {
     "id": "m0006",
     "name": "卢强泽",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -140,13 +139,13 @@
     "contactVisible": false,
     "wechatId": "stua_0006",
     "phone": "13678631647",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2018-10-24"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2018-10-24"
   },
   {
     "id": "m0007",
     "name": "萧婷晓",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -164,13 +163,13 @@
     "contactVisible": true,
     "wechatId": "stua_0007",
     "phone": "13250671866",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2025-12-06"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2025-12-06"
   },
   {
     "id": "m0008",
     "name": "方家文",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -188,13 +187,13 @@
     "contactVisible": false,
     "wechatId": "stua_0008",
     "phone": "13875803454",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2022-10-12"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2022-10-12"
   },
   {
     "id": "m0009",
     "name": "张培爱",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -212,13 +211,13 @@
     "contactVisible": false,
     "wechatId": "stua_0009",
     "phone": "13233981804",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-11-28"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-11-28"
   },
   {
     "id": "m0010",
     "name": "杜婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -236,13 +235,13 @@
     "contactVisible": false,
     "wechatId": "stua_0010",
     "phone": "13822592679",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-10-27"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-10-27"
   },
   {
     "id": "m0011",
     "name": "卢毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -260,13 +259,13 @@
     "contactVisible": false,
     "wechatId": "stua_0011",
     "phone": "13285831080",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2019-09-06"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2019-09-06"
   },
   {
     "id": "m0012",
     "name": "谢8涛",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -284,13 +283,13 @@
     "contactVisible": true,
     "wechatId": "stua_0012",
     "phone": "13459129431",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2022-12-26"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2022-12-26"
   },
   {
     "id": "m0013",
     "name": "江宏华",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -308,13 +307,13 @@
     "contactVisible": true,
     "wechatId": "stua_0013",
     "phone": "13028974170",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-03-21"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-03-21"
   },
   {
     "id": "m0014",
     "name": "许嘉婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -332,13 +331,13 @@
     "contactVisible": true,
     "wechatId": "stua_0014",
     "phone": "13676956874",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-01-06"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-01-06"
   },
   {
     "id": "m0015",
     "name": "谢强丽",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -356,13 +355,13 @@
     "contactVisible": true,
     "wechatId": "stua_0015",
     "phone": "13744397248",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2022-01-22"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2022-01-22"
   },
   {
     "id": "m0016",
     "name": "杜斌佳",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -380,13 +379,13 @@
     "contactVisible": false,
     "wechatId": "stua_0016",
     "phone": "13729222547",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2022-02-05"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2022-02-05"
   },
   {
     "id": "m0017",
     "name": "李毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -404,13 +403,13 @@
     "contactVisible": false,
     "wechatId": "stua_0017",
     "phone": "13446239048",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2018-08-26"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2018-08-26"
   },
   {
     "id": "m0018",
     "name": "周锐寿",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -428,13 +427,13 @@
     "contactVisible": true,
     "wechatId": "stua_0018",
     "phone": "13627547390",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-09-12"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-09-12"
   },
   {
     "id": "m0019",
     "name": "杨炳喜",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -452,13 +451,13 @@
     "contactVisible": true,
     "wechatId": "stua_0019",
     "phone": "13178542224",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2025-02-26"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2025-02-26"
   },
   {
     "id": "m0020",
     "name": "杨玩明",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -476,13 +475,13 @@
     "contactVisible": false,
     "wechatId": "stua_0020",
     "phone": "13959402430",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2022-08-01"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2022-08-01"
   },
   {
     "id": "m0021",
     "name": "蔡婷发",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -500,13 +499,13 @@
     "contactVisible": false,
     "wechatId": "stua_0021",
     "phone": "13190844444",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-01-12"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-01-12"
   },
   {
     "id": "m0022",
     "name": "杨南顺",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -524,13 +523,13 @@
     "contactVisible": false,
     "wechatId": "stua_0022",
     "phone": "13756677188",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2021-10-03"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2021-10-03"
   },
   {
     "id": "m0023",
     "name": "杨斌磊",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -548,13 +547,13 @@
     "contactVisible": true,
     "wechatId": "stua_0023",
     "phone": "13088713240",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2022-08-07"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2022-08-07"
   },
   {
     "id": "m0024",
     "name": "蔡丽南",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -572,13 +571,13 @@
     "contactVisible": true,
     "wechatId": "stua_0024",
     "phone": "13843298890",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2024-04-21"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2024-04-21"
   },
   {
     "id": "m0025",
     "name": "文泽和",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -596,13 +595,13 @@
     "contactVisible": false,
     "wechatId": "stua_0025",
     "phone": "13521141998",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2020-09-23"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2020-09-23"
   },
   {
     "id": "m0026",
     "name": "杜8旺",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -620,13 +619,13 @@
     "contactVisible": false,
     "wechatId": "stua_0026",
     "phone": "13565779093",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-01-27"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-01-27"
   },
   {
     "id": "m0027",
     "name": "黄泽文",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -644,13 +643,13 @@
     "contactVisible": false,
     "wechatId": "stua_0027",
     "phone": "13064206508",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2018-03-28"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2018-03-28"
   },
   {
     "id": "m0028",
     "name": "韩磊燕",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -668,13 +667,13 @@
     "contactVisible": false,
     "wechatId": "stua_0028",
     "phone": "13953643800",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2021-02-07"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2021-02-07"
   },
   {
     "id": "m0029",
     "name": "李毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -692,13 +691,13 @@
     "contactVisible": true,
     "wechatId": "stua_0029",
     "phone": "13670072528",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2025-12-12"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2025-12-12"
   },
   {
     "id": "m0030",
     "name": "余泽伟",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -716,13 +715,13 @@
     "contactVisible": true,
     "wechatId": "stua_0030",
     "phone": "13812710785",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2023-11-14"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2023-11-14"
   },
   {
     "id": "m0031",
     "name": "萧悦",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -740,13 +739,13 @@
     "contactVisible": true,
     "wechatId": "stua_0031",
     "phone": "13072078353",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-09-15"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-09-15"
   },
   {
     "id": "m0032",
     "name": "郭彬喜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -764,13 +763,13 @@
     "contactVisible": true,
     "wechatId": "stua_0032",
     "phone": "13537708222",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2024-06-08"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2024-06-08"
   },
   {
     "id": "m0033",
     "name": "杨澜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -788,13 +787,13 @@
     "contactVisible": true,
     "wechatId": "stua_0033",
     "phone": "13115442910",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2019-10-17"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2019-10-17"
   },
   {
     "id": "m0034",
     "name": "沈珊婷",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -812,13 +811,13 @@
     "contactVisible": true,
     "wechatId": "stua_0034",
     "phone": "13250307310",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2023-12-10"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2023-12-10"
   },
   {
     "id": "m0035",
     "name": "黄彬旺",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -836,13 +835,13 @@
     "contactVisible": false,
     "wechatId": "stua_0035",
     "phone": "13329294303",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2022-02-20"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2022-02-20"
   },
   {
     "id": "m0036",
     "name": "沈玩国",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -860,13 +859,13 @@
     "contactVisible": true,
     "wechatId": "stua_0036",
     "phone": "13643215684",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-07-11"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-07-11"
   },
   {
     "id": "m0037",
     "name": "方8明",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -884,13 +883,13 @@
     "contactVisible": false,
     "wechatId": "stua_0037",
     "phone": "13738037826",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2021-11-08"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2021-11-08"
   },
   {
     "id": "m0038",
     "name": "罗锐明",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -908,13 +907,13 @@
     "contactVisible": true,
     "wechatId": "stua_0038",
     "phone": "13018458028",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2023-06-27"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2023-06-27"
   },
   {
     "id": "m0039",
     "name": "曾宏喜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -932,13 +931,13 @@
     "contactVisible": true,
     "wechatId": "stua_0039",
     "phone": "13627151672",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-02-05"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-02-05"
   },
   {
     "id": "m0040",
     "name": "卢杰佳",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -956,13 +955,13 @@
     "contactVisible": true,
     "wechatId": "stua_0040",
     "phone": "13077678215",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-09-13"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-09-13"
   },
   {
     "id": "m0041",
     "name": "曾敏爱",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -980,13 +979,13 @@
     "contactVisible": false,
     "wechatId": "stua_0041",
     "phone": "13242638131",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2018-09-24"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2018-09-24"
   },
   {
     "id": "m0042",
     "name": "江毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1004,13 +1003,13 @@
     "contactVisible": false,
     "wechatId": "stua_0042",
     "phone": "13056179822",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2020-01-21"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2020-01-21"
   },
   {
     "id": "m0043",
     "name": "叶澜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1028,13 +1027,13 @@
     "contactVisible": false,
     "wechatId": "stua_0043",
     "phone": "13447464471",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-08-24"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-08-24"
   },
   {
     "id": "m0044",
     "name": "杜敏轩",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1052,13 +1051,13 @@
     "contactVisible": true,
     "wechatId": "stua_0044",
     "phone": "13771864769",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2022-04-28"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2022-04-28"
   },
   {
     "id": "m0045",
     "name": "杜婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1076,13 +1075,13 @@
     "contactVisible": true,
     "wechatId": "stua_0045",
     "phone": "13959899033",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-11-07"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-11-07"
   },
   {
     "id": "m0046",
     "name": "郭晓磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1100,13 +1099,13 @@
     "contactVisible": true,
     "wechatId": "stua_0046",
     "phone": "13019622852",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2023-05-03"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2023-05-03"
   },
   {
     "id": "m0047",
     "name": "方坤",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1124,13 +1123,13 @@
     "contactVisible": false,
     "wechatId": "stua_0047",
     "phone": "13462344875",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2019-02-18"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2019-02-18"
   },
   {
     "id": "m0048",
     "name": "方炳珊",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1148,13 +1147,13 @@
     "contactVisible": false,
     "wechatId": "stua_0048",
     "phone": "13167312900",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-11-24"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-11-24"
   },
   {
     "id": "m0049",
     "name": "张磊丹",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1172,13 +1171,13 @@
     "contactVisible": true,
     "wechatId": "stua_0049",
     "phone": "13269524536",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2019-05-07"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2019-05-07"
   },
   {
     "id": "m0050",
     "name": "黄磊禄",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1196,13 +1195,13 @@
     "contactVisible": false,
     "wechatId": "stua_0050",
     "phone": "13734911299",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-03-09"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-03-09"
   },
   {
     "id": "m0051",
     "name": "刘彬婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1220,13 +1219,13 @@
     "contactVisible": true,
     "wechatId": "stua_0051",
     "phone": "13589899543",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2025-07-09"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2025-07-09"
   },
   {
     "id": "m0052",
     "name": "杜毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1244,13 +1243,13 @@
     "contactVisible": false,
     "wechatId": "stua_0052",
     "phone": "13920318852",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-08-05"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-08-05"
   },
   {
     "id": "m0053",
     "name": "郑丽培",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1268,13 +1267,13 @@
     "contactVisible": false,
     "wechatId": "stua_0053",
     "phone": "13890033426",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2020-05-21"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2020-05-21"
   },
   {
     "id": "m0054",
     "name": "罗培丽",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1292,13 +1291,13 @@
     "contactVisible": true,
     "wechatId": "stua_0054",
     "phone": "13394535513",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2019-03-06"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2019-03-06"
   },
   {
     "id": "m0055",
     "name": "许航",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1316,13 +1315,13 @@
     "contactVisible": false,
     "wechatId": "stua_0055",
     "phone": "13249525013",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2021-10-08"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2021-10-08"
   },
   {
     "id": "m0056",
     "name": "卢磊财",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1340,13 +1339,13 @@
     "contactVisible": false,
     "wechatId": "stua_0056",
     "phone": "13986269690",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2020-07-25"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2020-07-25"
   },
   {
     "id": "m0057",
     "name": "陈建轩",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1364,13 +1363,13 @@
     "contactVisible": false,
     "wechatId": "stua_0057",
     "phone": "13188427092",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2018-08-27"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2018-08-27"
   },
   {
     "id": "m0058",
     "name": "卢爱爱",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1388,13 +1387,13 @@
     "contactVisible": false,
     "wechatId": "stua_0058",
     "phone": "13835763141",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2020-05-16"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2020-05-16"
   },
   {
     "id": "m0059",
     "name": "郭培孝",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1412,13 +1411,13 @@
     "contactVisible": false,
     "wechatId": "stua_0059",
     "phone": "13619905898",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-06-13"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-06-13"
   },
   {
     "id": "m0060",
     "name": "韩宏轩",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1436,13 +1435,13 @@
     "contactVisible": false,
     "wechatId": "stua_0060",
     "phone": "13177420301",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-06-15"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-06-15"
   },
   {
     "id": "m0061",
     "name": "吴锐宇",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1460,13 +1459,13 @@
     "contactVisible": false,
     "wechatId": "stua_0061",
     "phone": "13152753968",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2020-07-01"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2020-07-01"
   },
   {
     "id": "m0062",
     "name": "刘婷丹",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1484,13 +1483,13 @@
     "contactVisible": false,
     "wechatId": "stua_0062",
     "phone": "13450495341",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2025-02-05"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2025-02-05"
   },
   {
     "id": "m0063",
     "name": "许航",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1508,13 +1507,13 @@
     "contactVisible": true,
     "wechatId": "stua_0063",
     "phone": "13890861216",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2020-11-22"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2020-11-22"
   },
   {
     "id": "m0064",
     "name": "杜敏乐",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1532,13 +1531,13 @@
     "contactVisible": false,
     "wechatId": "stua_0064",
     "phone": "13051414514",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2023-02-27"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2023-02-27"
   },
   {
     "id": "m0065",
     "name": "卢悦",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1556,13 +1555,13 @@
     "contactVisible": true,
     "wechatId": "stua_0065",
     "phone": "13723493682",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2024-06-13"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2024-06-13"
   },
   {
     "id": "m0066",
     "name": "方8玩",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1580,13 +1579,13 @@
     "contactVisible": false,
     "wechatId": "stua_0066",
     "phone": "13377776676",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2021-05-20"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2021-05-20"
   },
   {
     "id": "m0067",
     "name": "萧宏南",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1604,13 +1603,13 @@
     "contactVisible": true,
     "wechatId": "stua_0067",
     "phone": "13894968165",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2022-07-23"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2022-07-23"
   },
   {
     "id": "m0068",
     "name": "郑婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1628,13 +1627,13 @@
     "contactVisible": true,
     "wechatId": "stua_0068",
     "phone": "13032813062",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2022-02-24"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2022-02-24"
   },
   {
     "id": "m0069",
     "name": "卢南炳",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1652,13 +1651,13 @@
     "contactVisible": false,
     "wechatId": "stua_0069",
     "phone": "13279693743",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2018-04-19"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2018-04-19"
   },
   {
     "id": "m0070",
     "name": "曾玩安",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1676,13 +1675,13 @@
     "contactVisible": false,
     "wechatId": "stua_0070",
     "phone": "13122659918",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2024-05-15"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2024-05-15"
   },
   {
     "id": "m0071",
     "name": "陈彬兴",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1700,13 +1699,13 @@
     "contactVisible": true,
     "wechatId": "stua_0071",
     "phone": "13390990345",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-04-15"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-04-15"
   },
   {
     "id": "m0072",
     "name": "吴家发",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1724,13 +1723,13 @@
     "contactVisible": true,
     "wechatId": "stua_0072",
     "phone": "13935848693",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2025-11-03"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2025-11-03"
   },
   {
     "id": "m0073",
     "name": "蔡悦",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1748,13 +1747,13 @@
     "contactVisible": true,
     "wechatId": "stua_0073",
     "phone": "13050391839",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-02-10"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-02-10"
   },
   {
     "id": "m0074",
     "name": "彭静博",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1772,13 +1771,13 @@
     "contactVisible": false,
     "wechatId": "stua_0074",
     "phone": "13580301539",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2025-01-19"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2025-01-19"
   },
   {
     "id": "m0075",
     "name": "江燕纯",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1796,13 +1795,13 @@
     "contactVisible": false,
     "wechatId": "stua_0075",
     "phone": "13558987045",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-11-15"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-11-15"
   },
   {
     "id": "m0076",
     "name": "文娟",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -1820,13 +1819,13 @@
     "contactVisible": false,
     "wechatId": "stua_0076",
     "phone": "13614854948",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-08-15"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-08-15"
   },
   {
     "id": "m0077",
     "name": "许南豪",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1844,13 +1843,13 @@
     "contactVisible": false,
     "wechatId": "stua_0077",
     "phone": "13799409179",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2024-11-23"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2024-11-23"
   },
   {
     "id": "m0078",
     "name": "沈南乐",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1868,13 +1867,13 @@
     "contactVisible": false,
     "wechatId": "stua_0078",
     "phone": "13562424452",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2024-12-19"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2024-12-19"
   },
   {
     "id": "m0079",
     "name": "黄丽娜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1892,13 +1891,13 @@
     "contactVisible": false,
     "wechatId": "stua_0079",
     "phone": "13371012137",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2022-01-08"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2022-01-08"
   },
   {
     "id": "m0080",
     "name": "杨婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1916,13 +1915,13 @@
     "contactVisible": false,
     "wechatId": "stua_0080",
     "phone": "13659755385",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2021-09-17"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2021-09-17"
   },
   {
     "id": "m0081",
     "name": "吴炳财",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1940,13 +1939,13 @@
     "contactVisible": true,
     "wechatId": "stua_0081",
     "phone": "13351591847",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-01-22"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-01-22"
   },
   {
     "id": "m0082",
     "name": "王8炳",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1964,13 +1963,13 @@
     "contactVisible": false,
     "wechatId": "stua_0082",
     "phone": "13491972502",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2020-09-27"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2020-09-27"
   },
   {
     "id": "m0083",
     "name": "彭磊贤",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -1988,13 +1987,13 @@
     "contactVisible": true,
     "wechatId": "stua_0083",
     "phone": "13811992225",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-09-24"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-09-24"
   },
   {
     "id": "m0084",
     "name": "杨婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -2012,13 +2011,13 @@
     "contactVisible": true,
     "wechatId": "stua_0084",
     "phone": "13583921549",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-10-11"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-10-11"
   },
   {
     "id": "m0085",
     "name": "许毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -2036,13 +2035,13 @@
     "contactVisible": false,
     "wechatId": "stua_0085",
     "phone": "13766327940",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-09-28"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-09-28"
   },
   {
     "id": "m0086",
     "name": "谢超珊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -2060,13 +2059,13 @@
     "contactVisible": true,
     "wechatId": "stua_0086",
     "phone": "13427893119",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2022-03-21"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2022-03-21"
   },
   {
     "id": "m0087",
     "name": "萧嘉喜",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -2084,13 +2083,13 @@
     "contactVisible": false,
     "wechatId": "stua_0087",
     "phone": "13656737362",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-04-04"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-04-04"
   },
   {
     "id": "m0088",
     "name": "沈珊华",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -2108,13 +2107,13 @@
     "contactVisible": true,
     "wechatId": "stua_0088",
     "phone": "13056683242",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2023-08-20"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2023-08-20"
   },
   {
     "id": "m0089",
     "name": "文培福",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -2132,13 +2131,13 @@
     "contactVisible": false,
     "wechatId": "stua_0089",
     "phone": "13241871434",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-07-23"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-07-23"
   },
   {
     "id": "m0090",
     "name": "叶敏建",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -2156,13 +2155,13 @@
     "contactVisible": true,
     "wechatId": "stua_0090",
     "phone": "13711820507",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-02-24"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-02-24"
   },
   {
     "id": "m0091",
     "name": "杨玩武",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "汕头市",
@@ -2180,13 +2179,13 @@
     "contactVisible": false,
     "wechatId": "stua_0091",
     "phone": "13374244263",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-12-04"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-12-04"
   },
   {
     "id": "m0092",
     "name": "许彬忠",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "汕头市",
@@ -2204,13 +2203,13 @@
     "contactVisible": false,
     "wechatId": "stua_0092",
     "phone": "13827003409",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-04-12"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-04-12"
   },
   {
     "id": "m0093",
     "name": "江家华",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2228,13 +2227,13 @@
     "contactVisible": false,
     "wechatId": "stua_0093",
     "phone": "13634357340",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2024-01-25"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2024-01-25"
   },
   {
     "id": "m0094",
     "name": "叶静培",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2252,13 +2251,13 @@
     "contactVisible": true,
     "wechatId": "stua_0094",
     "phone": "13866997536",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2024-11-09"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2024-11-09"
   },
   {
     "id": "m0095",
     "name": "谢超喜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2276,13 +2275,13 @@
     "contactVisible": true,
     "wechatId": "stua_0095",
     "phone": "13437015676",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2018-11-04"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2018-11-04"
   },
   {
     "id": "m0096",
     "name": "杨松豪",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2300,13 +2299,13 @@
     "contactVisible": false,
     "wechatId": "stua_0096",
     "phone": "13824082988",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2021-09-05"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2021-09-05"
   },
   {
     "id": "m0097",
     "name": "蔡锐涛",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "潮州市",
@@ -2324,13 +2323,13 @@
     "contactVisible": false,
     "wechatId": "stua_0097",
     "phone": "13136928038",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-12-23"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-12-23"
   },
   {
     "id": "m0098",
     "name": "张松斌",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2348,13 +2347,13 @@
     "contactVisible": false,
     "wechatId": "stua_0098",
     "phone": "13564333288",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2019-08-26"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2019-08-26"
   },
   {
     "id": "m0099",
     "name": "余航",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2372,13 +2371,13 @@
     "contactVisible": false,
     "wechatId": "stua_0099",
     "phone": "13362542705",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-02-28"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-02-28"
   },
   {
     "id": "m0100",
     "name": "杜婷",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "潮州市",
@@ -2396,13 +2395,13 @@
     "contactVisible": true,
     "wechatId": "stua_0100",
     "phone": "13418920670",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2024-03-12"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2024-03-12"
   },
   {
     "id": "m0101",
     "name": "李群",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "潮州市",
@@ -2420,13 +2419,13 @@
     "contactVisible": true,
     "wechatId": "stua_0101",
     "phone": "13457177367",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2018-04-12"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2018-04-12"
   },
   {
     "id": "m0102",
     "name": "杨松鑫",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "潮州市",
@@ -2444,13 +2443,13 @@
     "contactVisible": false,
     "wechatId": "stua_0102",
     "phone": "13555264201",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-01-11"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-01-11"
   },
   {
     "id": "m0103",
     "name": "曾磊",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "潮州市",
@@ -2468,13 +2467,13 @@
     "contactVisible": false,
     "wechatId": "stua_0103",
     "phone": "13692433643",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2021-01-21"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2021-01-21"
   },
   {
     "id": "m0104",
     "name": "曾纯燕",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "潮州市",
@@ -2492,13 +2491,13 @@
     "contactVisible": true,
     "wechatId": "stua_0104",
     "phone": "13449807847",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2021-08-06"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2021-08-06"
   },
   {
     "id": "m0105",
     "name": "韩磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2516,13 +2515,13 @@
     "contactVisible": false,
     "wechatId": "stua_0105",
     "phone": "13566298432",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2024-09-10"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2024-09-10"
   },
   {
     "id": "m0106",
     "name": "文彬琪",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "潮州市",
@@ -2540,13 +2539,13 @@
     "contactVisible": true,
     "wechatId": "stua_0106",
     "phone": "13822974012",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-10-16"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-10-16"
   },
   {
     "id": "m0107",
     "name": "杨毅",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "揭阳市",
@@ -2564,13 +2563,13 @@
     "contactVisible": false,
     "wechatId": "stua_0107",
     "phone": "13547461608",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2023-11-10"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2023-11-10"
   },
   {
     "id": "m0108",
     "name": "张磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2588,13 +2587,13 @@
     "contactVisible": true,
     "wechatId": "stua_0108",
     "phone": "13249149504",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2024-07-09"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2024-07-09"
   },
   {
     "id": "m0109",
     "name": "郭坤",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "揭阳市",
@@ -2612,13 +2611,13 @@
     "contactVisible": false,
     "wechatId": "stua_0109",
     "phone": "13539913465",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2025-04-18"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2025-04-18"
   },
   {
     "id": "m0110",
     "name": "江8涛",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "揭阳市",
@@ -2636,13 +2635,13 @@
     "contactVisible": false,
     "wechatId": "stua_0110",
     "phone": "13494286857",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2021-03-13"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2021-03-13"
   },
   {
     "id": "m0111",
     "name": "杜菲",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2660,13 +2659,13 @@
     "contactVisible": true,
     "wechatId": "stua_0111",
     "phone": "13147832949",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-08-24"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-08-24"
   },
   {
     "id": "m0112",
     "name": "黄航",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "揭阳市",
@@ -2684,13 +2683,13 @@
     "contactVisible": true,
     "wechatId": "stua_0112",
     "phone": "13431849103",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2022-07-18"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2022-07-18"
   },
   {
     "id": "m0113",
     "name": "吴丽国",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "揭阳市",
@@ -2708,13 +2707,13 @@
     "contactVisible": false,
     "wechatId": "stua_0113",
     "phone": "13657606678",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-12-04"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-12-04"
   },
   {
     "id": "m0114",
     "name": "蔡丽涛",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2732,13 +2731,13 @@
     "contactVisible": false,
     "wechatId": "stua_0114",
     "phone": "13295672781",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2023-01-13"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2023-01-13"
   },
   {
     "id": "m0115",
     "name": "许娟",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2756,13 +2755,13 @@
     "contactVisible": true,
     "wechatId": "stua_0115",
     "phone": "13981296358",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2018-04-06"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2018-04-06"
   },
   {
     "id": "m0116",
     "name": "谢菲",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2780,13 +2779,13 @@
     "contactVisible": true,
     "wechatId": "stua_0116",
     "phone": "13878698724",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2024-12-10"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2024-12-10"
   },
   {
     "id": "m0117",
     "name": "罗超豪",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2804,13 +2803,13 @@
     "contactVisible": true,
     "wechatId": "stua_0117",
     "phone": "13791678902",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-08-07"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-08-07"
   },
   {
     "id": "m0118",
     "name": "杨锐宏",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2828,13 +2827,13 @@
     "contactVisible": true,
     "wechatId": "stua_0118",
     "phone": "13775314889",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2020-09-06"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2020-09-06"
   },
   {
     "id": "m0119",
     "name": "卢玩寿",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "揭阳市",
@@ -2852,13 +2851,13 @@
     "contactVisible": false,
     "wechatId": "stua_0119",
     "phone": "13511882453",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-01-19"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-01-19"
   },
   {
     "id": "m0120",
     "name": "王珊静",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "揭阳市",
@@ -2876,13 +2875,13 @@
     "contactVisible": true,
     "wechatId": "stua_0120",
     "phone": "13976102044",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-12-16"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-12-16"
   },
   {
     "id": "m0121",
     "name": "李坤",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -2900,13 +2899,13 @@
     "contactVisible": true,
     "wechatId": "stua_0121",
     "phone": "13343196242",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-03-24"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-03-24"
   },
   {
     "id": "m0122",
     "name": "陈家文",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -2924,13 +2923,13 @@
     "contactVisible": true,
     "wechatId": "stua_0122",
     "phone": "13191763240",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2019-11-11"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2019-11-11"
   },
   {
     "id": "m0123",
     "name": "罗嘉宏",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -2948,13 +2947,13 @@
     "contactVisible": false,
     "wechatId": "stua_0123",
     "phone": "13485449057",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-03-18"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-03-18"
   },
   {
     "id": "m0124",
     "name": "吴菲",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -2972,13 +2971,13 @@
     "contactVisible": true,
     "wechatId": "stua_0124",
     "phone": "13515272806",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2020-02-04"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2020-02-04"
   },
   {
     "id": "m0125",
     "name": "王敏超",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -2996,13 +2995,13 @@
     "contactVisible": false,
     "wechatId": "stua_0125",
     "phone": "13776755946",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-09-11"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-09-11"
   },
   {
     "id": "m0126",
     "name": "杨嘉涛",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3020,13 +3019,13 @@
     "contactVisible": false,
     "wechatId": "stua_0126",
     "phone": "13751973065",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2022-08-08"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2022-08-08"
   },
   {
     "id": "m0127",
     "name": "郑磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3044,13 +3043,13 @@
     "contactVisible": false,
     "wechatId": "stua_0127",
     "phone": "13974048525",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-02-11"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-02-11"
   },
   {
     "id": "m0128",
     "name": "萧菲",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3068,13 +3067,13 @@
     "contactVisible": false,
     "wechatId": "stua_0128",
     "phone": "13625829092",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-11-09"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-11-09"
   },
   {
     "id": "m0129",
     "name": "蔡培燕",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3092,13 +3091,13 @@
     "contactVisible": false,
     "wechatId": "stua_0129",
     "phone": "13866717092",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2025-11-24"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2025-11-24"
   },
   {
     "id": "m0130",
     "name": "王悦",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3116,13 +3115,13 @@
     "contactVisible": true,
     "wechatId": "stua_0130",
     "phone": "13494493730",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2020-06-03"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2020-06-03"
   },
   {
     "id": "m0131",
     "name": "李毅",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3140,13 +3139,13 @@
     "contactVisible": false,
     "wechatId": "stua_0131",
     "phone": "13030071594",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-01-26"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-01-26"
   },
   {
     "id": "m0132",
     "name": "许斌发",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3164,13 +3163,13 @@
     "contactVisible": false,
     "wechatId": "stua_0132",
     "phone": "13245436768",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-06-25"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-06-25"
   },
   {
     "id": "m0133",
     "name": "蔡炳乐",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3188,13 +3187,13 @@
     "contactVisible": false,
     "wechatId": "stua_0133",
     "phone": "13482769917",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2022-04-09"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2022-04-09"
   },
   {
     "id": "m0134",
     "name": "杜坤",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3212,13 +3211,13 @@
     "contactVisible": true,
     "wechatId": "stua_0134",
     "phone": "13065626247",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-08-02"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-08-02"
   },
   {
     "id": "m0135",
     "name": "林群",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3236,13 +3235,13 @@
     "contactVisible": false,
     "wechatId": "stua_0135",
     "phone": "13788323393",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2024-01-17"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2024-01-17"
   },
   {
     "id": "m0136",
     "name": "罗玩鑫",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3260,13 +3259,13 @@
     "contactVisible": true,
     "wechatId": "stua_0136",
     "phone": "13695595633",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2020-12-14"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2020-12-14"
   },
   {
     "id": "m0137",
     "name": "罗嘉福",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3284,13 +3283,13 @@
     "contactVisible": false,
     "wechatId": "stua_0137",
     "phone": "13563897428",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2019-01-15"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2019-01-15"
   },
   {
     "id": "m0138",
     "name": "杜宏发",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3308,13 +3307,13 @@
     "contactVisible": true,
     "wechatId": "stua_0138",
     "phone": "13828969992",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2025-07-01"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2025-07-01"
   },
   {
     "id": "m0139",
     "name": "彭婷明",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3332,13 +3331,13 @@
     "contactVisible": false,
     "wechatId": "stua_0139",
     "phone": "13594948455",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-01-09"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-01-09"
   },
   {
     "id": "m0140",
     "name": "曾群",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3356,13 +3355,13 @@
     "contactVisible": true,
     "wechatId": "stua_0140",
     "phone": "13358145028",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-03-08"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-03-08"
   },
   {
     "id": "m0141",
     "name": "叶澜",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3380,13 +3379,13 @@
     "contactVisible": false,
     "wechatId": "stua_0141",
     "phone": "13572174318",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2023-12-10"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2023-12-10"
   },
   {
     "id": "m0142",
     "name": "黄建丹",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3404,13 +3403,13 @@
     "contactVisible": true,
     "wechatId": "stua_0142",
     "phone": "13882983978",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-04-02"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-04-02"
   },
   {
     "id": "m0143",
     "name": "张群",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "广州市",
@@ -3428,13 +3427,13 @@
     "contactVisible": true,
     "wechatId": "stua_0143",
     "phone": "13392124324",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2021-04-06"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2021-04-06"
   },
   {
     "id": "m0144",
     "name": "韩超彬",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3452,13 +3451,13 @@
     "contactVisible": false,
     "wechatId": "stua_0144",
     "phone": "13545673676",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-03-22"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-03-22"
   },
   {
     "id": "m0145",
     "name": "李澜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3476,13 +3475,13 @@
     "contactVisible": true,
     "wechatId": "stua_0145",
     "phone": "13383504636",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-09-07"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-09-07"
   },
   {
     "id": "m0146",
     "name": "罗锐顺",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "广州市",
@@ -3500,13 +3499,13 @@
     "contactVisible": false,
     "wechatId": "stua_0146",
     "phone": "13799900297",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2023-07-11"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2023-07-11"
   },
   {
     "id": "m0147",
     "name": "谢杰明",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3524,13 +3523,13 @@
     "contactVisible": false,
     "wechatId": "stua_0147",
     "phone": "13151898436",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2018-04-11"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2018-04-11"
   },
   {
     "id": "m0148",
     "name": "李嘉燕",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3548,13 +3547,13 @@
     "contactVisible": false,
     "wechatId": "stua_0148",
     "phone": "13332289224",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-02-11"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-02-11"
   },
   {
     "id": "m0149",
     "name": "韩坤",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3572,13 +3571,13 @@
     "contactVisible": true,
     "wechatId": "stua_0149",
     "phone": "13825903982",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2022-12-05"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2022-12-05"
   },
   {
     "id": "m0150",
     "name": "蔡斌燕",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3596,13 +3595,13 @@
     "contactVisible": false,
     "wechatId": "stua_0150",
     "phone": "13651921503",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2019-04-19"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2019-04-19"
   },
   {
     "id": "m0151",
     "name": "彭磊",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3620,13 +3619,13 @@
     "contactVisible": false,
     "wechatId": "stua_0151",
     "phone": "13134901420",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2018-05-20"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2018-05-20"
   },
   {
     "id": "m0152",
     "name": "彭磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3644,13 +3643,13 @@
     "contactVisible": true,
     "wechatId": "stua_0152",
     "phone": "13813052787",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2024-03-28"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2024-03-28"
   },
   {
     "id": "m0153",
     "name": "叶敏娜",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3668,13 +3667,13 @@
     "contactVisible": true,
     "wechatId": "stua_0153",
     "phone": "13098617713",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2018-03-15"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2018-03-15"
   },
   {
     "id": "m0154",
     "name": "黄燕静",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3692,13 +3691,13 @@
     "contactVisible": false,
     "wechatId": "stua_0154",
     "phone": "13699938430",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2020-03-06"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2020-03-06"
   },
   {
     "id": "m0155",
     "name": "黄婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3716,13 +3715,13 @@
     "contactVisible": false,
     "wechatId": "stua_0155",
     "phone": "13495459503",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2020-10-18"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2020-10-18"
   },
   {
     "id": "m0156",
     "name": "余锐寿",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3740,13 +3739,13 @@
     "contactVisible": true,
     "wechatId": "stua_0156",
     "phone": "13397012263",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-03-07"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-03-07"
   },
   {
     "id": "m0157",
     "name": "林锐磊",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3764,13 +3763,13 @@
     "contactVisible": false,
     "wechatId": "stua_0157",
     "phone": "13090996446",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-09-07"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-09-07"
   },
   {
     "id": "m0158",
     "name": "陈志嘉",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3788,13 +3787,13 @@
     "contactVisible": false,
     "wechatId": "stua_0158",
     "phone": "13813927392",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2022-01-07"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2022-01-07"
   },
   {
     "id": "m0159",
     "name": "刘泽敏",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3812,13 +3811,13 @@
     "contactVisible": false,
     "wechatId": "stua_0159",
     "phone": "13913441196",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2020-08-26"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2020-08-26"
   },
   {
     "id": "m0160",
     "name": "曾丽超",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3836,13 +3835,13 @@
     "contactVisible": false,
     "wechatId": "stua_0160",
     "phone": "13099210096",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2022-01-14"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2022-01-14"
   },
   {
     "id": "m0161",
     "name": "卢锐和",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3860,13 +3859,13 @@
     "contactVisible": false,
     "wechatId": "stua_0161",
     "phone": "13956342453",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-06-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-06-07"
   },
   {
     "id": "m0162",
     "name": "庄强佳",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3884,13 +3883,13 @@
     "contactVisible": false,
     "wechatId": "stua_0162",
     "phone": "13984642488",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-06-25"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-06-25"
   },
   {
     "id": "m0163",
     "name": "刘玩晓",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3908,13 +3907,13 @@
     "contactVisible": false,
     "wechatId": "stua_0163",
     "phone": "13294493423",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-07-13"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-07-13"
   },
   {
     "id": "m0164",
     "name": "彭航",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3932,13 +3931,13 @@
     "contactVisible": false,
     "wechatId": "stua_0164",
     "phone": "13134098243",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-07-01"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-07-01"
   },
   {
     "id": "m0165",
     "name": "余宏财",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -3956,13 +3955,13 @@
     "contactVisible": false,
     "wechatId": "stua_0165",
     "phone": "13326528381",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2022-11-03"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2022-11-03"
   },
   {
     "id": "m0166",
     "name": "卢群",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -3980,13 +3979,13 @@
     "contactVisible": false,
     "wechatId": "stua_0166",
     "phone": "13819651523",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2022-04-16"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2022-04-16"
   },
   {
     "id": "m0167",
     "name": "杨婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -4004,13 +4003,13 @@
     "contactVisible": true,
     "wechatId": "stua_0167",
     "phone": "13719993784",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-03-21"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-03-21"
   },
   {
     "id": "m0168",
     "name": "杜松乐",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -4028,13 +4027,13 @@
     "contactVisible": false,
     "wechatId": "stua_0168",
     "phone": "13252220860",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2022-02-16"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2022-02-16"
   },
   {
     "id": "m0169",
     "name": "周建嘉",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -4052,13 +4051,13 @@
     "contactVisible": false,
     "wechatId": "stua_0169",
     "phone": "13057388212",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2022-07-16"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2022-07-16"
   },
   {
     "id": "m0170",
     "name": "彭8静",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "深圳市",
@@ -4076,13 +4075,13 @@
     "contactVisible": false,
     "wechatId": "stua_0170",
     "phone": "13860967484",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2022-04-23"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2022-04-23"
   },
   {
     "id": "m0171",
     "name": "韩斌燕",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -4100,13 +4099,13 @@
     "contactVisible": false,
     "wechatId": "stua_0171",
     "phone": "13637798632",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-01-14"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-01-14"
   },
   {
     "id": "m0172",
     "name": "罗燕国",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "深圳市",
@@ -4124,13 +4123,13 @@
     "contactVisible": false,
     "wechatId": "stua_0172",
     "phone": "13886621912",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2021-08-01"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2021-08-01"
   },
   {
     "id": "m0173",
     "name": "杨炳孝",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4148,13 +4147,13 @@
     "contactVisible": true,
     "wechatId": "stua_0173",
     "phone": "13022675255",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2019-03-27"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2019-03-27"
   },
   {
     "id": "m0174",
     "name": "罗嘉伟",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4172,13 +4171,13 @@
     "contactVisible": true,
     "wechatId": "stua_0174",
     "phone": "13870674165",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2022-10-19"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2022-10-19"
   },
   {
     "id": "m0175",
     "name": "吴伟豪",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4196,13 +4195,13 @@
     "contactVisible": false,
     "wechatId": "stua_0175",
     "phone": "13699123127",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2019-01-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2019-01-07"
   },
   {
     "id": "m0176",
     "name": "卢婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4220,13 +4219,13 @@
     "contactVisible": false,
     "wechatId": "stua_0176",
     "phone": "13125778259",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-04-11"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-04-11"
   },
   {
     "id": "m0177",
     "name": "周珊兴",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "东莞市",
@@ -4244,13 +4243,13 @@
     "contactVisible": false,
     "wechatId": "stua_0177",
     "phone": "13229180892",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-02-02"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-02-02"
   },
   {
     "id": "m0178",
     "name": "黄培玩",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4268,13 +4267,13 @@
     "contactVisible": false,
     "wechatId": "stua_0178",
     "phone": "13784530027",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2018-03-20"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2018-03-20"
   },
   {
     "id": "m0179",
     "name": "彭磊纯",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "东莞市",
@@ -4292,13 +4291,13 @@
     "contactVisible": true,
     "wechatId": "stua_0179",
     "phone": "13568661487",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2019-10-19"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2019-10-19"
   },
   {
     "id": "m0180",
     "name": "沈强贤",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4316,13 +4315,13 @@
     "contactVisible": true,
     "wechatId": "stua_0180",
     "phone": "13955841637",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2024-08-06"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2024-08-06"
   },
   {
     "id": "m0181",
     "name": "萧娟",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "东莞市",
@@ -4340,13 +4339,13 @@
     "contactVisible": false,
     "wechatId": "stua_0181",
     "phone": "13591243843",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-02-23"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-02-23"
   },
   {
     "id": "m0182",
     "name": "陈悦",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "东莞市",
@@ -4364,13 +4363,13 @@
     "contactVisible": true,
     "wechatId": "stua_0182",
     "phone": "13067409866",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-05-09"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-05-09"
   },
   {
     "id": "m0183",
     "name": "刘娟",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4388,13 +4387,13 @@
     "contactVisible": true,
     "wechatId": "stua_0183",
     "phone": "13258164910",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2018-12-23"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2018-12-23"
   },
   {
     "id": "m0184",
     "name": "苏斌孝",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "东莞市",
@@ -4412,13 +4411,13 @@
     "contactVisible": true,
     "wechatId": "stua_0184",
     "phone": "13217106891",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2021-11-17"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2021-11-17"
   },
   {
     "id": "m0185",
     "name": "叶松财",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4436,13 +4435,13 @@
     "contactVisible": true,
     "wechatId": "stua_0185",
     "phone": "13098344197",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-11-25"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-11-25"
   },
   {
     "id": "m0186",
     "name": "周群",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4460,13 +4459,13 @@
     "contactVisible": false,
     "wechatId": "stua_0186",
     "phone": "13697988705",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2019-06-15"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2019-06-15"
   },
   {
     "id": "m0187",
     "name": "蔡磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4484,13 +4483,13 @@
     "contactVisible": false,
     "wechatId": "stua_0187",
     "phone": "13896674391",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-03-11"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-03-11"
   },
   {
     "id": "m0188",
     "name": "叶婷强",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "东莞市",
@@ -4508,13 +4507,13 @@
     "contactVisible": false,
     "wechatId": "stua_0188",
     "phone": "13819494437",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-04-08"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-04-08"
   },
   {
     "id": "m0189",
     "name": "黄婷",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4532,13 +4531,13 @@
     "contactVisible": false,
     "wechatId": "stua_0189",
     "phone": "13218565911",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2018-10-27"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2018-10-27"
   },
   {
     "id": "m0190",
     "name": "叶强顺",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4556,13 +4555,13 @@
     "contactVisible": true,
     "wechatId": "stua_0190",
     "phone": "13136341489",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-04-15"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-04-15"
   },
   {
     "id": "m0191",
     "name": "刘群",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4580,13 +4579,13 @@
     "contactVisible": false,
     "wechatId": "stua_0191",
     "phone": "13450927427",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2022-11-21"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2022-11-21"
   },
   {
     "id": "m0192",
     "name": "谢坤",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4604,13 +4603,13 @@
     "contactVisible": false,
     "wechatId": "stua_0192",
     "phone": "13856467370",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-05-23"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-05-23"
   },
   {
     "id": "m0193",
     "name": "韩澜",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4628,13 +4627,13 @@
     "contactVisible": false,
     "wechatId": "stua_0193",
     "phone": "13716671222",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-04-14"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-04-14"
   },
   {
     "id": "m0194",
     "name": "郭南安",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4652,13 +4651,13 @@
     "contactVisible": true,
     "wechatId": "stua_0194",
     "phone": "13351617585",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-09-16"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-09-16"
   },
   {
     "id": "m0195",
     "name": "曾纯兴",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4676,13 +4675,13 @@
     "contactVisible": false,
     "wechatId": "stua_0195",
     "phone": "13017722104",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2022-11-21"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2022-11-21"
   },
   {
     "id": "m0196",
     "name": "彭彬家",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4700,13 +4699,13 @@
     "contactVisible": false,
     "wechatId": "stua_0196",
     "phone": "13542160351",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2018-08-05"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2018-08-05"
   },
   {
     "id": "m0197",
     "name": "沈群",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "佛山市",
@@ -4724,13 +4723,13 @@
     "contactVisible": false,
     "wechatId": "stua_0197",
     "phone": "13299905804",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2019-08-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2019-08-07"
   },
   {
     "id": "m0198",
     "name": "黄佳禄",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "佛山市",
@@ -4748,13 +4747,13 @@
     "contactVisible": true,
     "wechatId": "stua_0198",
     "phone": "13585754232",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2025-02-23"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2025-02-23"
   },
   {
     "id": "m0199",
     "name": "罗纯国",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "珠海市",
@@ -4772,13 +4771,13 @@
     "contactVisible": false,
     "wechatId": "stua_0199",
     "phone": "13938165932",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-05-11"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-05-11"
   },
   {
     "id": "m0200",
     "name": "杜坤",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "珠海市",
@@ -4796,13 +4795,13 @@
     "contactVisible": true,
     "wechatId": "stua_0200",
     "phone": "13752548418",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-07-14"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-07-14"
   },
   {
     "id": "m0201",
     "name": "韩彬强",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "珠海市",
@@ -4820,13 +4819,13 @@
     "contactVisible": false,
     "wechatId": "stua_0201",
     "phone": "13421905609",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2024-06-02"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2024-06-02"
   },
   {
     "id": "m0202",
     "name": "李敏佳",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "珠海市",
@@ -4844,13 +4843,13 @@
     "contactVisible": false,
     "wechatId": "stua_0202",
     "phone": "13846308273",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-06-18"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-06-18"
   },
   {
     "id": "m0203",
     "name": "卢磊",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "珠海市",
@@ -4868,13 +4867,13 @@
     "contactVisible": false,
     "wechatId": "stua_0203",
     "phone": "13996709798",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2018-11-14"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2018-11-14"
   },
   {
     "id": "m0204",
     "name": "张娟",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "珠海市",
@@ -4892,13 +4891,13 @@
     "contactVisible": true,
     "wechatId": "stua_0204",
     "phone": "13065122000",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2019-10-15"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2019-10-15"
   },
   {
     "id": "m0205",
     "name": "周玩文",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "中山市",
@@ -4916,13 +4915,13 @@
     "contactVisible": true,
     "wechatId": "stua_0205",
     "phone": "13728978844",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2021-02-11"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2021-02-11"
   },
   {
     "id": "m0206",
     "name": "余毅",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "中山市",
@@ -4940,13 +4939,13 @@
     "contactVisible": false,
     "wechatId": "stua_0206",
     "phone": "13095896309",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2023-09-25"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2023-09-25"
   },
   {
     "id": "m0207",
     "name": "庄嘉强",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "中山市",
@@ -4964,13 +4963,13 @@
     "contactVisible": false,
     "wechatId": "stua_0207",
     "phone": "13844538772",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2024-10-17"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2024-10-17"
   },
   {
     "id": "m0208",
     "name": "谢嘉贤",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "中山市",
@@ -4988,13 +4987,13 @@
     "contactVisible": false,
     "wechatId": "stua_0208",
     "phone": "13527938559",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2025-01-20"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2025-01-20"
   },
   {
     "id": "m0209",
     "name": "张菲",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "中山市",
@@ -5012,13 +5011,13 @@
     "contactVisible": false,
     "wechatId": "stua_0209",
     "phone": "13717283583",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2025-07-16"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2025-07-16"
   },
   {
     "id": "m0210",
     "name": "沈群",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5036,13 +5035,13 @@
     "contactVisible": true,
     "wechatId": "stua_0210",
     "phone": "13650993262",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2023-09-01"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2023-09-01"
   },
   {
     "id": "m0211",
     "name": "萧泽安",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5060,13 +5059,13 @@
     "contactVisible": false,
     "wechatId": "stua_0211",
     "phone": "13481398682",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2023-10-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2023-10-07"
   },
   {
     "id": "m0212",
     "name": "庄纯寿",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "惠州市",
@@ -5084,13 +5083,13 @@
     "contactVisible": false,
     "wechatId": "stua_0212",
     "phone": "13151461985",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2024-05-20"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2024-05-20"
   },
   {
     "id": "m0213",
     "name": "周南旺",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5108,13 +5107,13 @@
     "contactVisible": false,
     "wechatId": "stua_0213",
     "phone": "13241847507",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2020-11-08"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2020-11-08"
   },
   {
     "id": "m0214",
     "name": "叶磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5132,13 +5131,13 @@
     "contactVisible": true,
     "wechatId": "stua_0214",
     "phone": "13246525287",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2023-06-28"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2023-06-28"
   },
   {
     "id": "m0215",
     "name": "周志文",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5156,13 +5155,13 @@
     "contactVisible": false,
     "wechatId": "stua_0215",
     "phone": "13967846066",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2020-08-15"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2020-08-15"
   },
   {
     "id": "m0216",
     "name": "郭群",
-    "avatar": "",
     "gender": 2,
     "province": "广东省",
     "city": "惠州市",
@@ -5180,13 +5179,13 @@
     "contactVisible": false,
     "wechatId": "stua_0216",
     "phone": "13275183354",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-02-24"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-02-24"
   },
   {
     "id": "m0217",
     "name": "李毅",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5204,13 +5203,13 @@
     "contactVisible": false,
     "wechatId": "stua_0217",
     "phone": "13520127535",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2018-08-02"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2018-08-02"
   },
   {
     "id": "m0218",
     "name": "郑珊忠",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5228,13 +5227,13 @@
     "contactVisible": false,
     "wechatId": "stua_0218",
     "phone": "13760899893",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2020-10-11"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2020-10-11"
   },
   {
     "id": "m0219",
     "name": "曾磊",
-    "avatar": "",
     "gender": 1,
     "province": "广东省",
     "city": "惠州市",
@@ -5252,13 +5251,13 @@
     "contactVisible": false,
     "wechatId": "stua_0219",
     "phone": "13157310794",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-03-11"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-03-11"
   },
   {
     "id": "m0220",
     "name": "卢磊",
-    "avatar": "",
     "gender": 2,
     "province": "上海市",
     "city": "上海市",
@@ -5276,13 +5275,13 @@
     "contactVisible": true,
     "wechatId": "stua_0220",
     "phone": "13581375855",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-04-09"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-04-09"
   },
   {
     "id": "m0221",
     "name": "彭纯志",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5300,13 +5299,13 @@
     "contactVisible": false,
     "wechatId": "stua_0221",
     "phone": "13291837868",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2018-06-04"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2018-06-04"
   },
   {
     "id": "m0222",
     "name": "杨婷",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5324,13 +5323,13 @@
     "contactVisible": false,
     "wechatId": "stua_0222",
     "phone": "13243718224",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-05-18"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-05-18"
   },
   {
     "id": "m0223",
     "name": "杨群",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5348,13 +5347,13 @@
     "contactVisible": true,
     "wechatId": "stua_0223",
     "phone": "13076047678",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2025-11-25"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2025-11-25"
   },
   {
     "id": "m0224",
     "name": "周航",
-    "avatar": "",
     "gender": 2,
     "province": "上海市",
     "city": "上海市",
@@ -5372,13 +5371,13 @@
     "contactVisible": false,
     "wechatId": "stua_0224",
     "phone": "13314784751",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2022-06-26"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2022-06-26"
   },
   {
     "id": "m0225",
     "name": "韩纯明",
-    "avatar": "",
     "gender": 2,
     "province": "上海市",
     "city": "上海市",
@@ -5396,13 +5395,13 @@
     "contactVisible": false,
     "wechatId": "stua_0225",
     "phone": "13895962209",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-08-03"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-08-03"
   },
   {
     "id": "m0226",
     "name": "卢婷",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5420,13 +5419,13 @@
     "contactVisible": true,
     "wechatId": "stua_0226",
     "phone": "13739793870",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2025-12-06"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2025-12-06"
   },
   {
     "id": "m0227",
     "name": "韩磊豪",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5444,13 +5443,13 @@
     "contactVisible": false,
     "wechatId": "stua_0227",
     "phone": "13678818587",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2019-08-14"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2019-08-14"
   },
   {
     "id": "m0228",
     "name": "彭澜",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5468,13 +5467,13 @@
     "contactVisible": false,
     "wechatId": "stua_0228",
     "phone": "13481905256",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-02-08"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-02-08"
   },
   {
     "id": "m0229",
     "name": "吴晓炳",
-    "avatar": "",
     "gender": 2,
     "province": "上海市",
     "city": "上海市",
@@ -5492,13 +5491,13 @@
     "contactVisible": false,
     "wechatId": "stua_0229",
     "phone": "13238145023",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2024-09-05"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2024-09-05"
   },
   {
     "id": "m0230",
     "name": "江佳国",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5516,13 +5515,13 @@
     "contactVisible": false,
     "wechatId": "stua_0230",
     "phone": "13445733560",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2020-03-23"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2020-03-23"
   },
   {
     "id": "m0231",
     "name": "杜松乐",
-    "avatar": "",
     "gender": 1,
     "province": "上海市",
     "city": "上海市",
@@ -5540,13 +5539,13 @@
     "contactVisible": false,
     "wechatId": "stua_0231",
     "phone": "13121515183",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2023-03-17"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2023-03-17"
   },
   {
     "id": "m0232",
     "name": "叶菲",
-    "avatar": "",
     "gender": 2,
     "province": "上海市",
     "city": "上海市",
@@ -5564,13 +5563,13 @@
     "contactVisible": true,
     "wechatId": "stua_0232",
     "phone": "13356406808",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2024-05-27"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2024-05-27"
   },
   {
     "id": "m0233",
     "name": "庄磊",
-    "avatar": "",
     "gender": 2,
     "province": "上海市",
     "city": "上海市",
@@ -5588,13 +5587,13 @@
     "contactVisible": false,
     "wechatId": "stua_0233",
     "phone": "13326815587",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-12-08"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-12-08"
   },
   {
     "id": "m0234",
     "name": "叶爱武",
-    "avatar": "",
     "gender": 2,
     "province": "浙江省",
     "city": "杭州市",
@@ -5612,13 +5611,13 @@
     "contactVisible": false,
     "wechatId": "stua_0234",
     "phone": "13180524588",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2018-08-25"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2018-08-25"
   },
   {
     "id": "m0235",
     "name": "方珊华",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "杭州市",
@@ -5636,13 +5635,13 @@
     "contactVisible": false,
     "wechatId": "stua_0235",
     "phone": "13953558873",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2023-04-09"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2023-04-09"
   },
   {
     "id": "m0236",
     "name": "卢志华",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "杭州市",
@@ -5660,13 +5659,13 @@
     "contactVisible": false,
     "wechatId": "stua_0236",
     "phone": "13031332963",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-09-27"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-09-27"
   },
   {
     "id": "m0237",
     "name": "沈超禄",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "杭州市",
@@ -5684,13 +5683,13 @@
     "contactVisible": false,
     "wechatId": "stua_0237",
     "phone": "13853279057",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2023-07-08"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2023-07-08"
   },
   {
     "id": "m0238",
     "name": "郑彬兴",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "杭州市",
@@ -5708,13 +5707,13 @@
     "contactVisible": true,
     "wechatId": "stua_0238",
     "phone": "13896401698",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2022-02-14"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2022-02-14"
   },
   {
     "id": "m0239",
     "name": "杨锐婷",
-    "avatar": "",
     "gender": 2,
     "province": "浙江省",
     "city": "杭州市",
@@ -5732,13 +5731,13 @@
     "contactVisible": true,
     "wechatId": "stua_0239",
     "phone": "13481255847",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2023-09-09"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2023-09-09"
   },
   {
     "id": "m0240",
     "name": "庄磊建",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "杭州市",
@@ -5756,13 +5755,13 @@
     "contactVisible": true,
     "wechatId": "stua_0240",
     "phone": "13223081917",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-06-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-06-07"
   },
   {
     "id": "m0241",
     "name": "苏毅",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "宁波市",
@@ -5780,13 +5779,13 @@
     "contactVisible": true,
     "wechatId": "stua_0241",
     "phone": "13427612774",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2023-03-22"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2023-03-22"
   },
   {
     "id": "m0242",
     "name": "郭婷",
-    "avatar": "",
     "gender": 2,
     "province": "浙江省",
     "city": "宁波市",
@@ -5804,13 +5803,13 @@
     "contactVisible": true,
     "wechatId": "stua_0242",
     "phone": "13090887929",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2018-10-03"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2018-10-03"
   },
   {
     "id": "m0243",
     "name": "余悦",
-    "avatar": "",
     "gender": 2,
     "province": "浙江省",
     "city": "宁波市",
@@ -5828,13 +5827,13 @@
     "contactVisible": false,
     "wechatId": "stua_0243",
     "phone": "13511379492",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-11-23"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-11-23"
   },
   {
     "id": "m0244",
     "name": "吴珊宇",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "宁波市",
@@ -5852,13 +5851,13 @@
     "contactVisible": false,
     "wechatId": "stua_0244",
     "phone": "13135885799",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2021-08-15"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2021-08-15"
   },
   {
     "id": "m0245",
     "name": "李婷",
-    "avatar": "",
     "gender": 2,
     "province": "浙江省",
     "city": "温州市",
@@ -5876,13 +5875,13 @@
     "contactVisible": false,
     "wechatId": "stua_0245",
     "phone": "13031256441",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2018-04-05"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2018-04-05"
   },
   {
     "id": "m0246",
     "name": "周纯轩",
-    "avatar": "",
     "gender": 1,
     "province": "浙江省",
     "city": "温州市",
@@ -5900,13 +5899,13 @@
     "contactVisible": false,
     "wechatId": "stua_0246",
     "phone": "13427037540",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2021-02-17"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2021-02-17"
   },
   {
     "id": "m0247",
     "name": "张锐炳",
-    "avatar": "",
     "gender": 2,
     "province": "浙江省",
     "city": "温州市",
@@ -5924,13 +5923,13 @@
     "contactVisible": false,
     "wechatId": "stua_0247",
     "phone": "13637025533",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2020-04-07"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2020-04-07"
   },
   {
     "id": "m0248",
     "name": "杜丽杰",
-    "avatar": "",
     "gender": 1,
     "province": "江苏省",
     "city": "苏州市",
@@ -5948,13 +5947,13 @@
     "contactVisible": true,
     "wechatId": "stua_0248",
     "phone": "13435183997",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-05-10"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-05-10"
   },
   {
     "id": "m0249",
     "name": "陈南炳",
-    "avatar": "",
     "gender": 1,
     "province": "江苏省",
     "city": "苏州市",
@@ -5972,13 +5971,13 @@
     "contactVisible": false,
     "wechatId": "stua_0249",
     "phone": "13043031517",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2022-01-09"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2022-01-09"
   },
   {
     "id": "m0250",
     "name": "江8安",
-    "avatar": "",
     "gender": 2,
     "province": "江苏省",
     "city": "苏州市",
@@ -5996,13 +5995,13 @@
     "contactVisible": false,
     "wechatId": "stua_0250",
     "phone": "13288898377",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-09-02"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-09-02"
   },
   {
     "id": "m0251",
     "name": "彭群",
-    "avatar": "",
     "gender": 1,
     "province": "江苏省",
     "city": "苏州市",
@@ -6020,13 +6019,13 @@
     "contactVisible": false,
     "wechatId": "stua_0251",
     "phone": "13126248033",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2022-01-03"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2022-01-03"
   },
   {
     "id": "m0252",
     "name": "刘泽禄",
-    "avatar": "",
     "gender": 1,
     "province": "江苏省",
     "city": "苏州市",
@@ -6044,13 +6043,13 @@
     "contactVisible": true,
     "wechatId": "stua_0252",
     "phone": "13587753467",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2019-12-19"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2019-12-19"
   },
   {
     "id": "m0253",
     "name": "刘珊兴",
-    "avatar": "",
     "gender": 2,
     "province": "江苏省",
     "city": "南京市",
@@ -6068,13 +6067,13 @@
     "contactVisible": false,
     "wechatId": "stua_0253",
     "phone": "13740526275",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2021-12-27"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2021-12-27"
   },
   {
     "id": "m0254",
     "name": "王磊",
-    "avatar": "",
     "gender": 2,
     "province": "江苏省",
     "city": "南京市",
@@ -6092,13 +6091,13 @@
     "contactVisible": false,
     "wechatId": "stua_0254",
     "phone": "13476254126",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2025-08-20"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2025-08-20"
   },
   {
     "id": "m0255",
     "name": "李群",
-    "avatar": "",
     "gender": 1,
     "province": "江苏省",
     "city": "南京市",
@@ -6116,13 +6115,13 @@
     "contactVisible": true,
     "wechatId": "stua_0255",
     "phone": "13687838574",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-04-09"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-04-09"
   },
   {
     "id": "m0256",
     "name": "文婷",
-    "avatar": "",
     "gender": 2,
     "province": "北京市",
     "city": "北京市",
@@ -6140,13 +6139,13 @@
     "contactVisible": false,
     "wechatId": "stua_0256",
     "phone": "13659860825",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-04-25"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-04-25"
   },
   {
     "id": "m0257",
     "name": "陈澜",
-    "avatar": "",
     "gender": 2,
     "province": "北京市",
     "city": "北京市",
@@ -6164,13 +6163,13 @@
     "contactVisible": false,
     "wechatId": "stua_0257",
     "phone": "13940174520",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2021-08-18"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2021-08-18"
   },
   {
     "id": "m0258",
     "name": "曾燕乐",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6188,13 +6187,13 @@
     "contactVisible": true,
     "wechatId": "stua_0258",
     "phone": "13591603103",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2022-09-08"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2022-09-08"
   },
   {
     "id": "m0259",
     "name": "郭斌静",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6212,13 +6211,13 @@
     "contactVisible": true,
     "wechatId": "stua_0259",
     "phone": "13761648309",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2024-12-20"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2024-12-20"
   },
   {
     "id": "m0260",
     "name": "江南贤",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6236,13 +6235,13 @@
     "contactVisible": false,
     "wechatId": "stua_0260",
     "phone": "13691137452",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-10-19"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-10-19"
   },
   {
     "id": "m0261",
     "name": "郑炳兴",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6260,13 +6259,13 @@
     "contactVisible": false,
     "wechatId": "stua_0261",
     "phone": "13584035030",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2019-02-03"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2019-02-03"
   },
   {
     "id": "m0262",
     "name": "蔡炳彬",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6284,13 +6283,13 @@
     "contactVisible": false,
     "wechatId": "stua_0262",
     "phone": "13478712251",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2022-01-08"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2022-01-08"
   },
   {
     "id": "m0263",
     "name": "周悦",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6308,13 +6307,13 @@
     "contactVisible": true,
     "wechatId": "stua_0263",
     "phone": "13891442120",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2018-05-18"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2018-05-18"
   },
   {
     "id": "m0264",
     "name": "苏嘉顺",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6332,13 +6331,13 @@
     "contactVisible": true,
     "wechatId": "stua_0264",
     "phone": "13346185057",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2020-03-18"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2020-03-18"
   },
   {
     "id": "m0265",
     "name": "刘松琪",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6356,13 +6355,13 @@
     "contactVisible": true,
     "wechatId": "stua_0265",
     "phone": "13259757282",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-12-23"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-12-23"
   },
   {
     "id": "m0266",
     "name": "谢泽娜",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6380,13 +6379,13 @@
     "contactVisible": false,
     "wechatId": "stua_0266",
     "phone": "13718787216",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2018-03-28"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2018-03-28"
   },
   {
     "id": "m0267",
     "name": "韩澜",
-    "avatar": "",
     "gender": 2,
     "province": "北京市",
     "city": "北京市",
@@ -6404,13 +6403,13 @@
     "contactVisible": true,
     "wechatId": "stua_0267",
     "phone": "13058681988",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2021-09-18"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2021-09-18"
   },
   {
     "id": "m0268",
     "name": "郭菲",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6428,13 +6427,13 @@
     "contactVisible": false,
     "wechatId": "stua_0268",
     "phone": "13995347237",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2021-08-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2021-08-07"
   },
   {
     "id": "m0269",
     "name": "林杰伟",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6452,13 +6451,13 @@
     "contactVisible": false,
     "wechatId": "stua_0269",
     "phone": "13551847205",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2018-01-22"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2018-01-22"
   },
   {
     "id": "m0270",
     "name": "杨伟文",
-    "avatar": "",
     "gender": 2,
     "province": "北京市",
     "city": "北京市",
@@ -6476,13 +6475,13 @@
     "contactVisible": false,
     "wechatId": "stua_0270",
     "phone": "13459365198",
-    "bio": "毕业后留在本地,关注乡会的青少年助学项目。",
-    "joinedAt": "2024-06-24"
+    "avatarUrl": "",
+    "intro": "毕业后留在本地,关注乡会的青少年助学项目。",
+    "createdAt": "2024-06-24"
   },
   {
     "id": "m0271",
     "name": "张泽喜",
-    "avatar": "",
     "gender": 1,
     "province": "北京市",
     "city": "北京市",
@@ -6500,13 +6499,13 @@
     "contactVisible": false,
     "wechatId": "stua_0271",
     "phone": "13794938273",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2018-07-08"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2018-07-08"
   },
   {
     "id": "m0272",
     "name": "江毅",
-    "avatar": "",
     "gender": 1,
     "province": "天津市",
     "city": "天津市",
@@ -6524,13 +6523,13 @@
     "contactVisible": false,
     "wechatId": "stua_0272",
     "phone": "13781326863",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2025-06-23"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2025-06-23"
   },
   {
     "id": "m0273",
     "name": "蔡毅",
-    "avatar": "",
     "gender": 1,
     "province": "天津市",
     "city": "天津市",
@@ -6548,13 +6547,13 @@
     "contactVisible": false,
     "wechatId": "stua_0273",
     "phone": "13843828100",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2020-04-17"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2020-04-17"
   },
   {
     "id": "m0274",
     "name": "杨澜",
-    "avatar": "",
     "gender": 2,
     "province": "天津市",
     "city": "天津市",
@@ -6572,13 +6571,13 @@
     "contactVisible": false,
     "wechatId": "stua_0274",
     "phone": "13815519011",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2021-03-18"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2021-03-18"
   },
   {
     "id": "m0275",
     "name": "郑炳财",
-    "avatar": "",
     "gender": 1,
     "province": "天津市",
     "city": "天津市",
@@ -6596,13 +6595,13 @@
     "contactVisible": true,
     "wechatId": "stua_0275",
     "phone": "13463806382",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-08-28"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-08-28"
   },
   {
     "id": "m0276",
     "name": "江娟",
-    "avatar": "",
     "gender": 1,
     "province": "天津市",
     "city": "天津市",
@@ -6620,13 +6619,13 @@
     "contactVisible": true,
     "wechatId": "stua_0276",
     "phone": "13768878272",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-12-14"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-12-14"
   },
   {
     "id": "m0277",
     "name": "陈晓武",
-    "avatar": "",
     "gender": 1,
     "province": "天津市",
     "city": "天津市",
@@ -6644,13 +6643,13 @@
     "contactVisible": false,
     "wechatId": "stua_0277",
     "phone": "13975866567",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2020-10-02"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2020-10-02"
   },
   {
     "id": "m0278",
     "name": "林婷华",
-    "avatar": "",
     "gender": 2,
     "province": "天津市",
     "city": "天津市",
@@ -6668,13 +6667,13 @@
     "contactVisible": false,
     "wechatId": "stua_0278",
     "phone": "13249710540",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2023-11-18"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2023-11-18"
   },
   {
     "id": "m0279",
     "name": "方菲",
-    "avatar": "",
     "gender": 1,
     "province": "天津市",
     "city": "天津市",
@@ -6692,13 +6691,13 @@
     "contactVisible": true,
     "wechatId": "stua_0279",
     "phone": "13599820977",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2023-10-16"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2023-10-16"
   },
   {
     "id": "m0280",
     "name": "李航",
-    "avatar": "",
     "gender": 1,
     "province": "四川省",
     "city": "成都市",
@@ -6716,13 +6715,13 @@
     "contactVisible": false,
     "wechatId": "stua_0280",
     "phone": "13792667673",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-09-13"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-09-13"
   },
   {
     "id": "m0281",
     "name": "韩松国",
-    "avatar": "",
     "gender": 1,
     "province": "四川省",
     "city": "成都市",
@@ -6740,13 +6739,13 @@
     "contactVisible": false,
     "wechatId": "stua_0281",
     "phone": "13647013389",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2020-08-15"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2020-08-15"
   },
   {
     "id": "m0282",
     "name": "郭炳娜",
-    "avatar": "",
     "gender": 2,
     "province": "四川省",
     "city": "成都市",
@@ -6764,13 +6763,13 @@
     "contactVisible": false,
     "wechatId": "stua_0282",
     "phone": "13939178992",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2025-04-07"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2025-04-07"
   },
   {
     "id": "m0283",
     "name": "江爱丹",
-    "avatar": "",
     "gender": 1,
     "province": "四川省",
     "city": "成都市",
@@ -6788,13 +6787,13 @@
     "contactVisible": true,
     "wechatId": "stua_0283",
     "phone": "13656997413",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2021-06-24"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2021-06-24"
   },
   {
     "id": "m0284",
     "name": "叶彬发",
-    "avatar": "",
     "gender": 1,
     "province": "湖北省",
     "city": "武汉市",
@@ -6812,13 +6811,13 @@
     "contactVisible": false,
     "wechatId": "stua_0284",
     "phone": "13548984441",
-    "bio": "做实业十几年,愿意带刚毕业的老乡入门。",
-    "joinedAt": "2025-06-08"
+    "avatarUrl": "",
+    "intro": "做实业十几年,愿意带刚毕业的老乡入门。",
+    "createdAt": "2025-06-08"
   },
   {
     "id": "m0285",
     "name": "庄毅",
-    "avatar": "",
     "gender": 2,
     "province": "湖北省",
     "city": "武汉市",
@@ -6836,13 +6835,13 @@
     "contactVisible": false,
     "wechatId": "stua_0285",
     "phone": "13463673680",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2024-10-10"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2024-10-10"
   },
   {
     "id": "m0286",
     "name": "庄嘉涛",
-    "avatar": "",
     "gender": 1,
     "province": "湖北省",
     "city": "武汉市",
@@ -6860,13 +6859,13 @@
     "contactVisible": true,
     "wechatId": "stua_0286",
     "phone": "13248018115",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2022-09-03"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2022-09-03"
   },
   {
     "id": "m0287",
     "name": "黄松琪",
-    "avatar": "",
     "gender": 2,
     "province": "湖南省",
     "city": "长沙市",
@@ -6884,13 +6883,13 @@
     "contactVisible": false,
     "wechatId": "stua_0287",
     "phone": "13712881643",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2024-08-01"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2024-08-01"
   },
   {
     "id": "m0288",
     "name": "杜伟建",
-    "avatar": "",
     "gender": 1,
     "province": "湖南省",
     "city": "长沙市",
@@ -6908,13 +6907,13 @@
     "contactVisible": true,
     "wechatId": "stua_0288",
     "phone": "13637427863",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2024-02-03"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2024-02-03"
   },
   {
     "id": "m0289",
     "name": "蔡锐婷",
-    "avatar": "",
     "gender": 1,
     "province": "湖南省",
     "city": "长沙市",
@@ -6932,13 +6931,13 @@
     "contactVisible": false,
     "wechatId": "stua_0289",
     "phone": "13558342228",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2020-10-25"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2020-10-25"
   },
   {
     "id": "m0290",
     "name": "叶杰豪",
-    "avatar": "",
     "gender": 2,
     "province": "福建省",
     "city": "厦门市",
@@ -6956,13 +6955,13 @@
     "contactVisible": false,
     "wechatId": "stua_0290",
     "phone": "13377981400",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2019-08-04"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2019-08-04"
   },
   {
     "id": "m0291",
     "name": "郭宏财",
-    "avatar": "",
     "gender": 1,
     "province": "福建省",
     "city": "厦门市",
@@ -6980,13 +6979,13 @@
     "contactVisible": true,
     "wechatId": "stua_0291",
     "phone": "13242116013",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2018-08-25"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2018-08-25"
   },
   {
     "id": "m0292",
     "name": "郑娟",
-    "avatar": "",
     "gender": 2,
     "province": "福建省",
     "city": "厦门市",
@@ -7004,13 +7003,13 @@
     "contactVisible": false,
     "wechatId": "stua_0292",
     "phone": "13353860415",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-12-12"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-12-12"
   },
   {
     "id": "m0293",
     "name": "张磊",
-    "avatar": "",
     "gender": 1,
     "province": "福建省",
     "city": "厦门市",
@@ -7028,13 +7027,13 @@
     "contactVisible": false,
     "wechatId": "stua_0293",
     "phone": "13961464987",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2021-10-15"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2021-10-15"
   },
   {
     "id": "m0294",
     "name": "蔡菲",
-    "avatar": "",
     "gender": 1,
     "province": "福建省",
     "city": "福州市",
@@ -7052,13 +7051,13 @@
     "contactVisible": false,
     "wechatId": "stua_0294",
     "phone": "13042864841",
-    "bio": "从家族生意转型做电商,正在摸索新渠道。",
-    "joinedAt": "2019-08-12"
+    "avatarUrl": "",
+    "intro": "从家族生意转型做电商,正在摸索新渠道。",
+    "createdAt": "2019-08-12"
   },
   {
     "id": "m0295",
     "name": "谢磊",
-    "avatar": "",
     "gender": 1,
     "province": "福建省",
     "city": "福州市",
@@ -7076,13 +7075,13 @@
     "contactVisible": true,
     "wechatId": "stua_0295",
     "phone": "13838483568",
-    "bio": "常年往返广深,业务方向是供应链与品牌出海。",
-    "joinedAt": "2019-10-27"
+    "avatarUrl": "",
+    "intro": "常年往返广深,业务方向是供应链与品牌出海。",
+    "createdAt": "2019-10-27"
   },
   {
     "id": "m0296",
     "name": "沈磊",
-    "avatar": "",
     "gender": 2,
     "province": "福建省",
     "city": "福州市",
@@ -7100,13 +7099,13 @@
     "contactVisible": true,
     "wechatId": "stua_0296",
     "phone": "13579880642",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2021-05-16"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2021-05-16"
   },
   {
     "id": "m0297",
     "name": "刘松顺",
-    "avatar": "",
     "gender": 1,
     "province": "云南省",
     "city": "昆明市",
@@ -7124,13 +7123,13 @@
     "contactVisible": false,
     "wechatId": "stua_0297",
     "phone": "13132822836",
-    "bio": "做物流出身,熟悉潮汕各地仓配网络。",
-    "joinedAt": "2022-01-06"
+    "avatarUrl": "",
+    "intro": "做物流出身,熟悉潮汕各地仓配网络。",
+    "createdAt": "2022-01-06"
   },
   {
     "id": "m0298",
     "name": "罗菲",
-    "avatar": "",
     "gender": 1,
     "province": "云南省",
     "city": "昆明市",
@@ -7148,13 +7147,13 @@
     "contactVisible": false,
     "wechatId": "stua_0298",
     "phone": "13486807845",
-    "bio": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
-    "joinedAt": "2018-04-26"
+    "avatarUrl": "",
+    "intro": "喜欢工夫茶,周末常在乡会会所冲茶聊天。",
+    "createdAt": "2018-04-26"
   },
   {
     "id": "m0299",
     "name": "苏坤",
-    "avatar": "",
     "gender": 1,
     "province": "陕西省",
     "city": "西安市",
@@ -7172,13 +7171,13 @@
     "contactVisible": true,
     "wechatId": "stua_0299",
     "phone": "13010618356",
-    "bio": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
-    "joinedAt": "2020-03-17"
+    "avatarUrl": "",
+    "intro": "在外的汕头人,逢年过节总要回厝边吃一碗粿条。",
+    "createdAt": "2020-03-17"
   },
   {
     "id": "m0300",
     "name": "方佳磊",
-    "avatar": "",
     "gender": 1,
     "province": "陕西省",
     "city": "西安市",
@@ -7196,7 +7195,8 @@
     "contactVisible": true,
     "wechatId": "stua_0300",
     "phone": "13752218203",
-    "bio": "医务工作者,乡会义诊活动的固定志愿者。",
-    "joinedAt": "2018-12-23"
+    "avatarUrl": "",
+    "intro": "医务工作者,乡会义诊活动的固定志愿者。",
+    "createdAt": "2018-12-23"
   }
 ]

@@ -11,7 +11,7 @@ export type Gender = 0 | 1 | 2
 export interface MemberMapPoint {
   id: string
   name: string
-  avatar: string
+  avatarUrl: string
   lat: number
   lng: number
   province: string
@@ -36,12 +36,14 @@ export interface MemberDetail extends MemberListItem {
   school: string
   /** 毕业至今年数,由生成脚本算好,前端不再计算 */
   seniority: number
-  bio: string
+  /** 个人简介。后端字段名同为 intro */
+  intro: string
   /** 联系方式是否对外可见 —— 前端据此决定是否渲染,后端必须同样做权限过滤 */
   contactVisible: boolean
   wechatId?: string
   phone?: string
-  joinedAt: string
+  /** 入会时间 = 后端 createdAt,ISO 8601 字符串 */
+  createdAt: string
   /**
    * 第一阶段恒为 '中国'。
    * 预留它是因为潮汕是最大侨乡之一、海外潮籍乡亲约 1500 万,

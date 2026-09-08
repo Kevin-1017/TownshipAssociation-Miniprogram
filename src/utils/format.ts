@@ -7,6 +7,15 @@
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
+/** '2026-09-06T14:30:00+08:00' → '2026-09-06 14:30:00' */
+export function formatFull(iso: string): string {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return iso
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`
+}
+
 /** '2026-09-06T14:30:00+08:00' → '2026-09-06' */
 export function formatDate(iso: string): string {
   if (!iso) return ''
