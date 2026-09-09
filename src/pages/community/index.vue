@@ -40,6 +40,8 @@ function goCampus() {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  /* padding 计入 100vh,避免页面多出 96rpx 滚动空间 */
+  box-sizing: border-box;
   padding: 48rpx;
   background: #fff;
 }
