@@ -1,4 +1,6 @@
 import type { Result } from '@/types/api'
+// mock 模块:开发期按需加载,生产构建通过 condition 剔除 (vue/tsconfig 的 moduleResolution 保证)
+import { mockDispatch } from '@/mock'
 
 export interface RequestOptions {
   /** 不含 baseURL,例如 '/members/map-data' */
@@ -55,7 +57,7 @@ export class ApiError extends Error {
  *   能把返回值形状锁死在自己手里,不受版本影响。
  *   这条已记入 docs/DEVELOPMENT.md §6.2。
  */
-function rawRequest<T>(opts: RequestOptions): Promise<Result<T>> {
+const rawRequest = <T>(opts: RequestOptions): Promise<Result<T>> => {
   return new Promise((resolve, reject) => {
     const token = uni.getStorageSync(TOKEN_KEY)
     uni.request({
@@ -83,8 +85,8 @@ function rawRequest<T>(opts: RequestOptions): Promise<Result<T>> {
  * 统一拆壳:页面永远只拿到 data,不需要写 try-catch,也不需要碰 code/message。
  * 这是 mock 与真后端能无感切换的关键 —— 两边给的是同一个壳。
  */
-function unwrap<T>(res: Result<T>, silentError: boolean): T {
-  if (res.code === CODE_SUCCESS) return res.data
+const unwrap = <T>(res: Result<T>, silentError: boolean): T => {
+  if (res.code === CODE_SUCCESS) return res.data;
 
   if (res.code === CODE_UNAUTHORIZED) {
     // 401 是全局登录事件:无论谁触发都清 token 跳登录页,不受 silentError 影响
@@ -101,12 +103,10 @@ function unwrap<T>(res: Result<T>, silentError: boolean): T {
 }
 
 export async function request<T>(options: RequestOptions): Promise<T> {
-  const { showLoading = true, loadingText = '加载中', silentError = false } = options
+  const { showLoading = true, loadingText = '加载中', silentError = false } = options;
 
-  // mock 分支用动态 import:生产构建时 USE_MOCK 为 false,
-  // 整个 src/mock/ 目录会被 tree-shake 掉,不进包体。
+  // mock 分支:静态导入已保证可用,避免动态 import 在 uni-app 构建管线中的 ESM 互操作问题
   if (USE_MOCK) {
-    const { mockDispatch } = await import('@/mock')
     return unwrap(await mockDispatch<T>(options), silentError)
   }
 

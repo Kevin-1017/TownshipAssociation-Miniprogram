@@ -4,6 +4,14 @@ import { formatFull } from '@/utils/format'
 import type { EventListItem } from '@/types/event'
 import WindowedScrollView from './components/WindowedScrollView.vue'
 
+/** 当前页面路径（底部 tab bar 高亮） */
+const activePage = ref('/pages/event/list')
+
+const onTabChange = (e: { value: string }) => {
+  activePage.value = e.value
+  uni.navigateTo({ url: e.value })
+}
+
 /**
  * 事件列表 —— 虚拟窗口化列表。
  *
@@ -50,12 +58,12 @@ const pickerValue = computed(() => [
   pickerSide.value === 'start' ? startYear.value : endYear.value,
 ])
 
-function openPicker(side: 'start' | 'end') {
+const openPicker = (side: 'start' | 'end') => {
   pickerSide.value = side
   pickerVisible.value = true
 }
 
-function onPickerChange(e: { value: string[] }) {
+const onPickerChange = (e: { value: string[] }) => {
   const v = e.value?.[0]
   if (!v) return
   if (pickerSide.value === 'start') {
@@ -70,7 +78,7 @@ function onPickerChange(e: { value: string[] }) {
   pickerVisible.value = false
 }
 
-function pickAll() {
+const pickAll = () => {
   startYear.value = String(YEAR_MIN)
   endYear.value = String(YEAR_MAX)
   scrollY.value = 0
@@ -112,7 +120,7 @@ const bottomHeight = computed(() => `${(filtered.value.length - endIdx.value) * 
 const items = computed(() => filtered.value.slice(startIdx.value, endIdx.value))
 
 // ---------- 滚动回调 ----------
-function handleScroll(_e: CustomEvent) {
+const handleScroll = (_e: CustomEvent) => {
   scrollY.value = (_e.detail as { scrollTop: number })?.scrollTop ?? 0
 }
 </script>
@@ -186,6 +194,28 @@ function handleScroll(_e: CustomEvent) {
     >
       <t-picker-item :options="yearOptions" />
     </t-picker>
+
+    <!-- 底部悬浮胶囊导航 -->
+    <t-tab-bar
+      :value="activePage"
+      @change="onTabChange"
+      shape="round"
+      safe-area-inset-bottom
+      t-class="bottom-bar"
+    >
+      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
+        首页
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
+        社区
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
+        事件
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
+        我的
+      </t-tab-bar-item>
+    </t-tab-bar>
   </view>
 </template>
 

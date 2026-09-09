@@ -55,16 +55,16 @@ const basicRows = computed(() => {
   ]
 })
 
-function copyContact() {
-  if (!member.value?.contactVisible) return
+const copyContact = () => {
+  if (!member.value?.contactVisible) return;
   uni.setClipboardData({
     data: member.value.wechatId ?? '',
     success: () => uni.showToast({ title: '微信号已复制', icon: 'success' }),
   })
 }
 
-async function fetchDetail() {
-  if (!memberId.value) return
+const fetchDetail = async () => {
+  if (!memberId.value) return;
   try {
     member.value = await memberApi.getDetail(memberId.value)
     if (member.value) {
@@ -86,8 +86,8 @@ async function fetchDetail() {
   }
 }
 
-async function onGetPhone(e: GetPhoneEvent) {
-  const code = e.detail?.code
+const onGetPhone = async (e: GetPhoneEvent) => {
+  const code = e.detail?.code;
   // 用户拒绝授权时 errMsg 含 fail 且无 code —— 静默停留，不打扰
   if (!code) return
 
@@ -110,11 +110,12 @@ async function onGetPhone(e: GetPhoneEvent) {
   }
 }
 
-function goBack() {
+const goBack = () => {
   if (getCurrentPages().length > 1) {
     uni.navigateBack()
   } else {
-    uni.switchTab({ url: '/pages/map/index' })
+    // 冷启动直达详情页(分享/扫码)时的兜底。地图已不是 tab 页,switchTab 会失败,回首页
+    uni.reLaunch({ url: '/pages/index/index' })
   }
 }
 

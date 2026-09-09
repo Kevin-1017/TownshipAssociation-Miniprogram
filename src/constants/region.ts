@@ -109,6 +109,6 @@ export const PROVINCES: ProvinceOption[] = [
 ]
 
 /** 扁平化的「省 / 市」选项,给不支持级联的控件用 */
-export function flatCityOptions(): Array<CityOption & { provinceLabel: string }> {
-  return PROVINCES.flatMap((p) => p.cities.map((c) => ({ ...c, provinceLabel: p.label })))
+export const flatCityOptions = (): Array<CityOption & { provinceLabel: string }> => {
+  return PROVINCES.flatMap((p) => p.cities.map((c) => ({ ...c, provinceLabel: p.label })));
 }

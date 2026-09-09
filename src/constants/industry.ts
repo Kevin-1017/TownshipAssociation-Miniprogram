@@ -28,6 +28,6 @@ export const INDUSTRY_LABELS: Record<string, string> = Object.fromEntries(
   INDUSTRIES.map((i) => [i.code, i.label]),
 )
 
-export function industryLabel(code: string): string {
-  return INDUSTRY_LABELS[code] ?? code
+export const industryLabel = (code: string): string => {
+  return INDUSTRY_LABELS[code] ?? code;
 }

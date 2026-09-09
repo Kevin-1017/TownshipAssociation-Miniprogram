@@ -29,9 +29,9 @@ export const useUserStore = defineStore('user', () => {
   // ---------- 乡会身份（跨页面共享：地图弹窗标识/详情页闸门/我的页都可能读，且需持久化） ----------
 
   /** 从 storage 恢复：JSON 串反序列化失败（脏数据）时静默当作未核验 */
-  function readAssocStorage(): AssocIdentity | null {
+  const readAssocStorage = (): AssocIdentity | null => {
     try {
-      const raw = uni.getStorageSync(ASSOC_STORAGE_KEY) as string
+      const raw = uni.getStorageSync(ASSOC_STORAGE_KEY) as string;
       if (!raw) return null
       const parsed = JSON.parse(raw) as AssocIdentity
       return parsed?.token ? parsed : null
@@ -43,38 +43,38 @@ export const useUserStore = defineStore('user', () => {
   const assoc = ref<AssocIdentity | null>(readAssocStorage())
   const isAssocVerified = computed(() => !!assoc.value?.token)
 
-  function saveAssoc(res: VerifyPhoneResult) {
-    if (!res.verified || !res.token) return
+  const saveAssoc = (res: VerifyPhoneResult) => {
+    if (!res.verified || !res.token) return;
     const identity: AssocIdentity = { token: res.token, name: res.name, role: res.role }
     assoc.value = identity
     uni.setStorageSync(ASSOC_STORAGE_KEY, JSON.stringify(identity))
   }
 
   /** 清乡会身份：核验失败 / 后端 1301（身份过期）时调用 */
-  function clearAssoc() {
-    assoc.value = null
+  const clearAssoc = () => {
+    assoc.value = null;
     uni.removeStorageSync(ASSOC_STORAGE_KEY)
   }
 
-  function setToken(t: string) {
-    token.value = t
+  const setToken = (t: string) => {
+    token.value = t;
     uni.setStorageSync(TOKEN_KEY, t)
   }
 
   /** 用微信登录返回的 code 换取 token。mock 阶段 code 不校验 */
-  async function loginWithCode(code: string) {
-    const res = await authApi.wechatLogin(code)
+  const loginWithCode = async (code: string) => {
+    const res = await authApi.wechatLogin(code);
     setToken(res.token)
     profile.value = res.user
   }
 
-  async function fetchProfile() {
-    if (!isLogin.value) return
+  const fetchProfile = async () => {
+    if (!isLogin.value) return;
     profile.value = await authApi.getProfile()
   }
 
-  function logout() {
-    authApi.logout()
+  const logout = () => {
+    authApi.logout();
     token.value = ''
     profile.value = null
     // 注意：不清 assoc —— 乡会身份与登录态一期解耦（见文件头注释）

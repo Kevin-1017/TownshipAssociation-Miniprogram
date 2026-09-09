@@ -7,8 +7,8 @@ import type { EventDetail } from '@/types/event'
 
 const event = ref<EventDetail | null>(null)
 
-function callOrganizer() {
-  if (!event.value) return
+const callOrganizer = () => {
+  if (!event.value) return;
   uni.makePhoneCall({ phoneNumber: event.value.contactPhone })
 }
 

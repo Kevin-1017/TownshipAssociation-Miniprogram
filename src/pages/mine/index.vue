@@ -14,6 +14,14 @@ import { industryLabel } from '@/constants/industry'
  * tsa-api 提供 code2session,见 docs/API.md「鉴权」。
  */
 
+/** 当前页面路径（用于底部 tab bar 高亮） */
+const activePage = ref('/pages/mine/index')
+
+const onTabChange = (e: { value: string }) => {
+  activePage.value = e.value
+  uni.navigateTo({ url: e.value })
+}
+
 const version = '0.1.0'
 const nodeHint = '24 LTS'
 
@@ -31,7 +39,7 @@ const { isLogin } = storeToRefs(user)
 const memberTotal = ref(0)
 const myCityCount = ref(0)
 
-async function onLogin() {
+const onLogin = async () => {
   if (user.isLogin) {
     user.logout()
     uni.showToast({ title: '已退出(mock)', icon: 'none' })
@@ -41,7 +49,7 @@ async function onLogin() {
   uni.showToast({ title: 'mock 登录成功', icon: 'success' })
 }
 
-function onMenu(m: (typeof MENUS)[number]) {
+const onMenu = (m: (typeof MENUS)[number]) => {
   if (m.action === 'call') {
     uni.makePhoneCall({ phoneNumber: '07548888000' })
     return
@@ -110,12 +118,36 @@ onShow(async () => {
       </text>
       <text class="mine__version">版本 {{ version }} · 编译器 Node {{ nodeHint }}</text>
     </view>
+
+    <!-- 底部悬浮胶囊导航 -->
+    <t-tab-bar
+      :value="activePage"
+      @change="onTabChange"
+      shape="round"
+      safe-area-inset-bottom
+      t-class="bottom-bar"
+    >
+      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
+        首页
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
+        社区
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
+        事件
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
+        我的
+      </t-tab-bar-item>
+    </t-tab-bar>
   </view>
 </template>
 
 <style lang="less" scoped>
 .mine {
-  padding-bottom: 40rpx;
+  /* padding 计入 100vh,避免页面多出滚动空间 */
+  box-sizing: border-box;
+  padding-bottom: calc(40rpx + 100rpx + env(safe-area-inset-bottom));
 }
 .mine__hero {
   display: flex;
@@ -221,5 +253,9 @@ onShow(async () => {
   margin-top: 18rpx;
   font-size: 22rpx;
   color: var(--td-text-color-placeholder);
+}
+
+.bottom-bar {
+  /* TDesign 内置 fixed + round + safe-area 样式,不需要额外定位 */
 }
 </style>

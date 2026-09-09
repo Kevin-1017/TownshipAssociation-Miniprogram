@@ -62,20 +62,20 @@ const bottomHeight = computed(() => `${(filteredPosts.value.length - endIdx.valu
 const items = computed(() => filteredPosts.value.slice(startIdx.value, endIdx.value))
 
 // ---------- 事件 ----------
-function handleScroll(_e: CustomEvent) {
+const handleScroll = (_e: CustomEvent) => {
   scrollY.value = (_e.detail as { scrollTop: number })?.scrollTop ?? 0
 }
 
-function onPublish() {
+const onPublish = () => {
   uni.showToast({ title: '发布功能开发中', icon: 'none' })
 }
 
-function onSearch() {
-  if (!searchKeyword.value.trim()) return
+const onSearch = () => {
+  if (!searchKeyword.value.trim()) return;
   uni.showToast({ title: '搜索: ' + searchKeyword.value, icon: 'none' })
 }
 
-function goDetail(id: string) {
+const goDetail = (id: string) => {
   uni.navigateTo({ url: `/pages/community/detail?id=${id}` })
 }
 </script>

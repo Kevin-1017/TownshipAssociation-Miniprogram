@@ -1,14 +1,24 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 /**
  * 社区首页 —— 只保留两个入口卡片:美食基地、校园广场。
  */
 
-function goFood() {
+/** 当前页面路径（用于底部 tab bar 高亮） */
+const activePage = ref('/pages/community/index')
+
+const goFood = () => {
   uni.navigateTo({ url: '/pages/community/subpage?type=food' })
 }
 
-function goCampus() {
+const goCampus = () => {
   uni.navigateTo({ url: '/pages/community/subpage?type=campus' })
+}
+
+const onTabChange = (e: { value: string }) => {
+  activePage.value = e.value
+  uni.navigateTo({ url: e.value })
 }
 </script>
 
@@ -31,6 +41,28 @@ function goCampus() {
         <t-icon class="community-home__card-arrow" name="chevron-right" size="48rpx" />
       </view>
     </view>
+
+    <!-- 底部悬浮胶囊导航 -->
+    <t-tab-bar
+      :value="activePage"
+      @change="onTabChange"
+      shape="round"
+      safe-area-inset-bottom
+      t-class="bottom-bar"
+    >
+      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
+        首页
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
+        社区
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
+        事件
+      </t-tab-bar-item>
+      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
+        我的
+      </t-tab-bar-item>
+    </t-tab-bar>
   </view>
 </template>
 
@@ -42,7 +74,7 @@ function goCampus() {
   min-height: 100vh;
   /* padding 计入 100vh,避免页面多出 96rpx 滚动空间 */
   box-sizing: border-box;
-  padding: 48rpx;
+  padding: 48rpx 48rpx calc(48rpx + 100rpx + env(safe-area-inset-bottom));
   background: #fff;
 }
 .community-home__cards {
@@ -83,5 +115,9 @@ function goCampus() {
 }
 .community-home__card-arrow {
   color: var(--td-text-color-placeholder);
+}
+
+.bottom-bar {
+  /* TDesign 内置 fixed + round + safe-area 样式,不需要额外定位 */
 }
 </style>

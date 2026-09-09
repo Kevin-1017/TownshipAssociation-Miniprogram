@@ -41,22 +41,22 @@ const filteredCount = computed(() => {
   }).length
 })
 
-function pickProvince(p: ProvinceOption) {
-  draft.province = p.label
+const pickProvince = (p: ProvinceOption) => {
+  draft.province = p.label;
   // 换省必须清掉市,否则可能留下「广东省 + 上海市」这种筛不出任何东西的组合
   draft.city = ''
 }
 
-function onConfirm() {
-  store.province = draft.province
+const onConfirm = () => {
+  store.province = draft.province;
   store.city = draft.city
   store.industry = draft.industry
   store.keyword = draft.keyword
   emit('confirm')
 }
 
-function onReset() {
-  draft.province = ''
+const onReset = () => {
+  draft.province = '';
   draft.city = ''
   draft.industry = ''
   draft.keyword = ''

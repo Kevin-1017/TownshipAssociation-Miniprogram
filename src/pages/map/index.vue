@@ -62,8 +62,8 @@ const markers = computed(() =>
   })),
 )
 
-function onMarkerTap(e: MarkerTapDetail | { detail: MarkerTapDetail }) {
-  const detail = (e as { detail?: MarkerTapDetail }).detail ?? (e as MarkerTapDetail)
+const onMarkerTap = (e: MarkerTapDetail | { detail: MarkerTapDetail }) => {
+  const detail = (e as { detail?: MarkerTapDetail }).detail ?? (e as MarkerTapDetail);
   const id = detail.markerId ?? detail.marker?.id
   if (id === undefined) return
 
@@ -72,27 +72,37 @@ function onMarkerTap(e: MarkerTapDetail | { detail: MarkerTapDetail }) {
   selected.value = hit ?? null
 }
 
-function goHometown() {
-  view.value = 'hometown'
+const goHometown = () => {
+  view.value = 'hometown';
   center.value = { lat: 23.4, lng: 116.4 }
   scale.value = 8
 }
 
-function goNation() {
+const goNation = () => {
   view.value = 'nation'
   center.value = { lat: 30.5, lng: 110.0 }
   scale.value = 4
 }
 
-function onFilterConfirm() {
-  showFilter.value = false
+const onFilterConfirm = () => {
+  showFilter.value = false;
   // 筛选后原来选中的人可能已被过滤掉,清掉避免卡片显示一个图上没有的点
   if (selected.value && !points.value.includes(selected.value)) selected.value = null
 }
 
-function goDetail() {
-  if (!selected.value) return
+const goDetail = () => {
+  if (!selected.value) return;
   uni.navigateTo({ url: `/pages/member/detail?id=${selected.value.id}` })
+}
+
+// 地图已移出 tabBar,靠 navigateTo 入栈打开;返回即销毁,顺带根治原生 map 层泄漏。
+// 兜底 reLaunch:正常入口都在栈内,冷启动直达时才走到
+const goBack = () => {
+  if (getCurrentPages().length > 1) {
+    uni.navigateBack()
+  } else {
+    uni.reLaunch({ url: '/pages/index/index' })
+  }
 }
 
 onMounted(async () => {
@@ -131,6 +141,11 @@ onMounted(async () => {
         所以成员卡片这类"必须浮在地图上"的用 cover-view,筛选面板这种
         打开后就该盖住地图的用 t-popup。详见 docs/TECHNOLOGY.md §6。
     -->
+
+    <!-- custom 导航 + 不再是 tab 页 → 没有系统返回入口,自己画一个;浮在 map 上必须 cover-view -->
+    <cover-view class="map-page__back" :style="{ top: topInset + 'px' }" @tap="goBack">
+      <t-icon name="arrow-left" size="24rpx" />
+    </cover-view>
 
     <cover-view class="map-page__stat" :style="{ top: topInset + 'px' }">
       <cover-view class="map-page__stat-num">{{ shown }} / {{ total }}</cover-view>
@@ -193,9 +208,22 @@ onMounted(async () => {
 }
 
 /* cover-view 不支持 gap / 简写定位继承,逐个写清 */
+.map-page__back {
+  position: absolute;
+  left: 48rpx;
+  width: 48rpx;
+  height: 48rpx;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  /* t-icon 内部是 view/子组件,text-align + line-height 不生效,改用 flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .map-page__stat {
   position: absolute;
-  left: 24rpx;
+  /* 让开左侧返回按钮:24 + 96 + 24 */
+  left: 124rpx;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 14rpx;
   padding: 14rpx 22rpx;

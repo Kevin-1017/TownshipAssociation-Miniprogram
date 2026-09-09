@@ -34,7 +34,7 @@ export const useMemberFilterStore = defineStore('memberFilter', () => {
   })
 
   /** 前端过滤 mock 数据。后端就绪后页面应改用接口参数查询,而不是继续本地过滤 */
-  function apply(list: MemberMapPoint[]): MemberMapPoint[] {
+  const apply = (list: MemberMapPoint[]): MemberMapPoint[] => {
     return list.filter((m) => {
       if (province.value && m.province !== province.value) return false
       if (city.value && m.city !== city.value) return false
@@ -48,22 +48,22 @@ export const useMemberFilterStore = defineStore('memberFilter', () => {
   }
 
   /** 选省时清空市,避免出现「广东省 + 上海市」这种矛盾组合 */
-  function setProvince(v: string) {
-    province.value = v
+  const setProvince = (v: string) => {
+    province.value = v;
     city.value = ''
   }
-  function setCity(v: string) {
-    city.value = v
+  const setCity = (v: string) => {
+    city.value = v;
   }
-  function setIndustry(v: string) {
-    industry.value = v
+  const setIndustry = (v: string) => {
+    industry.value = v;
   }
-  function setKeyword(v: string) {
-    keyword.value = v
+  const setKeyword = (v: string) => {
+    keyword.value = v;
   }
 
-  function reset() {
-    province.value = ''
+  const reset = () => {
+    province.value = '';
     city.value = ''
     industry.value = ''
     keyword.value = ''

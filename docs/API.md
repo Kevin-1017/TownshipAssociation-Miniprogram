@@ -156,6 +156,20 @@ GET /tsa/notices/{id} → NoticeItem      // 不存在返回 code=1002
 
 ---
 
+## 基金会
+
+```
+GET /tsa/foundation   → { rewards: FoundationRewardItem[], donations: FoundationDonationItem[] }
+```
+
+- `FoundationRewardItem`: `id label amount sponsor`
+  - `label` 如"年度奖学金""校园活动支持资金"; `amount` 单位为元; `sponsor` 为赞助人/捐赠方名称
+- `FoundationDonationItem`: `id donorName amount date`
+  - `donorName` 捐赠人姓名; `amount` 单位元; `date` ISO 8601
+- 前端展示分为两栏:"校内奖励与表彰"(含总额汇总 + 逐条明细)和"捐赠与帮助致谢"(鸣谢列表)
+
+---
+
 ## 当前用户
 
 ```

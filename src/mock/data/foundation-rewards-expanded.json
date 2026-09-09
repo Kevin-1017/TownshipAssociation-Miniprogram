@@ -1,0 +1,10 @@
+[
+  { "id": "rr001", "categoryId": "cat1", "categoryName": "年度奖学金颁发", "recipient": "张明远", "amount": 8000 },
+  { "id": "rr002", "categoryId": "cat1", "categoryName": "年度奖学金颁发", "recipient": "李思琪", "amount": 6000 },
+  { "id": "rr003", "categoryId": "cat1", "categoryName": "年度奖学金颁发", "recipient": "王浩然", "amount": 5000 },
+  { "id": "rr004", "categoryId": "cat2", "categoryName": "优秀负责人表彰", "recipient": "陈雅婷", "amount": 2000 },
+  { "id": "rr005", "categoryId": "cat2", "categoryName": "优秀负责人表彰", "recipient": "赵家辉", "amount": 2000 },
+  { "id": "rr006", "categoryId": "cat3", "categoryName": "校园活动支持", "recipient": "学生会文艺部", "amount": 3000 },
+  { "id": "rr007", "categoryId": "cat3", "categoryName": "校园活动支持", "recipient": "创业协会", "amount": 5000 },
+  { "id": "rr008", "categoryId": "cat3", "categoryName": "校园活动支持", "recipient": "青年志愿者服务队", "amount": 4000 }
+]

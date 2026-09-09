@@ -10,10 +10,15 @@ import type {
 } from '@/types/member'
 import type { EventDetail, EventListItem, EventQuery } from '@/types/event'
 import type { NoticeItem } from '@/types/notice'
+import type { FoundationRewardItem, FoundationDonationItem, RewardRecord, DonationRecord } from '@/types/foundation'
 import { delay } from './delay'
 import membersRaw from './data/members.json'
 import eventsRaw from './data/events.json'
 import noticesRaw from './data/notices.json'
+import rewardsRaw from './data/foundation-rewards.json'
+import donationsRaw from './data/foundation-donations.json'
+import rewardsExpanded from './data/foundation-rewards-expanded.json'
+import donationsExpanded from './data/foundation-donations-expanded.json'
 
 /**
  * 本地 mock 分发器。
@@ -29,14 +34,15 @@ import noticesRaw from './data/notices.json'
 const members = membersRaw as MemberDetail[]
 const events = eventsRaw as EventDetail[]
 const notices = noticesRaw as NoticeItem[]
+const rewards = rewardsRaw as FoundationRewardItem[]
+const donations = donationsRaw as FoundationDonationItem[]
 
 // ---------- 投影:全量成员 → 地图轻量点 ----------
 /**
  * 300 条全字段约 180 KB,地图接口只取渲染必需的 8 个字段,压到约 40 KB。
  * 后端实现 /members/map-data 时同样应该只 SELECT 这些列。
  */
-function toMapPoint(m: MemberDetail): MemberMapPoint {
-  return {
+const toMapPoint = (m: MemberDetail): MemberMapPoint => ({
     id: m.id,
     name: m.name,
     avatarUrl: m.avatarUrl,
@@ -45,12 +51,10 @@ function toMapPoint(m: MemberDetail): MemberMapPoint {
     province: m.province,
     city: m.city,
     industry: m.industry,
-  }
-}
+  });
 
 /** 显式列举,而不是解构丢弃 —— 契约变化时这里会第一时间暴露,而不是悄悄多传字段 */
-function toListItem(m: MemberDetail): MemberListItem {
-  return {
+const toListItem = (m: MemberDetail): MemberListItem => ({
     id: m.id,
     name: m.name,
     avatarUrl: m.avatarUrl,
@@ -63,12 +67,11 @@ function toListItem(m: MemberDetail): MemberListItem {
     company: m.company,
     title: m.title,
     graduationYear: m.graduationYear,
-  }
-}
+  });
 
 // ---------- 各接口的 mock 实现 ----------
-function pageMembers(data: MemberQuery = {}): PageResult<MemberListItem> {
-  const { page = 1, pageSize = 20, province, city, industry, keyword } = data
+const pageMembers = (data: MemberQuery = {}): PageResult<MemberListItem> => {
+  const { page = 1, pageSize = 20, province, city, industry, keyword } = data;
 
   let list = members.filter((m) => {
     if (province && m.province !== province) return false
@@ -87,16 +90,16 @@ function pageMembers(data: MemberQuery = {}): PageResult<MemberListItem> {
   return { list: list.map(toListItem), total, page, pageSize }
 }
 
-function countByProvince(): ProvinceStat[] {
-  const map = new Map<string, number>()
+const countByProvince = (): ProvinceStat[] => {
+  const map = new Map<string, number>();
   for (const m of members) map.set(m.province, (map.get(m.province) ?? 0) + 1)
   return [...map.entries()]
     .map(([province, count]) => ({ province, count }))
     .sort((a, b) => b.count - a.count)
 }
 
-function pageEvents(data: EventQuery = {}): PageResult<EventListItem> {
-  const { page = 1, pageSize = 10, status, city } = data
+const pageEvents = (data: EventQuery = {}): PageResult<EventListItem> => {
+  const { page = 1, pageSize = 10, status, city } = data;
   let list = events.filter((e) => {
     if (status && e.status !== status) return false
     if (city && e.city !== city) return false
@@ -121,8 +124,7 @@ function pageEvents(data: EventQuery = {}): PageResult<EventListItem> {
 }
 
 /** 列表接口不返回富文本正文与坐标,详情接口才返回 */
-function toEventListItem(e: EventDetail): EventListItem {
-  return {
+const toEventListItem = (e: EventDetail): EventListItem => ({
     id: e.id,
     title: e.title,
     cover: e.cover,
@@ -133,19 +135,16 @@ function toEventListItem(e: EventDetail): EventListItem {
     registeredCount: e.registeredCount,
     quota: e.quota,
     status: e.status,
-  }
-}
+  });
 
 /** 当前登录成员。mock 阶段固定返回第一条,让「我的」页面有内容可看 */
-function currentUser(): MemberDetail | null {
-  return members[0] ?? null
-}
+const currentUser = (): MemberDetail | null => members[0] ?? null;
 
 /**
  * 详情投影:显式列举字段(契约变化第一时间暴露),并按隐私规则
  * contactVisible=false 时**剔除** wechatId/phone,与真实后端行为一致。
  */
-function toDetailProjection(m: MemberDetail): MemberDetail {
+const toDetailProjection = (m: MemberDetail): MemberDetail => {
   const detail: MemberDetail = {
     id: m.id,
     name: m.name,
@@ -167,7 +166,7 @@ function toDetailProjection(m: MemberDetail): MemberDetail {
     intro: m.intro,
     contactVisible: m.contactVisible,
     createdAt: m.createdAt,
-  }
+  };
   if (m.contactVisible) {
     detail.wechatId = m.wechatId
     detail.phone = m.phone
@@ -188,6 +187,18 @@ const staticRoutes: Record<string, Handler> = {
   'GET /tsa/members/stats/province': () => countByProvince(),
   'GET /tsa/events': (o) => pageEvents((o.data ?? {}) as EventQuery),
   'GET /tsa/notices': () => notices.slice().sort((a, b) => Number(b.pinned) - Number(a.pinned)),
+  'GET /tsa/foundation': () => ({ rewards, donations }),
+  'GET /tsa/foundation/rewards': () => {
+    const records = rewardsExpanded as RewardRecord[]
+    return {
+      categories: [...new Set(records.map((r) => r.categoryName))],
+      records,
+    }
+  },
+  'GET /tsa/foundation/donations': () => {
+    const all = donationsExpanded as DonationRecord[]
+    return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  },
   'GET /tsa/user/me': () => currentUser(),
   'POST /tsa/auth/verify-phone': (o) => {
     // mock 验证不了真实微信链路,职责是跑通「闸门与拒绝态」——
@@ -243,8 +254,8 @@ const dynamicRoutes: Array<{
   },
 ]
 
-function matchDynamic(key: string): Handler | undefined {
-  const [method, path] = key.split(' ')
+const matchDynamic = (key: string): Handler | undefined => {
+  const [method, path] = key.split(' ');
   for (const r of dynamicRoutes) {
     if (r.method !== method) continue
     const matched = path.match(r.pattern)
@@ -254,7 +265,7 @@ function matchDynamic(key: string): Handler | undefined {
 }
 
 export async function mockDispatch<T>(opts: RequestOptions): Promise<Result<T>> {
-  await delay()
+  await delay();
   const key = `${opts.method ?? 'GET'} ${opts.url}`
   const handler = staticRoutes[key] ?? matchDynamic(key)
 

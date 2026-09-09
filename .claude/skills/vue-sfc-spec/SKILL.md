@@ -63,8 +63,8 @@ const loading = ref(false)
 // ── 5. computed:派生状态 ───────────────────────────────
 const total = computed(() => list.value.length)
 
-// ── 6. 函数/方法:业务逻辑(必须排在 watch 之前)────────
-async function fetchPage() {
+// ── 6. 函数/方法:业务逻辑(必须排在 watch 之前,统一用箭头函数)──
+const fetchPage = async () => {
   /* ... */
 }
 
@@ -84,8 +84,7 @@ onShow(() => fetchPage(true))
 // <script setup> 默认封闭是特性,本项目现有组件一个都没用到 —— 没用就别写。
 ```
 
-**第 6 段必须排在第 7 段之前。** watch 回调(尤其 `{ immediate: true }`)与生命周期都是方法的
-调用方;方法放下面,写成 `const` 箭头函数就是同步 TDZ 报错,写成 `function` 也只是靠提升侥幸能跑。
+**第 6 段必须排在第 7 段之前,且统一用箭头函数。** watch 回调(尤其 `{ immediate: true }`)与生命周期都是方法的调用方;方法放下面,写成 `const` 箭头函数就是同步 TDZ 报错。
 
 **第 8/9 段必须在 script 块的最末尾。** 这是最常见的违规点 ——
 习惯上会把 `onShow(load)` 写在几个函数中间,读的时候要找"这组件什么时候动"得上下翻。

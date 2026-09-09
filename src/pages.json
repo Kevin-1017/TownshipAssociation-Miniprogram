@@ -6,7 +6,10 @@
 			"style": { "navigationBarTitleText": "潮阳潮南校友会" }
 		},
 		{
-			// 地图页要沉浸式,所以隐藏原生导航栏;顶部安全区由页面自己处理
+			// 地图页要沉浸式,所以隐藏原生导航栏;顶部安全区由页面自己处理。
+			// ★ 刻意不进 tabBar:tab 页创建后常驻不卸载,map 是原生组件,
+			//   切到其他 tab 时原生层不会跟着隐藏,会在别的页面底部漏出来。
+			//   作为普通页面用 navigateTo 打开,返回即销毁,泄漏随之消失。
 			"path": "pages/map/index",
 			"style": { "navigationStyle": "custom" }
 		},
@@ -39,6 +42,10 @@
 			"style": { "navigationBarTitleText": "公告" }
 		},
 		{
+			"path": "pages/foundation/index",
+			"style": { "navigationBarTitleText": "校友基金会" }
+		},
+		{
 			"path": "pages/mine/index",
 			"style": { "navigationBarTitleText": "我的" }
 		}
@@ -49,22 +56,6 @@
 		"custom": {
 			"^t-(.*)": "@tdesign/uniapp/$1/$1.vue"
 		}
-	},
-	// ★ 当前刻意不配 iconPath:微信小程序 tabBar 的图标是可选字段,缺省即纯文字。
-	//   素材到位后,给每个 list 项补 "iconPath" 与 "selectedIconPath" 两个字段,
-	//   文件放 src/static/tabbar/,必须是 PNG(SVG 不被支持),建议 81×81。
-	"tabBar": {
-		"color": "#8a8a8a",
-		"selectedColor": "#0052d9",
-		"backgroundColor": "#ffffff",
-		"borderStyle": "white",
-		"list": [
-			{ "pagePath": "pages/index/index", "text": "首页" },
-			{ "pagePath": "pages/map/index", "text": "地图" },
-			{ "pagePath": "pages/community/index", "text": "社区" },
-			{ "pagePath": "pages/event/list", "text": "事件" },
-			{ "pagePath": "pages/mine/index", "text": "我的" }
-		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

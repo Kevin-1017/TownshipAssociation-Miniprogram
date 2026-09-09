@@ -29,8 +29,8 @@ const loading = ref(false)
 const finished = ref(false)
 const showFilter = ref(false)
 
-async function fetchPage(reset = false) {
-  if (loading.value) return
+const fetchPage = async (reset = false) => {
+  if (loading.value) return;
   if (reset) {
     page.value = 1
     finished.value = false
@@ -55,17 +55,17 @@ async function fetchPage(reset = false) {
   }
 }
 
-function onFilterConfirm() {
+const onFilterConfirm = () => {
   showFilter.value = false
   fetchPage(true)
 }
 
-function clearFilter() {
+const clearFilter = () => {
   store.reset()
   fetchPage(true)
 }
 
-function goDetail(m: MemberListItem) {
+const goDetail = (m: MemberListItem) => {
   uni.navigateTo({ url: `/pages/member/detail?id=${m.id}` })
 }
 

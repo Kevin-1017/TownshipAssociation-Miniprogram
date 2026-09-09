@@ -103,11 +103,11 @@ const finished = ref(false)
 const isEmpty = computed(() => !loading.value && list.value.length === 0)
 
 // ── 6. 业务逻辑 ──────────────────────────────────────────
-async function fetchPage(reset = false) {
+const fetchPage = async (reset = false) => {
   /* ... */
 }
 
-function goDetail(m: MemberListItem) {
+const goDetail = (m: MemberListItem) => {
   emit('picked', m)
 }
 
@@ -125,15 +125,11 @@ onReachBottom(() => !finished.value && fetchPage())
 </script>
 ```
 
-#### 为什么方法要排在 watch 之前
+#### 为什么方法要排在 watch 之前(且必须用箭头函数)
 
 watch 的回调(尤其带 `{ immediate: true }` 的)、生命周期钩子,都是方法的**调用方**。
-若方法排在它们下面,只有两种结局:
-
-- 写成 `function` 声明 —— 靠提升侥幸能跑,但违反「声明先于使用」,读的时候仍要下翻再回看;
-- 写成 `const fn = () => {}` —— `immediate: true` 同步触发时直接 TDZ 报错。
-
-把方法挪到上方,两种问题一起消失:引用永远朝上,全文件一遍读到底。
+方法统一写成 `const name = (...) => { ... }` 箭头函数 —— `const` 无提升,如果方法在 watch 下面就会出现 TDZ 错误。
+把方法放在 watch 上方,引用永远朝上,全文件一遍读到底,TDZ 问题自动消失。
 
 #### 为什么生命周期与 defineExpose 必须在最后
 
@@ -283,7 +279,7 @@ import { computed, MemberListItem } from '...'
 ```ts
 // 面板内改本地 reactive,点「确定」才写回 store
 const draft = reactive({ city: store.city /* ... */ })
-function onConfirm() {
+const onConfirm = () => {
   store.city = draft.city
   emit('confirm')
 }
@@ -300,7 +296,7 @@ function onConfirm() {
 export const useMemberFilterStore = defineStore('memberFilter', () => {
   const city = ref('')
   const label = computed(() => city.value.replace('市', ''))
-  function reset() {
+  const reset = () => {
     city.value = ''
   }
   return { city, label, reset }
@@ -528,7 +524,7 @@ pnpm run type-check && pnpm run lint
 1. **契约是否三处同步**(types / API.md / mock 路由表)—— 最高优先级
 2. 依赖方向有没有越界(页面直接 `uni.request`?组件 import 了 api?)
 3. 有没有把页面私有状态塞进 store
-4. 分区顺序:方法是否仍在 watch 之前、生命周期/`defineExpose` 是否仍在 script 末尾
+4. 分区顺序:方法是否仍是箭头函数、是否在 watch 之前、生命周期/`defineExpose` 是否仍在 script 末尾
 5. 有没有硬编码色值 / `px` / 缺 `scoped`
 6. 那些"看起来多余"的代码,注释还在不在
 7. `any` 有没有增加
@@ -541,6 +537,7 @@ pnpm run type-check && pnpm run lint
 
 | 不要                                                  | 因为                                                            |
 | ----------------------------------------------------- | --------------------------------------------------------------- |
+| 用 `function name()` 声明函数                         | 统一用 `const name = () => {}` 箭头函数:`const` 无提升,方法放 watch 上方才能避免 TDZ |
 | 用 npm/yarn                                           | 项目由 pnpm 管,`preinstall` 会拦;两份 lockfile 会装出两棵依赖树 |
 | 手动改 `@dcloudio/*`、`vite`、`vue`、`pinia` 的版本号 | 版本被交叉约束锁死,见 `docs/TECHNOLOGY.md` 版本表               |
 | 在页面里 `uni.request`                                | 绕过统一拆壳、token 注入、mock 分流                             |
@@ -548,7 +545,7 @@ pnpm run type-check && pnpm run lint
 | `any` 满天飞                                          | 类型是这个项目分层设计的地基                                    |
 | 页面私有状态进 store                                  | store 会变成全局变量垃圾桶                                      |
 | 生命周期写在函数中间                                  | 破坏自上而下的执行流可读性                                      |
-| `watch` 写在它所调用方法的上方                        | 靠函数提升才勉强能跑;写成箭头函数时 `immediate` 直接 TDZ        |
+| `watch` 写在它所调用方法的上方                        | 方法统一用箭头函数(`const`),无提升;`immediate: true` 会直接 TDZ |
 | 没有 template ref 需求却 `defineExpose` 一堆方法      | 组件默认封闭是特性,白白送掉封装性                               |
 | 删掉"解释为什么"的注释                                | 下一个人会以为是写得烂并改掉它                                  |
 | 把 `pages.json` 交给 Prettier 格式化                  | 注释会被吃掉                                                    |

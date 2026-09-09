@@ -9,7 +9,7 @@ import type {
 } from '@/types/member'
 
 /** 读取已核验的乡会身份令牌(没有则空串)。api 层直读 storage 有先例:authApi.logout 同款 */
-function assocTokenFromStorage(): string {
+const assocTokenFromStorage = (): string => {
   try {
     const raw = uni.getStorageSync(ASSOC_STORAGE_KEY) as string
     const parsed = raw ? (JSON.parse(raw) as { token?: string }) : null
