@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 
 /**
  * 社区首页 —— 只保留两个入口卡片:美食基地、校园广场。
  */
 
+/** 本页路径:tab bar 高亮;tab 页常驻缓存,返回时按它复位 */
+const OWN_PATH = '/pages/community/index'
+
 /** 当前页面路径（用于底部 tab bar 高亮） */
-const activePage = ref('/pages/community/index')
+const activePage = ref(OWN_PATH)
 
 const goFood = () => {
   uni.navigateTo({ url: '/pages/community/subpage?type=food' })
@@ -17,9 +21,15 @@ const goCampus = () => {
 }
 
 const onTabChange = (e: { value: string }) => {
-  activePage.value = e.value
-  uni.navigateTo({ url: e.value })
+  // 四个 tab 已登记进 pages.json 的 tabBar.list,只能用 switchTab 互切
+  uni.switchTab({ url: e.value })
 }
+
+onShow(() => {
+  // tab 页不卸载:返回时把高亮复位成本页,并藏掉原生 tab bar(只留悬浮胶囊)
+  activePage.value = OWN_PATH
+  uni.hideTabBar()
+})
 </script>
 
 <template>
@@ -42,26 +52,12 @@ const onTabChange = (e: { value: string }) => {
       </view>
     </view>
 
-    <!-- 底部悬浮胶囊导航 -->
-    <t-tab-bar
-      :value="activePage"
-      @change="onTabChange"
-      shape="round"
-      safe-area-inset-bottom
-      t-class="bottom-bar"
-    >
-      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
-        首页
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
-        社区
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
-        事件
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
-        我的
-      </t-tab-bar-item>
+    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
+      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
+      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
+      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
+      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
     </t-tab-bar>
   </view>
 </template>
@@ -93,7 +89,9 @@ const onTabChange = (e: { value: string }) => {
   background: #fff;
   border-radius: 24rpx;
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
-  transition: transform 150ms ease, box-shadow 150ms ease;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
 }
 .community-home__card:active {
   transform: scale(0.97);
@@ -115,9 +113,5 @@ const onTabChange = (e: { value: string }) => {
 }
 .community-home__card-arrow {
   color: var(--td-text-color-placeholder);
-}
-
-.bottom-bar {
-  /* TDesign 内置 fixed + round + safe-area 样式,不需要额外定位 */
 }
 </style>

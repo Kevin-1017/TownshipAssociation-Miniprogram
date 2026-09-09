@@ -6,8 +6,7 @@
  * 或者干脆不要放在 .env 里提交进仓库。
  */
 interface ImportMetaEnv {
-  /** 'true' | 'false'。注意是字符串,不是布尔 */
-  readonly VITE_USE_MOCK: string
+  readonly VITE_USE_MOCK: string | boolean
   /** 后端 API 前缀,如 https://api.xxx.org/api/v1 */
   readonly VITE_API_BASE_URL: string
 }

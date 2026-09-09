@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { formatFull } from '@/utils/format'
 import type { EventListItem } from '@/types/event'
 import WindowedScrollView from './components/WindowedScrollView.vue'
 
+/** 本页路径：tab bar 高亮；tab 页常驻缓存，返回时按它复位 */
+const OWN_PATH = '/pages/event/list'
+
 /** 当前页面路径（底部 tab bar 高亮） */
-const activePage = ref('/pages/event/list')
+const activePage = ref(OWN_PATH)
 
 const onTabChange = (e: { value: string }) => {
-  activePage.value = e.value
-  uni.navigateTo({ url: e.value })
+  // 四个 tab 已登记进 pages.json 的 tabBar.list，只能用 switchTab 互切
+  uni.switchTab({ url: e.value })
 }
 
 /**
@@ -26,9 +30,7 @@ import eventsRaw from '@/mock/data/events.json'
 const allEvents = ref<EventListItem[]>(eventsRaw as unknown as EventListItem[])
 
 // 排序:按开始时间从近到远
-allEvents.value.sort(
-  (a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime(),
-)
+allEvents.value.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
 
 // ---------- 年份范围 ----------
 const YEAR_MIN = 2000
@@ -54,9 +56,7 @@ const isAll = computed(
 )
 
 /** picker 的当前值由正在选择的一侧决定 */
-const pickerValue = computed(() => [
-  pickerSide.value === 'start' ? startYear.value : endYear.value,
-])
+const pickerValue = computed(() => [pickerSide.value === 'start' ? startYear.value : endYear.value])
 
 const openPicker = (side: 'start' | 'end') => {
   pickerSide.value = side
@@ -123,6 +123,13 @@ const items = computed(() => filtered.value.slice(startIdx.value, endIdx.value))
 const handleScroll = (_e: CustomEvent) => {
   scrollY.value = (_e.detail as { scrollTop: number })?.scrollTop ?? 0
 }
+
+// ---------- 生命周期 ----------
+onShow(() => {
+  // tab 页不卸载:返回时把高亮复位成本页,并藏掉原生 tab bar(只留悬浮胶囊)
+  activePage.value = OWN_PATH
+  uni.hideTabBar()
+})
 </script>
 
 <template>
@@ -134,9 +141,7 @@ const handleScroll = (_e: CustomEvent) => {
       </text>
 
       <view class="elist__range">
-        <view class="elist__range-side" @click="openPicker('start')">
-          {{ startYear }}年
-        </view>
+        <view class="elist__range-side" @click="openPicker('start')">{{ startYear }}年</view>
         <t-icon class="elist__range-icon" name="swap-right" size="32rpx" />
         <view class="elist__range-side elist__range-side--right" @click="openPicker('end')">
           {{ endYear }}年
@@ -160,13 +165,7 @@ const handleScroll = (_e: CustomEvent) => {
         class="card item-card"
         :style="{ marginBottom: '16rpx' }"
       >
-        <image
-          v-if="e.cover"
-          class="item-card__cover"
-          mode="aspectFill"
-          :src="e.cover"
-          lazy-load
-        />
+        <image v-if="e.cover" class="item-card__cover" mode="aspectFill" :src="e.cover" lazy-load />
         <view v-else class="item-card__cover-placeholder" />
 
         <view class="item-card__body">
@@ -195,26 +194,12 @@ const handleScroll = (_e: CustomEvent) => {
       <t-picker-item :options="yearOptions" />
     </t-picker>
 
-    <!-- 底部悬浮胶囊导航 -->
-    <t-tab-bar
-      :value="activePage"
-      @change="onTabChange"
-      shape="round"
-      safe-area-inset-bottom
-      t-class="bottom-bar"
-    >
-      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
-        首页
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
-        社区
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
-        事件
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
-        我的
-      </t-tab-bar-item>
+    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
+      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
+      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
+      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
+      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
     </t-tab-bar>
   </view>
 </template>

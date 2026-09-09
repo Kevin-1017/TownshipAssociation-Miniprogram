@@ -4,14 +4,17 @@ import { onShow } from '@dcloudio/uni-app'
 import { memberApi } from '@/api/member'
 import { noticeApi } from '@/api/notice'
 import { eventApi } from '@/api/event'
-import { formatDate, formatRelative } from '@/utils/format'
+import { formatRelative } from '@/utils/format'
 import type { NoticeItem } from '@/types/notice'
 import type { ProvinceStat } from '@/types/member'
 
 /** 首页只做取数与展示,不做业务判断 —— 见 docs/DEVELOPMENT.md §3 */
 
+/** 本页路径:tab bar 高亮;tab 页常驻缓存,返回时按它复位 */
+const OWN_PATH = '/pages/index/index'
+
 /** 当前页面路径（用于底部 tab bar 高亮） */
-const activePage = ref('/pages/index/index')
+const activePage = ref(OWN_PATH)
 
 const notices = ref<NoticeItem[]>([])
 const topProvinces = ref<ProvinceStat[]>([])
@@ -37,12 +40,17 @@ const goFoundation = (tab: 'rewards' | 'donations') =>
   uni.navigateTo({ url: `/pages/foundation/index?tab=${tab}` })
 
 const onTabChange = (e: { value: string }) => {
-  activePage.value = e.value
-  uni.navigateTo({ url: e.value })
+  // 四个 tab 已登记进 pages.json 的 tabBar.list,只能用 switchTab 互切
+  uni.switchTab({ url: e.value })
 }
 
 // 用 onShow 而不是 onMounted:从地图页返回时也要刷新统计
-onShow(load)
+onShow(() => {
+  // tab 页不卸载:离开前不改高亮,返回时复位成本页;原生 tab bar 每次都要藏
+  activePage.value = OWN_PATH
+  uni.hideTabBar()
+  load()
+})
 </script>
 
 <template>
@@ -140,26 +148,12 @@ onShow(load)
       <text class="text-placeholder">本页面数据来自本地 mock,切换真后端只需改 .env 一个变量</text>
     </view>
 
-    <!-- 底部悬浮胶囊导航 -->
-    <t-tab-bar
-      :value="activePage"
-      @change="onTabChange"
-      shape="round"
-      safe-area-inset-bottom
-      t-class="bottom-bar"
-    >
-      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
-        首页
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
-        社区
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
-        事件
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
-        我的
-      </t-tab-bar-item>
+    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
+      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
+      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
+      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
+      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
     </t-tab-bar>
   </view>
 </template>
@@ -311,9 +305,5 @@ onShow(load)
   margin-top: 16rpx;
   font-size: 26rpx;
   color: var(--td-brand-color);
-}
-
-.bottom-bar {
-  /* TDesign 内置 fixed + round + safe-area 样式,不需要额外定位 */
 }
 </style>

@@ -16,7 +16,7 @@ export interface RequestOptions {
   silentError?: boolean
 }
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === true || import.meta.env.NODE_ENV === 'true'
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export const TOKEN_KEY = 'tsa_token'
@@ -91,7 +91,8 @@ const unwrap = <T>(res: Result<T>, silentError: boolean): T => {
   if (res.code === CODE_UNAUTHORIZED) {
     // 401 是全局登录事件:无论谁触发都清 token 跳登录页,不受 silentError 影响
     uni.removeStorageSync(TOKEN_KEY)
-    uni.navigateTo({ url: '/pages/mine/index' })
+    // 我的页现在是原生 tab 页,navigateTo 会直接 fail,只能用 switchTab
+    uni.switchTab({ url: '/pages/mine/index' })
   }
 
   if (!silentError) {

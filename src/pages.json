@@ -57,6 +57,20 @@
 			"^t-(.*)": "@tdesign/uniapp/$1/$1.vue"
 		}
 	},
+	// switchTab 的硬性前提:tab 页必须登记在这里。原生 tab bar 启动时会闪一下,
+	// 四个 tab 页在 onShow 里统一 hideTabBar() 藏掉,只保留页面自绘的悬浮胶囊。
+	// 不放图标:这个 bar 从不会真正展示,text 只为满足校验。
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#0052d9",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{ "pagePath": "pages/index/index", "text": "首页" },
+			{ "pagePath": "pages/community/index", "text": "社区" },
+			{ "pagePath": "pages/event/list", "text": "事件" },
+			{ "pagePath": "pages/mine/index", "text": "我的" }
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "潮阳潮南校友会",

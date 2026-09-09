@@ -14,12 +14,15 @@ import { industryLabel } from '@/constants/industry'
  * tsa-api 提供 code2session,见 docs/API.md「鉴权」。
  */
 
+/** 本页路径:tab bar 高亮;tab 页常驻缓存,返回时按它复位 */
+const OWN_PATH = '/pages/mine/index'
+
 /** 当前页面路径（用于底部 tab bar 高亮） */
-const activePage = ref('/pages/mine/index')
+const activePage = ref(OWN_PATH)
 
 const onTabChange = (e: { value: string }) => {
-  activePage.value = e.value
-  uni.navigateTo({ url: e.value })
+  // 四个 tab 已登记进 pages.json 的 tabBar.list,只能用 switchTab 互切
+  uni.switchTab({ url: e.value })
 }
 
 const version = '0.1.0'
@@ -58,6 +61,9 @@ const onMenu = (m: (typeof MENUS)[number]) => {
 }
 
 onShow(async () => {
+  // tab 页不卸载:返回时把高亮复位成本页,并藏掉原生 tab bar(只留悬浮胶囊)
+  activePage.value = OWN_PATH
+  uni.hideTabBar()
   if (isLogin.value) await user.fetchProfile()
   const stats = await memberApi.getProvinceStats()
   memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
@@ -119,26 +125,12 @@ onShow(async () => {
       <text class="mine__version">版本 {{ version }} · 编译器 Node {{ nodeHint }}</text>
     </view>
 
-    <!-- 底部悬浮胶囊导航 -->
-    <t-tab-bar
-      :value="activePage"
-      @change="onTabChange"
-      shape="round"
-      safe-area-inset-bottom
-      t-class="bottom-bar"
-    >
-      <t-tab-bar-item value="/pages/index/index" url="/pages/index/index" icon="home">
-        首页
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/community/index" url="/pages/community/index" icon="chat">
-        社区
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/event/list" url="/pages/event/list" icon="app">
-        事件
-      </t-tab-bar-item>
-      <t-tab-bar-item value="/pages/mine/index" url="/pages/mine/index" icon="user-filled">
-        我的
-      </t-tab-bar-item>
+    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
+      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
+      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
+      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
+      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
     </t-tab-bar>
   </view>
 </template>
@@ -253,9 +245,5 @@ onShow(async () => {
   margin-top: 18rpx;
   font-size: 22rpx;
   color: var(--td-text-color-placeholder);
-}
-
-.bottom-bar {
-  /* TDesign 内置 fixed + round + safe-area 样式,不需要额外定位 */
 }
 </style>
