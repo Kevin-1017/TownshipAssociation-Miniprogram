@@ -44,7 +44,7 @@ const industries = [
 ]
 
 const titles = [
-  '{year} 年度潮阳潮南校友会春节联谊大会',
+  '{year} 年度广工潮阳潮南校友会春节联谊大会',
   '乡贤企业行 · {city}{industry}产业带参访',
   '潮汕文化讲座: {theme}',
   '{city}同乡联谊会 · 中秋特别场',

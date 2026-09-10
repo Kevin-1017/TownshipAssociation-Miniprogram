@@ -1,6 +1,6 @@
 ---
 name: vue-sfc-spec
-description: 本项目(潮阳潮南校友会小程序)的 Vue SFC 与 TypeScript 开发规范。编辑、新建或审查 src/ 下任何 .vue 或 .ts 文件时必须先应用本规范。约束 SFC 块顺序(script→template→style)、<script setup> 内部分区顺序(声明先于使用:import→类型常量→props/emits→store→refs→computed→方法→watch→生命周期→defineExpose)、注释语言、分层调用边界、Pinia 状态归属、mock 与 API 契约同步。
+description: 本项目(广工潮阳潮南校友会小程序)的 Vue SFC 与 TypeScript 开发规范。编辑、新建或审查 src/ 下任何 .vue 或 .ts 文件时必须先应用本规范。约束 SFC 块顺序(script→template→style)、<script setup> 内部分区顺序(声明先于使用:import→类型常量→props/emits→store→refs→computed→方法→watch→生命周期→defineExpose)、注释语言、分层调用边界、Pinia 状态归属、mock 与 API 契约同步。
 ---
 
 # Vue SFC 开发规范(强制执行)

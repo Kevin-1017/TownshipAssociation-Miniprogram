@@ -1,4 +1,4 @@
-# 潮阳潮南校友会小程序 (tsa-miniprogram)
+# 广工潮阳潮南校友会小程序 (tsa-miniprogram)
 
 uni-app + Vue 3 + TypeScript + TDesign 的微信小程序。技术亮点是**乡贤分布地图**:
 可视化成员的地理分布,支持点聚合与按省市/行业筛选。
