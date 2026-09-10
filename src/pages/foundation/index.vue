@@ -40,12 +40,6 @@ onLoad((query) => {
   load()
 })
 
-// ---------- 事件 ----------
-const onTabsChange = (value: string | number) => {
-  activeTab.value = value as 'rewards' | 'donations'
-  uni.setStorageSync('foundation_tab', value)
-}
-
 /** 按类别分组获奖记录（返回数组避免 v-for 直接遍历对象 key 的 Vue 警告） */
 const groupedRewards = computed(() =>
   Object.entries(rewardRecords.value.reduce((groups, r) => {
