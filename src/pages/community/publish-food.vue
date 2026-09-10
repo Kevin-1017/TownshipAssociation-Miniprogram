@@ -270,6 +270,9 @@ const onFormSubmit = (e: FormSubmitEvent) => {
   --td-textarea-horizontal-padding: 0;
   padding: 0 !important;
 }
+:deep(.textarea .t-textarea) {
+  padding: 0 !important;
+}
 .publish {
   padding-bottom: 40rpx;
 }

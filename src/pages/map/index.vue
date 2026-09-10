@@ -63,7 +63,7 @@ const markers = computed(() =>
 )
 
 const onMarkerTap = (e: MarkerTapDetail | { detail: MarkerTapDetail }) => {
-  const detail = (e as { detail?: MarkerTapDetail }).detail ?? (e as MarkerTapDetail);
+  const detail = (e as { detail?: MarkerTapDetail }).detail ?? (e as MarkerTapDetail)
   const id = detail.markerId ?? detail.marker?.id
   if (id === undefined) return
 
@@ -73,7 +73,7 @@ const onMarkerTap = (e: MarkerTapDetail | { detail: MarkerTapDetail }) => {
 }
 
 const goHometown = () => {
-  view.value = 'hometown';
+  view.value = 'hometown'
   center.value = { lat: 23.4, lng: 116.4 }
   scale.value = 8
 }
@@ -85,13 +85,13 @@ const goNation = () => {
 }
 
 const onFilterConfirm = () => {
-  showFilter.value = false;
+  showFilter.value = false
   // 筛选后原来选中的人可能已被过滤掉,清掉避免卡片显示一个图上没有的点
   if (selected.value && !points.value.includes(selected.value)) selected.value = null
 }
 
 const goDetail = () => {
-  if (!selected.value) return;
+  if (!selected.value) return
   uni.navigateTo({ url: `/pages/member/detail?id=${selected.value.id}` })
 }
 
@@ -261,7 +261,7 @@ onMounted(async () => {
 .map-page__filter {
   position: absolute;
   right: 24rpx;
-  bottom: 200rpx;
+  bottom: 250rpx;
   display: flex;
   background: #0052d9;
   border-radius: 40rpx;

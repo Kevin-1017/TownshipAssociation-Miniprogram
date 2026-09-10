@@ -10,6 +10,24 @@
     "publishTime": "2026-09-08T10:30:00+08:00",
     "likes": 128,
     "comments": 36,
+    "commentsList": [
+      {
+        "id": "c_001_1",
+        "author": "老郑",
+        "avatar": "",
+        "content": "龙洞那家潮香居的牛肉丸绝了!手打的真材实料。",
+        "createTime": "2026-09-08T11:00:00+08:00",
+        "likes": 5
+      },
+      {
+        "id": "c_001_2",
+        "author": "小林",
+        "avatar": "",
+        "content": "大学城后门有家开了十几年的老店,老板是汕头人,味道很正",
+        "createTime": "2026-09-08T14:20:00+08:00",
+        "likes": 2
+      }
+    ],
     "cuisine": "潮汕菜",
     "region": "longdong"
   },
@@ -24,6 +42,16 @@
     "publishTime": "2026-09-07T18:20:00+08:00",
     "likes": 85,
     "comments": 12,
+    "commentsList": [
+      {
+        "id": "c_002_1",
+        "author": "敏姐",
+        "avatar": "",
+        "content": "试了下,米浆比例太稀确实不行,加了点木薯粉成功!",
+        "createTime": "2026-09-07T20:00:00+08:00",
+        "likes": 8
+      }
+    ],
     "cuisine": "潮汕菜",
     "region": "daxuecheng"
   },
@@ -37,7 +65,33 @@
     "images": [],
     "publishTime": "2026-09-06T09:00:00+08:00",
     "likes": 240,
-    "comments": 58
+    "comments": 58,
+    "commentsList": [
+      {
+        "id": "c_003_1",
+        "author": "小王",
+        "avatar": "",
+        "content": "报名!一个人来的,能多带几个同学吗哈哈",
+        "createTime": "2026-09-06T10:00:00+08:00",
+        "likes": 12
+      },
+      {
+        "id": "c_003_2",
+        "author": "志伟",
+        "avatar": "",
+        "content": "已报!这次有安排活动吗?",
+        "createTime": "2026-09-06T10:30:00+08:00",
+        "likes": 4
+      },
+      {
+        "id": "c_003_3",
+        "author": "阿梅",
+        "avatar": "",
+        "content": "期待期待!可以表演节目吗?",
+        "createTime": "2026-09-06T11:00:00+08:00",
+        "likes": 7
+      }
+    ]
   },
   {
     "id": "p004",
@@ -50,6 +104,16 @@
     "publishTime": "2026-09-05T14:10:00+08:00",
     "likes": 67,
     "comments": 29,
+    "commentsList": [
+      {
+        "id": "c_004_1",
+        "author": "芳姐",
+        "avatar": "",
+        "content": "澄海狮头鹅是最经典的,不过广州这边不好找真货",
+        "createTime": "2026-09-05T15:00:00+08:00",
+        "likes": 3
+      }
+    ],
     "cuisine": "潮汕菜",
     "region": "longdong"
   },
@@ -64,6 +128,24 @@
     "publishTime": "2026-09-04T20:45:00+08:00",
     "likes": 156,
     "comments": 21,
+    "commentsList": [
+      {
+        "id": "c_005_1",
+        "author": "李叔",
+        "avatar": "",
+        "content": "这壶不错啊,什么窑口的?",
+        "createTime": "2026-09-04T21:30:00+08:00",
+        "likes": 1
+      },
+      {
+        "id": "c_005_2",
+        "author": "阿丽",
+        "avatar": "",
+        "content": "我也想要一套!链接发我看看",
+        "createTime": "2026-09-05T08:00:00+08:00",
+        "likes": 0
+      }
+    ],
     "cuisine": "潮汕菜",
     "region": "daxuecheng"
   },
@@ -78,8 +160,7 @@
     "publishTime": "2026-09-03T11:25:00+08:00",
     "likes": 42,
     "comments": 18,
-    "cuisine": "粤菜",
-    "region": "longdong"
+    "commentsList": []
   },
   {
     "id": "p007",
@@ -91,7 +172,17 @@
     "images": [],
     "publishTime": "2026-09-02T16:50:00+08:00",
     "likes": 99,
-    "comments": 7
+    "comments": 7,
+    "commentsList": [
+      {
+        "id": "c_007_1",
+        "author": "阿强",
+        "avatar": "",
+        "content": "算我一个!上周球局还没上场呢",
+        "createTime": "2026-09-02T17:30:00+08:00",
+        "likes": 2
+      }
+    ]
   },
   {
     "id": "p008",
@@ -104,6 +195,32 @@
     "publishTime": "2026-09-01T08:15:00+08:00",
     "likes": 312,
     "comments": 45,
+    "commentsList": [
+      {
+        "id": "c_008_1",
+        "author": "陈阿姨",
+        "avatar": "",
+        "content": "做了!蚝一定要新鲜,冷冻的出水太多不行。",
+        "createTime": "2026-09-01T09:00:00+08:00",
+        "likes": 15
+      },
+      {
+        "id": "c_008_2",
+        "author": "老郑",
+        "avatar": "",
+        "content": "配普宁豆酱绝杀,差点忘了加这个",
+        "createTime": "2026-09-01T09:30:00+08:00",
+        "likes": 9
+      },
+      {
+        "id": "c_008_3",
+        "author": "阿杰",
+        "avatar": "",
+        "content": "终于有个靠谱的方子了,之前做的总是塌",
+        "createTime": "2026-09-01T10:00:00+08:00",
+        "likes": 4
+      }
+    ],
     "cuisine": "潮汕菜",
     "region": "daxuecheng"
   },
@@ -117,7 +234,25 @@
     "images": [],
     "publishTime": "2026-08-31T19:10:00+08:00",
     "likes": 178,
-    "comments": 33
+    "comments": 33,
+    "commentsList": [
+      {
+        "id": "c_009_1",
+        "author": "阿梅",
+        "avatar": "",
+        "content": "投!今年秋招太难了,需要抱团取暖",
+        "createTime": "2026-08-31T19:30:00+08:00",
+        "likes": 21
+      },
+      {
+        "id": "c_009_2",
+        "author": "小林",
+        "avatar": "",
+        "content": "我也在找工作中,能进吗?",
+        "createTime": "2026-08-31T20:00:00+08:00",
+        "likes": 6
+      }
+    ]
   },
   {
     "id": "p010",
@@ -129,7 +264,17 @@
     "images": [],
     "publishTime": "2026-08-30T09:30:00+08:00",
     "likes": 89,
-    "comments": 56
+    "comments": 56,
+    "commentsList": [
+      {
+        "id": "c_010_1",
+        "author": "敏姐",
+        "avatar": "",
+        "content": "9号晚上深圳到揭阳能拼吗?三个人",
+        "createTime": "2026-08-30T10:00:00+08:00",
+        "likes": 1
+      }
+    ]
   },
   {
     "id": "p011",
@@ -142,6 +287,24 @@
     "publishTime": "2026-08-29T07:45:00+08:00",
     "likes": 245,
     "comments": 41,
+    "commentsList": [
+      {
+        "id": "c_011_1",
+        "author": "陈阿姨",
+        "avatar": "",
+        "content": "中山路的阿勇肠粉也值得加进去,我从小吃到大",
+        "createTime": "2026-08-29T08:00:00+08:00",
+        "likes": 18
+      },
+      {
+        "id": "c_011_2",
+        "author": "老郑",
+        "avatar": "",
+        "content": "西肠粉和东肠粉到底哪个更正宗?每次回家都吵这个问题",
+        "createTime": "2026-08-29T08:30:00+08:00",
+        "likes": 25
+      }
+    ],
     "cuisine": "粤菜",
     "region": "longdong"
   },
@@ -155,6 +318,7 @@
     "images": [],
     "publishTime": "2026-08-28T14:00:00+08:00",
     "likes": 64,
-    "comments": 22
+    "comments": 22,
+    "commentsList": []
   }
 ]
