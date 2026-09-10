@@ -212,6 +212,7 @@ types/  ──→ (不 import 任何运行时模块)
 
 ### 组件设计
 
+- **TDesign 组件优先**:凡是 `@tdesign/uniapp` 已有的基础控件(表单类 form/form-item/input/radio/checkbox/textarea/picker,展示类 button/tag/popup/avatar/loading 等),一律直接用 `t-*` 组件,**禁止手绘 `view`+CSS 做等价物**。手绘件没有设计 token、没有暗色适配、没有无障碍语义,还得自己维护受控状态与交互细节(协议弹窗与资料页都曾因此返工)。只有组件确实覆盖不了的场景(如 `cover-view` 原生层不能放 TDesign 组件)才允许手绘,且必须注释写明原因。
 - **有业务含义的 UI 必须包成 `Tsa*` 组件**(`t-button`/`t-tag` 这类原子控件不必包 —— 包了是噪音)。
 - 组件**不直接发请求**:数据从 props 进,交互用 emit 出。这让组件可复用、可静态预览。
 - 组件不要直接写 store。需要改共享状态时 emit 出去,由页面写 store。
@@ -541,6 +542,7 @@ pnpm run type-check && pnpm run lint
 | 用 npm/yarn                                           | 项目由 pnpm 管,`preinstall` 会拦;两份 lockfile 会装出两棵依赖树 |
 | 手动改 `@dcloudio/*`、`vite`、`vue`、`pinia` 的版本号 | 版本被交叉约束锁死,见 `docs/TECHNOLOGY.md` 版本表               |
 | 在页面里 `uni.request`                                | 绕过统一拆壳、token 注入、mock 分流                             |
+| TDesign 已有 `t-*` 控件还手绘 view+CSS 做等价物       | 丢设计 token/暗色适配/无障碍语义,状态与交互还得自己维护          |
 | 组件里 import api 发请求                              | 组件不可复用、难测试                                            |
 | `any` 满天飞                                          | 类型是这个项目分层设计的地基                                    |
 | 页面私有状态进 store                                  | store 会变成全局变量垃圾桶                                      |

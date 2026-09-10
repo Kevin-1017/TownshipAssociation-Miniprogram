@@ -126,6 +126,8 @@ stores/      → 只放跨页面共享状态
 
 **`components/` 里出现 `import { memberApi }` 就是错的** —— 那会让组件无法复用且难测试。
 
+**`TDesign 组件优先`:凡 `@tdesign/uniapp` 已有的 `t-*` 控件(form/checkbox/radio/input/button/tag/popup 等),一律直接用组件,禁止手绘 `view`+CSS 做等价物。只有 `cover-view` 原生层这类组件到不了的场景才允许手绘,且注释写明原因。**
+
 **页面里出现 `uni.request(...)` 就是错的** —— 绕过了统一拆壳、token 注入、mock 分流。
 
 ---
