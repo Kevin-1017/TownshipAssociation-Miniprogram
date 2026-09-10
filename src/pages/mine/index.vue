@@ -119,18 +119,18 @@ onShow(async () => {
     <view class="card mine__about">
       <text class="mine__about-title">关于本小程序</text>
       <text class="mine__about-body">
-        潮阳潮南校友会官方小程序,基于 uni-app(Vue 3 + TypeScript)构建, UI 使用腾讯 TDesign
+        广工潮阳潮南校友会官方小程序,基于 uni-app(Vue 3 + TypeScript)构建, UI 使用腾讯 TDesign
         组件库,数据当前来自本地 mock。 它与将来的 React 官网共用同一套 Spring Boot 后端接口。
       </text>
       <text class="mine__version">版本 {{ version }} · 编译器 Node {{ nodeHint }}</text>
     </view>
 
-    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <!-- 底部悬浮胶囊导航:theme="tag" 选中项带胶囊底色,split=false 去分隔线;文字放默认插槽显示在图标下方 -->
     <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
-      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
-      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
-      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
-      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
+      <t-tab-bar-item value="/pages/index/index" icon="home">首页</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" icon="chat">社区</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/event/list" icon="app">事件</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/mine/index" icon="user">我的</t-tab-bar-item>
     </t-tab-bar>
   </view>
 </template>

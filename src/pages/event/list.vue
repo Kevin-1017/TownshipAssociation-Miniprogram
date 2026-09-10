@@ -163,13 +163,12 @@ onShow(() => {
         v-for="e in items"
         :key="e.id"
         class="card item-card"
-        :style="{ marginBottom: '16rpx' }"
       >
         <image v-if="e.cover" class="item-card__cover" mode="aspectFill" :src="e.cover" lazy-load />
         <view v-else class="item-card__cover-placeholder" />
 
         <view class="item-card__body">
-          <text class="item-card__title ellipsis">{{ e.title }}</text>
+          <text class="item-card__title ellipsis-2">{{ e.title }}</text>
           <text class="item-card__time text-secondary">{{ formatFull(e.startTime) }}</text>
         </view>
       </view>
@@ -194,12 +193,12 @@ onShow(() => {
       <t-picker-item :options="yearOptions" />
     </t-picker>
 
-    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <!-- 底部悬浮胶囊导航:theme="tag" 选中项带胶囊底色,split=false 去分隔线;文字放默认插槽显示在图标下方 -->
     <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
-      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
-      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
-      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
-      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
+      <t-tab-bar-item value="/pages/index/index" icon="home">首页</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" icon="chat">社区</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/event/list" icon="app">事件</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/mine/index" icon="user">我的</t-tab-bar-item>
     </t-tab-bar>
   </view>
 </template>
@@ -275,10 +274,13 @@ onShow(() => {
 .card {
   margin-left: 24rpx;
   margin-right: 24rpx;
+  /* 覆盖全局 .card 的 20rpx;必须与 ITEM_HEIGHT 里的间距 16rpx 保持一致,虚拟列表才不会错位 */
+  margin-bottom: 16rpx;
   /* 覆盖全局 .card 的 padding,保证实际高度与 ITEM_HEIGHT 换算一致 */
   padding: 0;
   display: flex;
-  align-items: center;
+  /* stretch:让右侧 body 撑满卡片高度(由封面 200rpx 决定),body 内的 space-between 才能把标题顶、时间底 */
+  align-items: stretch;
   background: #fff;
   border-radius: 16rpx;
   overflow: hidden;
@@ -300,7 +302,8 @@ onShow(() => {
   padding: 24rpx 24rpx 24rpx 20rpx;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* 标题在卡片顶部、时间在底部,与首页事件卡一致 */
+  justify-content: space-between;
 }
 .item-card__title {
   display: block;
@@ -310,7 +313,6 @@ onShow(() => {
   line-height: 1.45;
 }
 .item-card__time {
-  margin-top: 10rpx;
   font-size: 24rpx;
 }
 
