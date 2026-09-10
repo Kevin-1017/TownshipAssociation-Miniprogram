@@ -69,14 +69,16 @@ const rules = {
 // ---------- 派生逻辑 ----------
 /** 选中预置 → 用预置值;选「其他」→ 用自填文本(没填即为空,由 required 拦下) */
 const syncCuisine = () => {
-  formData.cuisine = cuisinePreset.value === OTHER ? customCuisine.value.trim() : cuisinePreset.value
+  formData.cuisine =
+    cuisinePreset.value === OTHER ? customCuisine.value.trim() : cuisinePreset.value
 }
 const syncRegion = () => {
   if (regionPreset.value === OTHER) {
     formData.region = customRegion.value.trim()
     return
   }
-  formData.region = REGION_PRESETS.find((r) => r.label === regionPreset.value)?.value ?? regionPreset.value
+  formData.region =
+    REGION_PRESETS.find((r) => r.label === regionPreset.value)?.value ?? regionPreset.value
 }
 
 watch([cuisinePreset, customCuisine], syncCuisine)
@@ -175,6 +177,7 @@ const onFormSubmit = (e: FormSubmitEvent) => {
 
       <t-form-item label="内容" name="content">
         <t-textarea
+          t-class="textarea"
           :value="formData.content"
           placeholder="至少 10 字:店在哪、点了什么、值不值得去"
           :maxlength="500"
@@ -237,7 +240,7 @@ const onFormSubmit = (e: FormSubmitEvent) => {
       </t-form-item>
 
       <!-- 照片:唯一非必填项,最多 1 张 -->
-      <t-form-item label="照片(最多 1 张,可不传)">
+      <t-form-item label="照片(最多 1 张,可不传)" label-width="300">
         <view class="publish__photos">
           <view v-for="(src, i) in photoFiles" :key="src" class="publish__photo">
             <image class="publish__photo-img" mode="aspectFill" :src="src" />
@@ -261,6 +264,12 @@ const onFormSubmit = (e: FormSubmitEvent) => {
 </template>
 
 <style lang="less" scoped>
+:deep(.textarea) {
+  width: 100%;
+  --textarea-vertical-padding: 0;
+  --td-textarea-horizontal-padding: 0;
+  padding: 0 !important;
+}
 .publish {
   padding-bottom: 40rpx;
 }

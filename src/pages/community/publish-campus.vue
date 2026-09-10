@@ -100,7 +100,13 @@ const onFormSubmit = (e: FormSubmitEvent) => {
 
 <template>
   <view class="page publish-campus">
-    <t-form :data="formData" :rules="rules" label-align="top" show-error-message @submit="onFormSubmit">
+    <t-form
+      :data="formData"
+      :rules="rules"
+      label-align="top"
+      show-error-message
+      @submit="onFormSubmit"
+    >
       <t-form-item label="标题" name="title">
         <t-input
           :value="formData.title"
@@ -113,6 +119,7 @@ const onFormSubmit = (e: FormSubmitEvent) => {
 
       <t-form-item label="内容" name="content">
         <t-textarea
+          t-class="textarea"
           :value="formData.content"
           placeholder="至少 10 字:发生了什么、有什么想说的"
           :maxlength="500"
@@ -123,7 +130,7 @@ const onFormSubmit = (e: FormSubmitEvent) => {
       </t-form-item>
 
       <!-- 照片:唯一非必填项,最多 1 张 -->
-      <t-form-item label="照片(最多 1 张,可不传)">
+      <t-form-item label="照片(最多 1 张,可不传)" label-width="300">
         <view class="publish-campus__photos">
           <view v-for="(src, i) in photoFiles" :key="src" class="publish-campus__photo">
             <image class="publish-campus__photo-img" mode="aspectFill" :src="src" />
@@ -151,6 +158,12 @@ const onFormSubmit = (e: FormSubmitEvent) => {
 </template>
 
 <style lang="less" scoped>
+:deep(.textarea) {
+  width: 100%;
+  --textarea-vertical-padding: 0;
+  --td-textarea-horizontal-padding: 0;
+  padding: 0 !important;
+}
 /* ---- 照片 ---- */
 .publish-campus__photos {
   flex: 1;
