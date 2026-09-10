@@ -29,11 +29,14 @@ const version = '0.1.0'
 const nodeHint = '24 LTS'
 
 const MENUS = [
-  { label: '我的资料', hint: '第二阶段', action: 'todo' },
-  { label: '我的报名', hint: '第二阶段', action: 'todo' },
+  { label: '我的资料', hint: '', action: 'profile' },
   { label: '乡会架构与理事名单', hint: '待补内容', action: 'todo' },
-  { label: '联系秘书处', hint: '', action: 'call' },
-  { label: '意见反馈', hint: '', action: 'todo' },
+] as const
+
+/** 法律合规菜单 */
+const LEGAL_MENUS = [
+  { label: '隐私政策', hint: '', action: 'privacy' },
+  { label: '用户协议', hint: '', action: 'agreement' },
 ] as const
 
 const user = useUserStore()
@@ -53,11 +56,19 @@ const onLogin = async () => {
 }
 
 const onMenu = (m: (typeof MENUS)[number]) => {
-  if (m.action === 'call') {
-    uni.makePhoneCall({ phoneNumber: '07548888000' })
+  if (m.action === 'profile') {
+    uni.navigateTo({ url: '/pages/mine/profile' })
     return
   }
   uni.showToast({ title: `${m.label}:该功能在第二阶段实现`, icon: 'none' })
+}
+
+const onLegal = (m: (typeof LEGAL_MENUS)[number]) => {
+  const urlMap: Record<string, string> = {
+    privacy: '/pages/mine/privacy',
+    agreement: '/pages/mine/agreement',
+  }
+  uni.navigateTo({ url: urlMap[m.action] ?? '' })
 }
 
 onShow(async () => {
@@ -101,10 +112,6 @@ onShow(async () => {
         <text class="mine__stat-num">{{ myCityCount }}</text>
         <text class="mine__stat-label">同城老乡</text>
       </view>
-      <view class="mine__stat">
-        <text class="mine__stat-num">0</text>
-        <text class="mine__stat-label">我的报名</text>
-      </view>
     </view>
 
     <view class="section-title"><text>乡会事务</text></view>
@@ -116,11 +123,21 @@ onShow(async () => {
       </view>
     </view>
 
+    <view class="section-title"><text>法律合规</text></view>
+    <view class="card mine__menu">
+      <view v-for="m in LEGAL_MENUS" :key="m.label" class="mine__cell" @click="onLegal(m)">
+        <text class="mine__cell-label">{{ m.label }}</text>
+        <text class="mine__cell-hint">{{ m.hint }}</text>
+        <text class="mine__cell-arrow">›</text>
+      </view>
+    </view>
+
     <view class="card mine__about">
       <text class="mine__about-title">关于本小程序</text>
       <text class="mine__about-body">
-        广工潮阳潮南校友会官方小程序,基于 uni-app(Vue 3 + TypeScript)构建, UI 使用腾讯 TDesign
-        组件库,数据当前来自本地 mock。 它与将来的 React 官网共用同一套 Spring Boot 后端接口。
+        本项目由KevinH独立开发完成，若对项目维护感兴趣，请加入飞书群组：123777
+        若想对项目提供资金帮助，请联系基金会：123444，您的资助会全额用于服务器的建设以及日常维护
+        若对项目有任何建议，发现任何bug，请发送邮件至邮箱：13623034184@163.com
       </text>
       <text class="mine__version">版本 {{ version }} · 编译器 Node {{ nodeHint }}</text>
     </view>

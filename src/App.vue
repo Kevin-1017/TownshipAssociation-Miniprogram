@@ -10,4 +10,9 @@ onHide(() => {
   console.log('App Hide')
 })
 </script>
+
+<template>
+  <view />
+</template>
+
 <style></style>

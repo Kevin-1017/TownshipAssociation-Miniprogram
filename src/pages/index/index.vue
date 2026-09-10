@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
+import AgreementPopup from '@/components/AgreementPopup/AgreementPopup.vue'
 import { memberApi } from '@/api/member'
 import { eventApi } from '@/api/event'
 import { formatDate } from '@/utils/format'
@@ -39,6 +40,10 @@ const LEADERS: LeaderShowcase[] = [
 ]
 /** 当前页面路径（用于底部 tab bar 高亮） */
 const activePage = ref(OWN_PATH)
+
+/** 协议弹窗显示态:Storage 未记录则强制显示 */
+const showAgreement = ref(uni.getStorageSync('community_agreement_accepted') !== true)
+const onAgree = () => { showAgreement.value = false }
 
 const events = ref<EventListItem[]>([])
 const topProvinces = ref<ProvinceStat[]>([])
@@ -243,6 +248,9 @@ onShow(() => {
     <view class="home__foot">
       <text class="text-placeholder">本页面数据来自本地 mock,切换真后端只需改 .env 一个变量</text>
     </view>
+
+    <!-- ---- 首次启动协议弹窗 ---- -->
+    <AgreementPopup :visible="showAgreement" @confirm="onAgree" />
 
     <!-- 底部悬浮胶囊导航:theme="tag" 选中项带胶囊底色,split=false 去分隔线;文字放默认插槽显示在图标下方 -->
     <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">

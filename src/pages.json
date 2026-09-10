@@ -58,6 +58,18 @@
 			"style": { "navigationBarTitleText": "校友基金会" }
 		},
 		{
+			"path": "pages/mine/profile",
+			"style": { "navigationBarTitleText": "我的资料" }
+		},
+		{
+			"path": "pages/mine/privacy",
+			"style": { "navigationBarTitleText": "隐私政策" }
+		},
+		{
+			"path": "pages/mine/agreement",
+			"style": { "navigationBarTitleText": "用户协议" }
+		},
+		{
 			"path": "pages/mine/index",
 			"style": { "navigationBarTitleText": "我的" }
 		}
