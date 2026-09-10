@@ -1,34 +1,29 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { onShow } from '@dcloudio/uni-app'
 import { formatRelative } from '@/utils/format'
+import { loadUserPosts } from '@/utils/community-posts'
 import type { CommunityPost } from '@/types/community'
 import VirtualList from './components/VirtualList.vue'
 
-/**
- * 社区子页面 —— 美食基地 / 校园广场。
- * 顶部吸顶搜索栏 + 对应类型的动态列表(虚拟列表)。
- */
-
 import postsRaw from '@/mock/data/community.json'
 
-const pageType = ref<'food' | 'campus'>('food')
+/**
+ * 校园广场 —— 社区子页面(动态类型固定为 campus)。
+ * 与美食基地拆成两份文件维护:两栏目的筛选口径、卡片样式后续会各自演化,
+ * 共用一个参数化页面只会让分支越积越多。
+ */
+
 const searchKeyword = ref('')
 const scrollY = ref(0)
 
-const titles: Record<'food' | 'campus', string> = {
-  food: '美食基地',
-  campus: '校园广场',
-}
-
-onLoad((options) => {
-  const type = options?.type as 'food' | 'campus'
-  pageType.value = type === 'campus' ? 'campus' : 'food'
-  uni.setNavigationBarTitle({ title: titles[pageType.value] })
-})
-
-// ---------- 静态数据 ----------
-const allPosts = ref<CommunityPost[]>(postsRaw as unknown as CommunityPost[])
+// ---------- 动态数据 ----------
+/** 用户本地发布的动态排在静态 mock 之前;发布后从表单页返回时由 onShow 重新拉 */
+const buildPosts = (): CommunityPost[] => [
+  ...loadUserPosts(),
+  ...(postsRaw as unknown as CommunityPost[]),
+]
+const allPosts = ref<CommunityPost[]>(buildPosts())
 
 // ---------- 虚拟列表参数 ----------
 const sysInfo = uni.getSystemInfoSync()
@@ -41,7 +36,7 @@ const PAGESIZE = Math.ceil(VIEWPORT_HEIGHT / ITEM_HEIGHT) + BUFFER_SIZE * 2
 // ---------- 过滤 & 排序 ----------
 const filteredPosts = computed(() =>
   [...allPosts.value]
-    .filter((p) => p.type === pageType.value)
+    .filter((p) => p.type === 'campus')
     .sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()),
 )
 
@@ -57,7 +52,9 @@ const endIdx = computed(() =>
 
 const totalHeight = computed(() => `${filteredPosts.value.length * ITEM_HEIGHT}px`)
 const topHeight = computed(() => `${startIdx.value * ITEM_HEIGHT}px`)
-const bottomHeight = computed(() => `${(filteredPosts.value.length - endIdx.value) * ITEM_HEIGHT}px`)
+const bottomHeight = computed(
+  () => `${(filteredPosts.value.length - endIdx.value) * ITEM_HEIGHT}px`,
+)
 
 const items = computed(() => filteredPosts.value.slice(startIdx.value, endIdx.value))
 
@@ -67,44 +64,50 @@ const handleScroll = (_e: CustomEvent) => {
 }
 
 const onPublish = () => {
-  uni.showToast({ title: '发布功能开发中', icon: 'none' })
+  uni.navigateTo({ url: '/pages/community/publish-campus' })
 }
 
 const onSearch = () => {
-  if (!searchKeyword.value.trim()) return;
+  if (!searchKeyword.value.trim()) return
   uni.showToast({ title: '搜索: ' + searchKeyword.value, icon: 'none' })
 }
 
 const goDetail = (id: string) => {
   uni.navigateTo({ url: `/pages/community/detail?id=${id}` })
 }
+
+// ---------- 生命周期 ----------
+// 从发布页 navigateBack 回来时组件不销毁、setup 不重跑,新发的动态只能靠 onShow 重新拉
+onShow(() => {
+  allPosts.value = buildPosts()
+})
 </script>
 
 <template>
-  <view class="page community-sub">
+  <view class="page campus">
     <!-- 吸顶搜索栏 -->
-    <view class="community-sub__header">
-      <view class="community-sub__search">
+    <view class="campus__header">
+      <view class="campus__search">
         <input
           v-model="searchKeyword"
-          class="community-sub__search-input"
-          placeholder="搜索社区动态"
+          class="campus__search-input"
+          placeholder="搜索校园动态"
           confirm-type="search"
           @confirm="onSearch"
         />
-        <view class="community-sub__search-btn" @click="onSearch">搜索</view>
+        <view class="campus__search-btn" @click="onSearch">搜索</view>
       </view>
-      <view class="community-sub__publish" @click="onPublish">
+      <view class="campus__publish" @click="onPublish">
         <t-icon name="add-circle-filled" size="48rpx" />
       </view>
     </view>
 
     <!-- 占位 -->
-    <view class="community-sub__header-holder" />
+    <view class="campus__header-holder" />
 
     <!-- 列表 -->
     <VirtualList
-      class="community-sub__scroll"
+      class="campus__scroll"
       :total-height="totalHeight"
       :top-height="topHeight"
       :bottom-height="bottomHeight"
@@ -113,27 +116,27 @@ const goDetail = (id: string) => {
       <view
         v-for="post in items"
         :key="post.id"
-        class="community-sub__item"
+        class="campus__item"
         :style="{ marginBottom: '16rpx' }"
         @click="goDetail(post.id)"
       >
         <image
           v-if="post.avatar"
-          class="community-sub__item-avatar"
+          class="campus__item-avatar"
           mode="aspectFill"
           :src="post.avatar"
         />
-        <view v-else class="community-sub__item-avatar-placeholder">
+        <view v-else class="campus__item-avatar-placeholder">
           {{ post.author.slice(0, 1) }}
         </view>
-        <view class="community-sub__item-body">
-          <text class="community-sub__item-title ellipsis">{{ post.title }}</text>
-          <text class="community-sub__item-content ellipsis-2">{{ post.content }}</text>
-          <view class="community-sub__item-meta">
-            <text class="community-sub__item-author">{{ post.author }}</text>
-            <text class="community-sub__item-time">{{ formatRelative(post.publishTime) }}</text>
-            <text class="community-sub__item-stat">赞 {{ post.likes }}</text>
-            <text class="community-sub__item-stat">评 {{ post.comments }}</text>
+        <view class="campus__item-body">
+          <text class="campus__item-title ellipsis">{{ post.title }}</text>
+          <text class="campus__item-content ellipsis-2">{{ post.content }}</text>
+          <view class="campus__item-meta">
+            <text class="campus__item-author">{{ post.author }}</text>
+            <text class="campus__item-time">{{ formatRelative(post.publishTime) }}</text>
+            <text class="campus__item-stat">赞 {{ post.likes }}</text>
+            <text class="campus__item-stat">评 {{ post.comments }}</text>
           </view>
         </view>
       </view>
@@ -142,7 +145,7 @@ const goDetail = (id: string) => {
 </template>
 
 <style lang="less" scoped>
-.community-sub {
+.campus {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -150,7 +153,7 @@ const goDetail = (id: string) => {
 }
 
 /* ---- 吸顶搜索栏 ---- */
-.community-sub__header {
+.campus__header {
   position: fixed;
   top: 0;
   left: 0;
@@ -165,11 +168,11 @@ const goDetail = (id: string) => {
   background: #fff;
   border-bottom: 1rpx solid var(--td-border-level-1-color);
 }
-.community-sub__header-holder {
+.campus__header-holder {
   height: 120rpx;
   flex-shrink: 0;
 }
-.community-sub__search {
+.campus__search {
   flex: 1;
   display: flex;
   align-items: center;
@@ -178,13 +181,13 @@ const goDetail = (id: string) => {
   border-radius: 36rpx;
   background: var(--td-bg-color-page);
 }
-.community-sub__search-input {
+.campus__search-input {
   flex: 1;
   height: 100%;
   font-size: 28rpx;
   color: var(--td-text-color-primary);
 }
-.community-sub__search-btn {
+.campus__search-btn {
   padding: 0 24rpx;
   height: 56rpx;
   line-height: 56rpx;
@@ -193,7 +196,7 @@ const goDetail = (id: string) => {
   color: #fff;
   background: var(--td-brand-color);
 }
-.community-sub__publish {
+.campus__publish {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,13 +206,13 @@ const goDetail = (id: string) => {
 }
 
 /* ---- 滚动宿主 ---- */
-.community-sub__scroll {
+.campus__scroll {
   flex: 1;
   min-height: 0;
 }
 
 /* ---- 列表项 ---- */
-.community-sub__item {
+.campus__item {
   margin-left: 24rpx;
   margin-right: 24rpx;
   padding: 24rpx;
@@ -219,39 +222,39 @@ const goDetail = (id: string) => {
   border-radius: 16rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
-.community-sub__item-avatar,
-.community-sub__item-avatar-placeholder {
+.campus__item-avatar,
+.campus__item-avatar-placeholder {
   width: 80rpx;
   height: 80rpx;
   border-radius: 40rpx;
   flex-shrink: 0;
 }
-.community-sub__item-avatar-placeholder {
+.campus__item-avatar-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #d9e1ff;
-  color: #0052d9;
+  background: var(--td-brand-color-light);
+  color: var(--td-brand-color);
   font-size: 34rpx;
 }
-.community-sub__item-body {
+.campus__item-body {
   flex: 1;
   min-width: 0;
 }
-.community-sub__item-title {
+.campus__item-title {
   display: block;
   font-size: 30rpx;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--td-text-color-primary);
 }
-.community-sub__item-content {
+.campus__item-content {
   display: block;
   margin-top: 8rpx;
   font-size: 26rpx;
   color: var(--td-text-color-secondary);
   line-height: 1.5;
 }
-.community-sub__item-meta {
+.campus__item-meta {
   display: flex;
   align-items: center;
   gap: 16rpx;

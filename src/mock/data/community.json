@@ -9,7 +9,9 @@
     "images": [],
     "publishTime": "2026-09-08T10:30:00+08:00",
     "likes": 128,
-    "comments": 36
+    "comments": 36,
+    "cuisine": "潮汕菜",
+    "region": "longdong"
   },
   {
     "id": "p002",
@@ -21,7 +23,9 @@
     "images": [],
     "publishTime": "2026-09-07T18:20:00+08:00",
     "likes": 85,
-    "comments": 12
+    "comments": 12,
+    "cuisine": "潮汕菜",
+    "region": "daxuecheng"
   },
   {
     "id": "p003",
@@ -45,7 +49,9 @@
     "images": [],
     "publishTime": "2026-09-05T14:10:00+08:00",
     "likes": 67,
-    "comments": 29
+    "comments": 29,
+    "cuisine": "潮汕菜",
+    "region": "longdong"
   },
   {
     "id": "p005",
@@ -57,7 +63,9 @@
     "images": [],
     "publishTime": "2026-09-04T20:45:00+08:00",
     "likes": 156,
-    "comments": 21
+    "comments": 21,
+    "cuisine": "潮汕菜",
+    "region": "daxuecheng"
   },
   {
     "id": "p006",
@@ -69,7 +77,9 @@
     "images": [],
     "publishTime": "2026-09-03T11:25:00+08:00",
     "likes": 42,
-    "comments": 18
+    "comments": 18,
+    "cuisine": "粤菜",
+    "region": "longdong"
   },
   {
     "id": "p007",
@@ -93,7 +103,9 @@
     "images": [],
     "publishTime": "2026-09-01T08:15:00+08:00",
     "likes": 312,
-    "comments": 45
+    "comments": 45,
+    "cuisine": "潮汕菜",
+    "region": "daxuecheng"
   },
   {
     "id": "p009",
@@ -129,7 +141,9 @@
     "images": [],
     "publishTime": "2026-08-29T07:45:00+08:00",
     "likes": 245,
-    "comments": 41
+    "comments": 41,
+    "cuisine": "粤菜",
+    "region": "longdong"
   },
   {
     "id": "p012",

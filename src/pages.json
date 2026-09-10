@@ -3,7 +3,7 @@
 	"pages": [
 		{
 			"path": "pages/index/index",
-			"style": { "navigationBarTitleText": "潮阳潮南校友会" }
+			"style": { "navigationBarTitleText": "广工潮阳潮南校友会" }
 		},
 		{
 			// 地图页要沉浸式,所以隐藏原生导航栏;顶部安全区由页面自己处理。
@@ -22,8 +22,20 @@
 			"style": { "navigationBarTitleText": "社区" }
 		},
 		{
-			"path": "pages/community/subpage",
-			"style": { "navigationBarTitleText": "社区" }
+			"path": "pages/community/food",
+			"style": { "navigationBarTitleText": "美食基地" }
+		},
+		{
+			"path": "pages/community/campus",
+			"style": { "navigationBarTitleText": "校园广场" }
+		},
+		{
+			"path": "pages/community/publish-food",
+			"style": { "navigationBarTitleText": "发布美食动态" }
+		},
+		{
+			"path": "pages/community/publish-campus",
+			"style": { "navigationBarTitleText": "发布校园动态" }
 		},
 		{
 			"path": "pages/community/detail",
@@ -73,7 +85,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "潮阳潮南校友会",
+		"navigationBarTitleText": "广工潮阳潮南校友会",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#F5F5F5"
 	}

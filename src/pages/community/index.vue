@@ -13,11 +13,11 @@ const OWN_PATH = '/pages/community/index'
 const activePage = ref(OWN_PATH)
 
 const goFood = () => {
-  uni.navigateTo({ url: '/pages/community/subpage?type=food' })
+  uni.navigateTo({ url: '/pages/community/food' })
 }
 
 const goCampus = () => {
-  uni.navigateTo({ url: '/pages/community/subpage?type=campus' })
+  uni.navigateTo({ url: '/pages/community/campus' })
 }
 
 const onTabChange = (e: { value: string }) => {
@@ -52,12 +52,12 @@ onShow(() => {
       </view>
     </view>
 
-    <!-- 底部悬浮胶囊导航:对齐官方示例 —— theme="tag" 选中项带胶囊底色,split=false 去分隔线,纯图标 -->
+    <!-- 底部悬浮胶囊导航:theme="tag" 选中项带胶囊底色,split=false 去分隔线;文字放默认插槽显示在图标下方 -->
     <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
-      <t-tab-bar-item value="/pages/index/index" icon="home" aria-label="首页" />
-      <t-tab-bar-item value="/pages/community/index" icon="chat" aria-label="社区" />
-      <t-tab-bar-item value="/pages/event/list" icon="app" aria-label="事件" />
-      <t-tab-bar-item value="/pages/mine/index" icon="user-filled" aria-label="我的" />
+      <t-tab-bar-item value="/pages/index/index" icon="home">首页</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" icon="chat">社区</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/event/list" icon="app">事件</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/mine/index" icon="user">我的</t-tab-bar-item>
     </t-tab-bar>
   </view>
 </template>
