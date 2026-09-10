@@ -16,7 +16,7 @@ export interface RequestOptions {
   silentError?: boolean
 }
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === true || import.meta.env.NODE_ENV === 'true'
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export const TOKEN_KEY = 'tsa_token'
