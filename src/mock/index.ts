@@ -10,6 +10,7 @@ import type {
 } from '@/types/member'
 import type { EventDetail, EventListItem, EventQuery } from '@/types/event'
 import type { NoticeItem } from '@/types/notice'
+import type { CommunityPost, CommunityQuery, CommentItem } from '@/types/community'
 import type { FoundationRewardItem, FoundationDonationItem, RewardRecord, DonationRecord } from '@/types/foundation'
 import { delay } from './delay'
 import membersRaw from './data/members.json'
@@ -19,6 +20,7 @@ import rewardsRaw from './data/foundation-rewards.json'
 import donationsRaw from './data/foundation-donations.json'
 import rewardsExpanded from './data/foundation-rewards-expanded.json'
 import donationsExpanded from './data/foundation-donations-expanded.json'
+import communityRaw from './data/community.json'
 
 /**
  * 本地 mock 分发器。
@@ -36,6 +38,34 @@ const events = eventsRaw as EventDetail[]
 const notices = noticesRaw as NoticeItem[]
 const rewards = rewardsRaw as FoundationRewardItem[]
 const donations = donationsRaw as FoundationDonationItem[]
+
+// ---------- 社区动态 mock 数据（可变:点赞/评论就地改，模拟服务端状态） ----------
+const communityPosts = (communityRaw as unknown as CommunityPost[]).map((p) => ({ ...p }))
+
+const pageCommunityPosts = (q: CommunityQuery): PageResult<CommunityPost> => {
+  const { page = 1, pageSize = 20, type, cuisine, region, keyword } = q;
+  let list = communityPosts.filter((p) => {
+    if (type && p.type !== type) return false
+    if (cuisine && p.cuisine !== cuisine) return false
+    if (region && p.region !== region) return false
+    if (keyword) {
+      const kw = keyword.trim().toLowerCase()
+      if (!`${p.title}${p.content}`.toLowerCase().includes(kw)) return false
+    }
+    return true
+  })
+  list = list.sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime())
+  const total = list.length
+  list = list.slice((page - 1) * pageSize, page * pageSize)
+  // 列表不下发评论树（与后端契约一致）
+  return { list: list.map(({ commentsList: _drop, ...rest }) => rest), total, page, pageSize }
+}
+
+/** 详情页投影:补 commentsList（无登录，mock 里评论作者统一按数据自带） */
+const communityDetail = (id: string): CommunityPost | undefined => {
+  const p = communityPosts.find((x) => x.id === id)
+  return p ? { ...p, commentsList: p.commentsList ?? [] } : undefined
+}
 
 // ---------- 投影:全量成员 → 地图轻量点 ----------
 /**
@@ -200,6 +230,26 @@ const staticRoutes: Record<string, Handler> = {
     return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   },
   'GET /tsa/user/me': () => currentUser(),
+  'GET /tsa/community/posts': (o) => pageCommunityPosts((o.data ?? {}) as CommunityQuery),
+  'POST /tsa/community/posts': (o) => {
+    const body = (o.data ?? {}) as Record<string, unknown>
+    const id = `p_${Date.now()}`
+    communityPosts.unshift({
+      id,
+      type: body.type as CommunityPost['type'],
+      author: (body.author as string) ?? '匿名',
+      avatar: (body.avatar as string) ?? '',
+      title: (body.title as string) ?? '',
+      content: (body.content as string) ?? '',
+      images: (body.images as string[]) ?? [],
+      publishTime: new Date().toISOString(),
+      likes: 0,
+      comments: 0,
+      cuisine: body.cuisine as string | undefined,
+      region: body.region as CommunityPost['region'],
+    })
+    return id
+  },
   'POST /tsa/auth/verify-phone': (o) => {
     // mock 验证不了真实微信链路,职责是跑通「闸门与拒绝态」——
     // 除哨兵值外一律视为命中,拒绝路径用 mock-external-phone 手测
@@ -245,6 +295,45 @@ const dynamicRoutes: Array<{
     method: 'GET',
     pattern: /^\/tsa\/notices\/(n\d{3})$/,
     handler: (m) => notices.find((x) => x.id === m[1]) ?? null,
+  },
+  {
+    method: 'GET',
+    pattern: /^\/tsa\/community\/posts\/([^/]+)$/,
+    handler: (m) => {
+      const post = communityDetail(m[1])
+      if (!post) return { code: 1002, message: '动态不存在', data: null }
+      return post
+    },
+  },
+  {
+    method: 'POST',
+    pattern: /^\/tsa\/community\/posts\/([^/]+)\/like$/,
+    handler: (m) => {
+      const post = communityPosts.find((x) => x.id === m[1])
+      if (!post) return { code: 1002, message: '动态不存在', data: null }
+      post.likes += 1
+      return post.likes
+    },
+  },
+  {
+    method: 'POST',
+    pattern: /^\/tsa\/community\/posts\/([^/]+)\/comments$/,
+    handler: (m, o) => {
+      const post = communityPosts.find((x) => x.id === m[1])
+      if (!post) return { code: 1002, message: '动态不存在', data: null }
+      const body = (o.data ?? {}) as Record<string, unknown>
+      const comment: CommentItem = {
+        id: `c_${Date.now()}`,
+        author: (body.author as string) ?? '我',
+        avatar: (body.avatar as string) ?? '',
+        content: (body.content as string) ?? '',
+        createTime: new Date().toISOString(),
+        likes: 0,
+      }
+      post.commentsList = [comment, ...(post.commentsList ?? [])]
+      post.comments += 1
+      return comment
+    },
   },
   // 登录/注册在 mock 阶段是假接口:不校验 code,直接发一个假 token
   {

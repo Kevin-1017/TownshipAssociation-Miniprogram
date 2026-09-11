@@ -2,7 +2,7 @@
 export interface FoundationRewardItem {
   id: string
   label: string // 如"年度奖学金""校园活动支持"
-  amount: number // 金额(分),前端格式化展示
+  amount: number // 金额(元),前端格式化展示
   sponsor: string // 赞助人/捐赠方名称
 }
 
@@ -10,7 +10,7 @@ export interface FoundationRewardItem {
 export interface FoundationDonationItem {
   id: string
   donorName: string // 捐赠人姓名
-  amount: number // 捐赠金额(分)
+  amount: number // 捐赠金额(元)
   date: string // ISO 8601
 }
 
@@ -28,13 +28,13 @@ export interface RewardRecord {
   categoryId: string // 所属类别
   categoryName: string
   recipient: string // 获奖人姓名
-  amount?: number // 奖金金额(分)
+  amount?: number // 奖金金额(元)
 }
 
 /** 捐赠记录（带完整信息） */
 export interface DonationRecord {
   id: string
   donorName: string
-  amount: number // 捐赠金额(分)
+  amount: number // 捐赠金额(元)
   date: string
 }

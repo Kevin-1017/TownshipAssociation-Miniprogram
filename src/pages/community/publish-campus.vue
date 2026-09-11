@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useUserStore } from '@/stores/user'
-import { appendUserPost } from '@/utils/community-posts'
-import type { CommunityPost } from '@/types/community'
+import { communityApi } from '@/api/community'
 
 /**
  * 发布校园动态 —— 从校园广场页「+」进入的独立表单页。
@@ -69,7 +68,7 @@ const checkExtras = (): string => {
   return ''
 }
 
-const onFormSubmit = (e: FormSubmitEvent) => {
+const onFormSubmit = async (e: FormSubmitEvent) => {
   if (e.validateResult !== true) {
     uni.showToast({ title: e.firstError || '请检查填写内容', icon: 'none' })
     return
@@ -79,22 +78,21 @@ const onFormSubmit = (e: FormSubmitEvent) => {
     uni.showToast({ title: extraError, icon: 'none' })
     return
   }
-  const post: CommunityPost = {
-    id: `p_${Date.now()}`,
-    type: 'campus',
-    author: user.displayName,
-    avatar: user.profile?.avatarUrl ?? '',
-    title: formData.title.trim(),
-    content: formData.content.trim(),
-    // 临时路径只在当前会话有效,mock 阶段够看效果;联调后换成上传服务返回的正式地址
-    images: photoFiles.value,
-    publishTime: new Date().toISOString(),
-    likes: 0,
-    comments: 0,
+  try {
+    await communityApi.publish({
+      type: 'campus',
+      author: user.displayName,
+      avatar: user.profile?.avatarUrl ?? '',
+      title: formData.title.trim(),
+      content: formData.content.trim(),
+      // 临时路径只在当前会话有效;正式上传服务接入后换成稳定地址
+      images: photoFiles.value,
+    })
+    uni.showToast({ title: '发布成功', icon: 'success' })
+    setTimeout(() => uni.navigateBack(), 600)
+  } catch {
+    // 失败由 request 层统一 toast,表单保留便于修改重提
   }
-  appendUserPost(post)
-  uni.showToast({ title: '发布成功', icon: 'success' })
-  setTimeout(() => uni.navigateBack(), 600)
 }
 </script>
 

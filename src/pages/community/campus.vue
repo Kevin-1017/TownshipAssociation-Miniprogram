@@ -2,11 +2,9 @@
 import { computed, ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { formatRelative } from '@/utils/format'
-import { loadUserPosts } from '@/utils/community-posts'
+import { communityApi } from '@/api/community'
 import type { CommunityPost } from '@/types/community'
 import VirtualList from './components/VirtualList.vue'
-
-import postsRaw from '@/mock/data/community.json'
 
 /**
  * 校园广场 —— 社区子页面(动态类型固定为 campus)。
@@ -18,12 +16,13 @@ const searchKeyword = ref('')
 const scrollY = ref(0)
 
 // ---------- 动态数据 ----------
-/** 用户本地发布的动态排在静态 mock 之前;发布后从表单页返回时由 onShow 重新拉 */
-const buildPosts = (): CommunityPost[] => [
-  ...loadUserPosts(),
-  ...(postsRaw as unknown as CommunityPost[]),
-]
-const allPosts = ref<CommunityPost[]>(buildPosts())
+const allPosts = ref<CommunityPost[]>([])
+
+/** 校园广场一期不分页,一次拉满(后端 pageSize 上限 100);返回本页时由 onShow 重拉 */
+const fetchPosts = async () => {
+  const res = await communityApi.getList({ type: 'campus', pageSize: 100 })
+  allPosts.value = res.list
+}
 
 // ---------- 虚拟列表参数 ----------
 const sysInfo = uni.getSystemInfoSync()
@@ -79,7 +78,7 @@ const goDetail = (id: string) => {
 // ---------- 生命周期 ----------
 // 从发布页 navigateBack 回来时组件不销毁、setup 不重跑,新发的动态只能靠 onShow 重新拉
 onShow(() => {
-  allPosts.value = buildPosts()
+  fetchPosts()
 })
 </script>
 

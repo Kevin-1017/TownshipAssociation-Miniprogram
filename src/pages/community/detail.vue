@@ -2,10 +2,8 @@
 import { ref, computed } from 'vue'
 import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 import { formatRelative } from '@/utils/format'
-import { loadUserPosts, incrementLikes, appendComment } from '@/utils/community-posts'
-import type { CommentItem, CommunityPost } from '@/types/community'
-
-import postsRaw from '@/mock/data/community.json'
+import { communityApi } from '@/api/community'
+import type { CommunityPost } from '@/types/community'
 
 /** 头像色板:基于姓名哈希,同一个作者总是同一种颜色 */
 const AVATAR_COLORS = ['#0052d9', '#e74c3c', '#27ae60', '#f39c12', '#8e44ad', '#1abc9c', '#e67e22']
@@ -21,26 +19,18 @@ const hashName = (name: string): number => {
 
 /**
  * 社区动态详情页 —— 承载美食基地 / 校园广场两类动态的通用详情。
- * 根据路由 id 从合并列表中匹配帖子;未找到时提示「动态不存在」。
+ * 按路由 id 从后端拉取帖子详情(含评论列表);拉取失败提示「动态不存在」并返回。
  */
 
 // ---------- refs / reactive:原始状态 ----------
 /** 当前浏览的帖子;null 表示加载失败或未找到 */
 const post = ref<CommunityPost | null>(null)
-/** 点赞态:本地点击后切换为 heart-fill(已赞) */
+/** 点赞态:本地点击后切换为 heart-fill(已赞);一期服务端只加不减 */
 const liked = ref(false)
 /** 评论输入框文本 */
 const commentText = ref('')
 /** 正在发表评论的加载态 */
 const submitting = ref(false)
-
-// ---------- 数据源 ----------
-/** 用户发布 + 静态 mock 合并;详情页需要读所有历史帖子的评论数据 */
-const buildPosts = (): CommunityPost[] => [
-  ...loadUserPosts(),
-  ...(postsRaw as unknown as CommunityPost[]),
-]
-const allPosts = ref<CommunityPost[]>(buildPosts())
 
 // ---------- computed:派生状态 ----------
 /** 图片展示:最多 3 张缩略图,多余的不渲染但显示 "+N" */
@@ -68,40 +58,33 @@ const onPreviewImage = (src: string) => {
   uni.previewImage({ urls: imgs, current: src })
 }
 
-/** 点赞:计数 +1,图标切实心(反赞可取消) */
-const onLike = () => {
-  if (!post.value) return
-  liked.value = !liked.value
-  if (liked.value) {
-    incrementLikes(post.value.id)
-    post.value.likes += 1
-  } else {
-    post.value.likes -= 1
+/** 点赞:调用后端计数 +1(一期无身份,不支持取消点赞,重复点击就地拦下) */
+const onLike = async () => {
+  if (!post.value || liked.value) return
+  try {
+    const newLikes = await communityApi.like(post.value.id)
+    liked.value = true
+    post.value.likes = newLikes
+  } catch {
+    // 失败由 request 层统一 toast,这里只吞掉异常避免未处理拒绝
   }
 }
 
-/** 提交评论:校验非空 + 防重复点击 */
-const onSubmitComment = () => {
+/** 提交评论:校验非空 + 防重复点击;成功后把服务端返回的评论插到列表最前 */
+const onSubmitComment = async () => {
   const text = commentText.value.trim()
-  if (!text || !post.value) return
+  if (!text || !post.value || submitting.value) return
   submitting.value = true
-  setTimeout(() => {
-    const newComment: CommentItem = {
-      id: `c_${Date.now()}`,
-      author: '我', // TODO: 联调后替换为 userStore.displayName
-      avatar: '',
-      content: text,
-      createTime: new Date().toISOString(),
-      likes: 0,
-    }
-    appendComment(post.value!.id, newComment)
-    // 同步更新 post 引用(因为 appendComment 写的是 Storage,post ref 不自动变)
-    const target = post.value!
-    target.commentsList = [newComment, ...(target.commentsList ?? [])]
-    target.comments = (target.comments ?? 0) + 1
+  try {
+    const created = await communityApi.addComment(post.value.id, { author: '我', content: text })
+    post.value.commentsList = [created, ...(post.value.commentsList ?? [])]
+    post.value.comments += 1
     commentText.value = ''
+  } catch {
+    // 失败由 request 层统一 toast
+  } finally {
     submitting.value = false
-  }, 300)
+  }
 }
 
 /** 取消发表(清输入框) */
@@ -110,19 +93,19 @@ const onCancelComment = () => {
 }
 
 // ---------- 生命周期 ----------
-onLoad((options) => {
+onLoad(async (options) => {
   const query = options as Record<string, string>
   const id = query?.id
   if (!id) return
-  const found = allPosts.value.find((p) => p.id === id)
-  if (!found) {
+  try {
+    const detail = await communityApi.getDetail(id)
+    post.value = detail
+    // 标题设为帖子标题,方便返回时识别来源
+    uni.setNavigationBarTitle({ title: detail.title.slice(0, 20) || '动态详情' })
+  } catch {
     uni.showToast({ title: '动态不存在', icon: 'none' })
     setTimeout(() => uni.navigateBack(), 600)
-    return
   }
-  post.value = found
-  // 标题设为帖子标题,方便返回时识别来源(found 已做非空守卫)
-  uni.setNavigationBarTitle({ title: found.title.slice(0, 20) || '动态详情' })
 })
 
 /** 分享配置 */

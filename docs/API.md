@@ -159,14 +159,34 @@ GET /tsa/notices/{id} → NoticeItem      // 不存在返回 code=1002
 ## 基金会
 
 ```
-GET /tsa/foundation   → { rewards: FoundationRewardItem[], donations: FoundationDonationItem[] }
+GET    /tsa/foundation               → { rewards: FoundationRewardItem[], donations: FoundationDonationItem[] }
+GET    /tsa/foundation/rewards       → { categories: string[], records: RewardRecord[] }   // 详情页 tab0
+GET    /tsa/foundation/donations     → DonationRecord[]                                     // 详情页 tab1,按日期倒序
 ```
 
-- `FoundationRewardItem`: `id label amount sponsor`
-  - `label` 如"年度奖学金""校园活动支持资金"; `amount` 单位为元; `sponsor` 为赞助人/捐赠方名称
-- `FoundationDonationItem`: `id donorName amount date`
-  - `donorName` 捐赠人姓名; `amount` 单位元; `date` ISO 8601
-- 前端展示分为两栏:"校内奖励与表彰"(含总额汇总 + 逐条明细)和"捐赠与帮助致谢"(鸣谢列表)
+- `FoundationRewardItem`: `id label amount sponsor`;`RewardRecord`: `id categoryId categoryName recipient amount`;
+  `FoundationDonationItem` / `DonationRecord`: `id donorName amount date`
+- **`amount` 单位为元**(与 mock 数值一致,前端 `formatAmount` 负责展示格式化)
+- 管理端写接口(一期不鉴权,管理后台二期收口):`POST/PUT/DELETE /tsa/foundation/{categories|records|donations}[/{id}]`
+- 删除奖项类别会连带软删其下的获奖记录
+
+---
+
+## 社区动态(美食基地 / 校园广场)
+
+```
+GET  /tsa/community/posts       query: page,pageSize,type,cuisine,region,keyword → PageResult<CommunityPost>
+GET  /tsa/community/posts/{id}                                                  → CommunityPost(含 commentsList)
+POST /tsa/community/posts       body: CommunityPostPayload                      → string(新动态 id)
+POST /tsa/community/posts/{id}/like                                             → number(点赞后总数)
+POST /tsa/community/posts/{id}/comments  body: CommentPayload                   → CommentItem
+```
+
+- `type` 为 `food`/`campus`;`cuisine`/`region` 仅美食动态携带
+- **一期无登录**:发布与评论的 `author` 为表单自由填写的昵称(前端默认取 `userStore.displayName`);
+  点赞只做计数 +1,不支持取消
+- 列表接口**不下发** `commentsList`(只给派生的 `comments` 计数);详情接口才带评论树
+- 无 `id` 命中详情/点赞/评论时返回 `code=1002`
 
 ---
 
@@ -192,7 +212,9 @@ GET /tsa/user/me   → MemberDetail | null    // 未登录返回 code=401
 
 ## 版本与前缀
 
-所有接口挂在 `/tsa` 下。`VITE_API_BASE_URL` 配置为 `…/tsa`,前端代码里路径以 `/tsa/` 开头,拼接后组成完整地址。
+所有接口挂在 `/tsa` 下。**`VITE_API_BASE_URL` 不带 `/tsa`**(如 `http://localhost:8080`),前端代码里
+路径以 `/tsa/` 开头,拼接后组成完整地址 `/tsa/...`。`/tsa` 前缀由后端 Controller 的
+`ApiConstants.BASE_PATH` 拥有(后端无 `context-path`),base 里再写一次会拼成 `/tsa/tsa/...` 双前缀。
 
 将来官网(React)接入时用的是同一批接口,不改后端 —— 这正是当初
 坚持把后端拆成独立仓库的原因。

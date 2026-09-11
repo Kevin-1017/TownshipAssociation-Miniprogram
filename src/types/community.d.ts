@@ -1,3 +1,5 @@
+import type { PageQuery } from './api'
+
 export type CommunityType = 'food' | 'campus'
 
 /** 评论项 */
@@ -29,10 +31,37 @@ export interface CommunityPost {
   publishTime: string
   likes: number
   comments: number
-  /** 评论列表(初期为空,mock/联调时填充) */
+  /** 评论列表(仅详情返回) */
   commentsList?: CommentItem[]
   /** 菜系名(仅美食基地动态携带;将来上后端字典后再换成枚举) */
   cuisine?: string
   /** 所在地区(仅美食基地动态携带,供筛选) */
   region?: CommunityRegion
+}
+
+/** 列表查询条件(用 type 别名,隐式索引签名可传给 request() —— 见 types/api.d.ts) */
+export type CommunityQuery = PageQuery & {
+  type?: CommunityType
+  cuisine?: string
+  region?: CommunityRegion
+  keyword?: string
+}
+
+/** 发布动态请求体(无登录:author 为自由填写的昵称) */
+export interface CommunityPostPayload {
+  type: CommunityType
+  author: string
+  avatar?: string
+  title: string
+  content: string
+  images?: string[]
+  cuisine?: string
+  region?: CommunityRegion
+}
+
+/** 发表评论请求体 */
+export interface CommentPayload {
+  author: string
+  avatar?: string
+  content: string
 }
