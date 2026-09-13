@@ -1,263 +1,88 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
-import { formatRelative } from '@/utils/format'
-import { communityApi } from '@/api/community'
-import type { CommunityPost } from '@/types/community'
-import VirtualList from './components/VirtualList.vue'
-
 /**
- * 校园广场 —— 社区子页面(动态类型固定为 campus)。
- * 与美食基地拆成两份文件维护:两栏目的筛选口径、卡片样式后续会各自演化,
- * 共用一个参数化页面只会让分支越积越多。
+ * 校园资讯 —— 「工大风云尽在掌握」:编辑部官方简讯,折叠面板只读浏览。
+ *
+ * 与美食基地同理,原校园广场 UGC 动态链路已删除;资讯为**官方采编**(非用户发布),
+ * 个人主体可承载。数据为示例稿,提审前替换为定稿;接入后端官方资讯接口是后续可选项。
  */
 
-const searchKeyword = ref('')
-const scrollY = ref(0)
-
-// ---------- 动态数据 ----------
-const allPosts = ref<CommunityPost[]>([])
-
-/** 校园广场一期不分页,一次拉满(后端 pageSize 上限 100);返回本页时由 onShow 重拉 */
-const fetchPosts = async () => {
-  const res = await communityApi.getList({ type: 'campus', pageSize: 100 })
-  allPosts.value = res.list
+interface NewsItem {
+  title: string
+  date: string
+  body: string
 }
 
-// ---------- 虚拟列表参数 ----------
-const sysInfo = uni.getSystemInfoSync()
-/** 列表项高度(px):卡片 160rpx,按设计稿换算 */
-const ITEM_HEIGHT = Math.ceil((160 * sysInfo.windowWidth) / 750)
-const VIEWPORT_HEIGHT = sysInfo.windowHeight || 600
-const BUFFER_SIZE = 3
-const PAGESIZE = Math.ceil(VIEWPORT_HEIGHT / ITEM_HEIGHT) + BUFFER_SIZE * 2
-
-// ---------- 过滤 & 排序 ----------
-const filteredPosts = computed(() =>
-  [...allPosts.value]
-    .filter((p) => p.type === 'campus')
-    .sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()),
-)
-
-/** 可见区间的起始索引 */
-const startIdx = computed(() => {
-  const base = Math.floor(scrollY.value / ITEM_HEIGHT)
-  return Math.max(0, base - BUFFER_SIZE)
-})
-
-const endIdx = computed(() =>
-  Math.min(filteredPosts.value.length, startIdx.value + PAGESIZE + BUFFER_SIZE),
-)
-
-const totalHeight = computed(() => `${filteredPosts.value.length * ITEM_HEIGHT}px`)
-const topHeight = computed(() => `${startIdx.value * ITEM_HEIGHT}px`)
-const bottomHeight = computed(
-  () => `${(filteredPosts.value.length - endIdx.value) * ITEM_HEIGHT}px`,
-)
-
-const items = computed(() => filteredPosts.value.slice(startIdx.value, endIdx.value))
-
-// ---------- 事件 ----------
-const handleScroll = (_e: CustomEvent) => {
-  scrollY.value = (_e.detail as { scrollTop: number })?.scrollTop ?? 0
-}
-
-const onPublish = () => {
-  uni.navigateTo({ url: '/pages/community/publish-campus' })
-}
-
-const onSearch = () => {
-  if (!searchKeyword.value.trim()) return
-  uni.showToast({ title: '搜索: ' + searchKeyword.value, icon: 'none' })
-}
-
-const goDetail = (id: string) => {
-  uni.navigateTo({ url: `/pages/community/detail?id=${id}` })
-}
-
-// ---------- 生命周期 ----------
-// 从发布页 navigateBack 回来时组件不销毁、setup 不重跑,新发的动态只能靠 onShow 重新拉
-onShow(() => {
-  fetchPosts()
-})
+/** 示例采编(事件为虚构演示):提审前由编辑部替换 */
+const NEWS: NewsItem[] = [
+  {
+    title: '母校七十周年校庆筹备启动,校友征集开启',
+    date: '2026-09',
+    body: '校庆办公室已启动老照片、口述史与届别联络人征集。乡会将协助各届校友整理报名通道,有史料可提供请在「我的」页留下联系方式,编辑部会主动联络。',
+  },
+  {
+    title: '龙洞校区图书馆改造完工,自习区延长开放',
+    date: '2026-08',
+    body: '暑期改造后的图书馆新增两层自习区,考试季开放至 23:00。回校拜访的校友可凭身份证在西门登记入馆参观。',
+  },
+  {
+    title: '乡会赞助「潮工杯」足球邀请赛落幕',
+    date: '2026-06',
+    body: '第八届校友与在校生足球邀请赛在大学城校区举行,乡会队 2:1 卫冕。赛事照片集锦将收入《乡会流年志》年度篇章。',
+  },
+  {
+    title: '材料学院团队获省科技进步奖',
+    date: '2026-05',
+    body: '母校材料科学与工程学院牵头项目获广东省科技进步一等奖,团队成员含三位乡会理事。乡会编辑部将跟进专访。',
+  },
+  {
+    title: '大学城校区地铁接驳专线试运行',
+    date: '2026-03',
+    body: '校区与地铁站间接驳巴士试运行,工作日高峰 10 分钟一班。校友返校日活动车辆动线已同步更新到公告。',
+  },
+]
 </script>
 
 <template>
-  <view class="page campus">
-    <!-- 吸顶搜索栏 -->
-    <view class="campus__header">
-      <view class="campus__search">
-        <input
-          v-model="searchKeyword"
-          class="campus__search-input"
-          placeholder="搜索校园动态"
-          confirm-type="search"
-          @confirm="onSearch"
-        />
-        <view class="campus__search-btn" @click="onSearch">搜索</view>
-      </view>
-      <view class="campus__publish" @click="onPublish">
-        <t-icon name="add-circle-filled" size="48rpx" />
-      </view>
-    </view>
-
-    <!-- 占位 -->
-    <view class="campus__header-holder" />
-
-    <!-- 列表 -->
-    <VirtualList
-      class="campus__scroll"
-      :total-height="totalHeight"
-      :top-height="topHeight"
-      :bottom-height="bottomHeight"
-      @scroll="handleScroll"
-    >
-      <view
-        v-for="post in items"
-        :key="post.id"
-        class="campus__item"
-        :style="{ marginBottom: '16rpx' }"
-        @click="goDetail(post.id)"
-      >
-        <image
-          v-if="post.avatar"
-          class="campus__item-avatar"
-          mode="aspectFill"
-          :src="post.avatar"
-        />
-        <view v-else class="campus__item-avatar-placeholder">
-          {{ post.author.slice(0, 1) }}
+  <view class="page campus-news">
+    <!-- 面板必须各自绑唯一 value:uniapp 版 dist 未实现「空值取下标兜底」,缺绑定时全部共享 undefined 会失效 -->
+    <t-collapse theme="card" :expand-mutex="false" :default-value="[]">
+      <t-collapse-panel v-for="item in NEWS" :key="item.title" :value="item.title" :header="item.title">
+        <view class="campus-news__body">
+          <text class="campus-news__meta">{{ item.date }} · 乡会编辑部</text>
+          <text class="campus-news__text">{{ item.body }}</text>
         </view>
-        <view class="campus__item-body">
-          <text class="campus__item-title ellipsis">{{ post.title }}</text>
-          <text class="campus__item-content ellipsis-2">{{ post.content }}</text>
-          <view class="campus__item-meta">
-            <text class="campus__item-author">{{ post.author }}</text>
-            <text class="campus__item-time">{{ formatRelative(post.publishTime) }}</text>
-            <text class="campus__item-stat">赞 {{ post.likes }}</text>
-            <text class="campus__item-stat">评 {{ post.comments }}</text>
-          </view>
-        </view>
-      </view>
-    </VirtualList>
+      </t-collapse-panel>
+    </t-collapse>
+
+    <text class="campus-news__note">资讯均由乡会编辑部采编发布,不代表母校官方口径</text>
   </view>
 </template>
 
 <style lang="less" scoped>
-.campus {
+.campus-news {
+  padding: 32rpx 32rpx 48rpx;
+  background: var(--td-bg-color-page);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.campus-news__body {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background: #fff;
-}
-
-/* ---- 吸顶搜索栏 ---- */
-.campus__header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
   gap: 16rpx;
-  padding: 24rpx;
-  height: 120rpx;
-  box-sizing: border-box;
-  background: #fff;
-  border-bottom: 1rpx solid var(--td-border-level-1-color);
 }
-.campus__header-holder {
-  height: 120rpx;
-  flex-shrink: 0;
+.campus-news__meta {
+  font-size: 24rpx;
+  color: var(--td-text-color-placeholder);
 }
-.campus__search {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  height: 72rpx;
-  padding: 0 8rpx 0 24rpx;
-  border-radius: 36rpx;
-  background: var(--td-bg-color-page);
-}
-.campus__search-input {
-  flex: 1;
-  height: 100%;
+.campus-news__text {
   font-size: 28rpx;
-  color: var(--td-text-color-primary);
-}
-.campus__search-btn {
-  padding: 0 24rpx;
-  height: 56rpx;
-  line-height: 56rpx;
-  border-radius: 28rpx;
-  font-size: 26rpx;
-  color: #fff;
-  background: var(--td-brand-color);
-}
-.campus__publish {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72rpx;
-  height: 72rpx;
-  color: var(--td-brand-color);
-}
-
-/* ---- 滚动宿主 ---- */
-.campus__scroll {
-  flex: 1;
-  min-height: 0;
-}
-
-/* ---- 列表项 ---- */
-.campus__item {
-  margin-left: 24rpx;
-  margin-right: 24rpx;
-  padding: 24rpx;
-  display: flex;
-  gap: 20rpx;
-  background: #fff;
-  border-radius: 16rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
-}
-.campus__item-avatar,
-.campus__item-avatar-placeholder {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 40rpx;
-  flex-shrink: 0;
-}
-.campus__item-avatar-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--td-brand-color-light);
-  color: var(--td-brand-color);
-  font-size: 34rpx;
-}
-.campus__item-body {
-  flex: 1;
-  min-width: 0;
-}
-.campus__item-title {
-  display: block;
-  font-size: 30rpx;
-  font-weight: 600;
-  color: var(--td-text-color-primary);
-}
-.campus__item-content {
-  display: block;
-  margin-top: 8rpx;
-  font-size: 26rpx;
+  line-height: 1.7;
   color: var(--td-text-color-secondary);
-  line-height: 1.5;
 }
-.campus__item-meta {
-  display: flex;
-  align-items: center;
-  gap: 16rpx;
-  margin-top: 16rpx;
+.campus-news__note {
+  display: block;
+  margin-top: 40rpx;
+  text-align: center;
   font-size: 22rpx;
   color: var(--td-text-color-placeholder);
 }

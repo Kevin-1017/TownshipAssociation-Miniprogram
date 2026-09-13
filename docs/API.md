@@ -36,48 +36,78 @@
 与 `tsa-api` 的 `common/ResultCode.java` 完全一致;业务码 1xxx 起,
 按模块分段(成员 10xx / 活动 11xx / 公告 12xx),加码两边同步。
 
-| code   | 含义                       | 前端行为                     |
-| ------ | -------------------------- | ---------------------------- |
-| `200`  | 成功                       | 返回 data                    |
-| `400`  | 参数校验失败               | toast `message`(内含字段提示) |
-| `401`  | 未登录 / token 失效        | 清本地 token,跳「我的」页    |
-| `403`  | 已登录但无权限             | toast 提示                   |
-| `404`  | 资源不存在                 | toast 提示(后续可优化为空态) |
-| `500`  | 服务器内部错误             | toast「网络异常,请稍后重试」 |
-| `1001` | 该微信已注册过成员         | toast `message`              |
-| `1002` | 数据不存在                 | toast `message`              |
-| `1301` | 查看资料仅限乡会会员       | 详情页清本地核验态,显示授权闸门 |
-| `1302` | 手机号核验失败,请重试     | toast,停留授权按钮可重试     |
+| code   | 含义                              | 前端行为                                                               |
+| ------ | --------------------------------- | ---------------------------------------------------------------------- |
+| `200`  | 成功                              | 返回 data                                                              |
+| `400`  | 参数校验失败                      | toast `message`(内含字段提示)                                          |
+| `401`  | 微信登录态失效(未登录/token 过期) | request 层单飞静默重登并重放一次;仍失败才清 token、跳「我的」页、toast |
+| `403`  | 已登录但无权限                    | toast 提示                                                             |
+| `404`  | 资源不存在                        | toast 提示(后续可优化为空态)                                           |
+| `500`  | 服务器内部错误                    | toast「网络异常,请稍后重试」                                           |
+| `1001` | 该微信已注册过成员                | toast `message`                                                        |
+| `1002` | 数据不存在                        | toast `message`                                                        |
+| `1301` | 查看资料仅限乡会会员              | 详情页清本地核验态,显示授权闸门                                        |
+| `1302` | 手机号核验失败,请重试             | toast,停留授权按钮可重试                                               |
+| `1303` | 微信登录失败,请重试               | silentLogin 回 `retryable`,只提示稍后重试,**不清登录态**               |
+| `1306` | 操作过于频繁(登录/核验限频)       | 同 1303:可重试,不是登录失效,不清登录态                                 |
 
 ---
 
 ## 鉴权
 
 ```
-POST /tsa/auth/wechat-login          // 二期实现
+POST /tsa/auth/wechat-login        // 第一期已上线(原「二期实现」)
   body: { "code": "<wx.login 拿到的 code>" }
-  200 : { "token": "<Sa-Token 令牌>", "user": MemberDetail | null }
+  200 : { "token": "<Sa-Token 令牌>", "user": MemberDetail | null }  // user:null = 已登录未建档
+  错误: 400(code 为空)/ 1303(微信侧换码失败)/ 1306(限频 10 次/分/IP)
 
-POST /tsa/auth/verify-phone          // 乡会身份核验(一期已上线)
+POST /tsa/auth/verify-phone          // 乡会身份核验(一期已上线;限频 5 次/分/IP → 1306)
   body: { "code": "<getPhoneNumber 按钮的动态 code>" }
   200 : { "verified": true, "token": "<乡会令牌>", "name": "...", "role": "..." }  // 命中名册
   200 : { "verified": false }         // 未命中名册 —— 正常业务结果,不是错误
+
+POST /tsa/auth/logout                // 本期新增:服务端注销
+  header: Authorization: Bearer <token>(可选;无 token 也幂等 200)
+  200 : null                          // 只注销当前 Bearer 会话,assoc 会话(loginId 不同)不受影响
 ```
 
-- 后端用 `code` 调微信 `code2session` 换 `openid`,再查会员表决定身份;
+- 后端用 `code` 调微信 `jscode2session` 换 `openid`(session_key 就地丢弃、不落库不下发),
+  再 `StpUtil.login(openid)` 签发登录态;`user` 为该 openid 已建档的乡贤档案,可为 null;
 - **两个 code 不是同一个**:`wechat-login` 用 `wx.login` 的 code;`verify-phone` 用
   `<button open-type="getPhoneNumber">` 回调里的动态 code(5 分钟有效、严格一次性,
   禁止缓存/重试同一 code);
+- **`/tsa/user/** 起需登录**:`Authorization: Bearer <token>`。401 = 微信会话失效,
+由前端 request 层**静默重登 + 重放一次**兜住(单飞去重),救不回才清态跳「我的」页;
+身份类失败仍是 1301 语义不变(X-Assoc-Token 体系)。loginId 以 `assoc-` 开头的
+  令牌冒充 Bearer 一律按 401 拒绝;
+- 登录/核验限频为**内存实现**(单实例假设);反代部署必须配 `forward-headers-strategy`;
 - `verify-phone` 核验成功后下发的 `token` 放 **`X-Assoc-Token`** 请求头访问受限资源
-  (成员详情);令牌失效/伪造统一返回 1301(**不是 401** —— 401 会触发前端
-  「清登录态跳我的页」,语义错乱);
+  (成员详情);令牌失效/伪造统一返回 1301(**绝不出 401** —— 401 归微信登录态语义,
+  会触发前端静默重登,两套身份不许互踩);
 - 手机号核验依赖微信 getuserphonenumber 接口,要求小程序为**企业认证主体**
   (个人主体无权限);后端本地联调有 `WECHAT_MOCK_MODE` 逃生通道(把 code 原样当手机号);
 - **`AppSecret` 只存在于服务端**,绝不下发给前端;
 - 前端把 `token` 存本地,之后每个请求带 `Authorization: Bearer <token>`
   (后端 Sa-Token 已按此读取:token-name=Authorization, token-prefix=Bearer);
-- mock 阶段该接口**不校验 code、直接发假 token**,只为让 UI 链路走得通,
-  不代表鉴权已验证。
+- mock 阶段 wechat-login **不校验 code、直接发假 token**(`mock-token-for-development-only`),
+  但 `/tsa/user/**` 两个受保护路由会校验这枚 Bearer 并回 401 壳 ——
+  「401 → 静默重登 → 重放」全链路在 mock 下同样可演练。
+
+### 登录态时效(7 天,以及为什么 `wx.checkSession` 不参与判定)
+
+- 后端签发的登录会话时效 **7 天**(Sa-Token `timeout`,yml 一行配置)。会话目前存在
+  后端进程内存里(Redis 二期),**后端重启 = 全员 token 失效** —— 这由前端 401 自愈吸收,
+  用户无感,不需要为此提前做什么。
+- 这枚 token 才是「你是谁」到达 tsa-api 的凭证;微信自带的会话体系(`wx.checkSession`、
+  `session_key`)管的只是「加密数据(如手机号)解密密钥」的生命周期 —— 本项目从不下发
+  也不留存 session_key,请求到达后端时微信**不会**替我们标注调用者是谁,
+  token→openid 映射必须我们自己持有(Sa-Token 现成能力,本期新增代码≈0)。
+- 所以 **401 是登录态失效的唯一权威信号**,`checkSession` 无判定权,前端不调它做登录态
+  辅助校验(v1.1 已论证并拒绝该方案)。失效后由 request 层自动 `wx.login` →
+  `POST /tsa/auth/wechat-login` 换新 token 并重放原请求(单飞,并发 401 只重登一次);
+  连换码也失败才清态跳「我的」页。
+- 将来管理系统复用同一套 Sa-Token(loginId 加 `admin-` 前缀),与 openid / `assoc-`
+  三个命名空间互斥,不另起炉灶。
 
 ---
 
@@ -101,8 +131,9 @@ GET /tsa/members/{id}               // 乡会用户专享
   header: X-Assoc-Token            // verify-phone 核验成功后签发,缺失/失效返回 1301
   → MemberDetail
 
-GET /tsa/members/stats/province
+GET /tsa/members/stats/province       // 公开免 token;第一期已上线(原「二期实现」)
   → ProvinceStat[]                       // [{ province, count }],按 count 降序
+  // 统计口径:member 表 status=1(审核通过)且 deleted=0,GROUP BY province
 ```
 
 ### 隐私(后端必须落实)
@@ -124,19 +155,19 @@ GET /tsa/members/stats/province
 ## 活动
 
 ```
-GET /tsa/events            query: page, pageSize, status, city → PageResult<EventListItem>
-GET /tsa/events/{id}                                              → EventDetail
-POST /tsa/events/{id}/register                                    → { ok: true }   // 第二阶段
+GET /tsa/events      query: page(默认1), pageSize(默认10,钳 1..50), year(可选,4位年份,按 start_time 年) → PageResult<EventListItem>
+GET /tsa/events/{id}                                                        → EventDetail   // 查无 code=1002
 ```
 
-`EventListItem` 不含 `content`/`lat`/`lng`/`organizer`/`contactPhone`;
-只有详情接口返回。列表页不需要富文本正文,下发它是纯浪费。
-
-`status` 枚举:`upcoming | ongoing | past | cancelled`。
-**由服务端计算并返回**,不要让前端比较时间 —— 客户端时间不可信。
-
-第二阶段做报名时必须处理:名额并发扣减(数据库唯一约束或 Redis 原子操作)、
-重复提交幂等(同一会员同一活动只能有一条报名记录)。
+- **正文不进小程序**(D2 定案):列表 `EventListItem = { id,title,cover,summary,startTime,status }`;
+  详情只多一个 `articleUrl`(公众号文章永久链接 `https://mp.weixin.qq.com/s/xxx`,
+  未整理则为 null)。小程序端用 `wx.openOfficialAccountArticle` 在点击回调内同步拉起
+  微信原生文章页;低版本/失败兜底复制链接。
+- `cover`/`summary`/`articleUrl` 为 `string | null`,`null` 时前端渲染占位/置灰按钮。
+- `status` 只有 `upcoming | past` 两态,**由服务端比较 start_time 与当前时间派生**(不落库),
+  不要让前端比时间 —— 客户端时间不可信。列表排序 `start_time DESC`。
+- **报名接口已撤**(`POST /tsa/events/{id}/register` 不再存在):本期不做报名,
+  activity_registration 表继续闲置;名额并发/幂等等真做报名再议。
 
 ---
 
@@ -172,7 +203,13 @@ GET    /tsa/foundation/donations     → DonationRecord[]                       
 
 ---
 
-## 社区动态(美食基地 / 校园广场)
+## 社区动态（前端已删除 · 后端接口保留备回归）
+
+> **2026-09-12**：个人主体小程序不可提供「用户发布且他人可浏览」的 UGC 功能
+> （《微信小程序平台运营规范》5.7.1 主体未开放类目）。前端相关代码**已整体删除**：
+> `api/community.ts`、`types/community.d.ts`、mock 路由与数据、列表/详情/发布/点赞/评论页面与路由注册
+> （git 历史可找回）。广场 tab 三入口改为**编辑部官方采编的只读内容**（美食图鉴/校园资讯/流年志），不调用下列任何接口。
+> **tsa-api 侧五个接口刻意保留**（含存量数据），主体变更 + 报备【社交-社区/论坛】类目后，按本节契约重建前端即可回归。
 
 ```
 GET  /tsa/community/posts       query: page,pageSize,type,cuisine,region,keyword → PageResult<CommunityPost>
@@ -193,20 +230,53 @@ POST /tsa/community/posts/{id}/comments  body: CommentPayload                   
 ## 当前用户
 
 ```
-GET /tsa/user/me   → MemberDetail | null    // 未登录返回 code=401
+GET /tsa/user/me        header: Authorization: Bearer → MemberDetail | null
+  // null = 已登录但没建档(本期所有新用户的初始态);未登录/失效/assoc 令牌冒充 → 401 壳
+  // 本人视角不裁 phone/wechatId(裁剪只发生在对外详情接口 GET /tsa/members/{id})
+
+PUT /tsa/user/profile   header: Bearer;body: 见下 → MemberDetail(更新后的本人视角档案)
+  { "name?","gender?","phone?","wechatId?","graduationYear?","major?","intro?","avatarUrl?" }
 ```
+
+- 请求体**全部可选,页面只提交改动过的字段**;后端按白名单更新,
+  `status/province/city/openid` 不在其列(归属与审核态由秘书处侧维护)。
+- openid 由服务端从 Bearer loginId 推导(`assoc-` 前缀拒绝 → 401),请求体没有它;
+- **首次提交 → INSERT status=0(待审)+ source=1**;已有行 → 白名单 update。
+  秘书处审核工作流本期不做,SQL 改 `status=1` 放行上墙。
+- 校验:name≤32、wechatId≤32、major≤64、intro≤200、avatarUrl≤255、
+  graduationYear ∈ [1950,2100]、gender ∈ {0,1,2}。
+
+---
+
+## 文件上传
+
+```
+POST /tsa/files   header: Bearer;multipart 字段名 "file" → { "path": "/tsa/files/<uuid>.<ext>" }
+GET  /tsa/files/{name}   公开,按扩展名回 Content-Type
+  // name 必须匹配 ^[0-9a-f-]{32,36}\.[a-z]{3,4}$,否则 404 —— 防目录穿越
+```
+
+- ≤2MB,类型白名单 `image/jpeg|png|webp`,超限/不符 → 400「文件超限或类型不支持」;
+  POST 路由由 SaRouter 单独锁 Bearer 门(公开只读 GET);
+- 文件落**本地磁盘**(配置键 `tsa.files.dir`,默认 `./upload-data`),不落库、不建表;
+- `path` 是**相对路径,入库也存它本身**(头像 → `member.avatar_url`),**展示时才**由前端
+  `buildFileUrl()` 拼绝对址(见 `src/utils/request.ts`)——API 域名是编译期常量,
+  把绝对 URL 写进存量数据,换正式域名(§9.E)时会集体失效;与 tsa-api 侧 FileUploadVO 口径一致。
+- 本期消费方:profile 页头像(chooseAvatar 临时路径必须落盘,重启不丢);
+  事件封面将来同通道。
+- mock 下 `uploadFile()` 直接回显传入的临时路径(不发请求,演练链路用)。
 
 ---
 
 ## 字段约定
 
-| 约定                                                               | 原因                                                     |
-| ------------------------------------------------------------------ | -------------------------------------------------------- |
-| 时间一律 **ISO 8601 字符串带时区**(如 `2026-09-27T18:00:00+08:00`) | 数字时间戳没有时区语义;格式化在前端做,后端不返回中文日期 |
+| 约定                                                               | 原因                                                                             |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| 时间一律 **ISO 8601 字符串带时区**(如 `2026-09-27T18:00:00+08:00`) | 数字时间戳没有时区语义;格式化在前端做,后端不返回中文日期                         |
 | `id` 是**字符串**(数据库自增主键的字符串形式,如 `"12"`)            | 后端 Long 超过 2^53 时前端 number 会丢精度;字符串也避免 URL 上暴露数字递增可遍历 |
-| 字典存 code,不存中文(`industry: "internet"`)                       | 中文改名不动数据;`src/constants/industry.ts` 是映射表    |
-| 坐标字段 `lat` / `lng`,GCJ-02                                      | 微信底图坐标系。见 [TECHNOLOGY.md](TECHNOLOGY.md) §6     |
-| `country` 恒为 `"中国"`,但保留字段                                 | 第二阶段要展示海外潮籍乡亲,现在留字段避免返工            |
+| 字典存 code,不存中文(`industry: "internet"`)                       | 中文改名不动数据;`src/constants/industry.ts` 是映射表                            |
+| 坐标字段 `lat` / `lng`,GCJ-02                                      | 微信底图坐标系。见 [TECHNOLOGY.md](TECHNOLOGY.md) §6                             |
+| `country` 恒为 `"中国"`,但保留字段                                 | 第二阶段要展示海外潮籍乡亲,现在留字段避免返工                                    |
 
 ---
 

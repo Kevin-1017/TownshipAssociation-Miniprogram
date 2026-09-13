@@ -1,22 +1,30 @@
-import { request, TOKEN_KEY } from '@/utils/request'
+import { request } from '@/utils/request'
 import type { VerifyPhoneResult } from '@/types/auth'
 import type { MemberDetail } from '@/types/member'
 
 export interface LoginResult {
   token: string
+  /** null = 已登录但还没建档(本期所有新用户的初始态),契约 C1 要求该键恒出现在 JSON 里 */
   user: MemberDetail | null
 }
 
 export const authApi = {
   /**
-   * 微信一键登录。
+   * 微信一键登录:把 wx.login 的 code 交给后端换 openid(真模式经 jscode2session,
+   * login-mock-mode 下回固定 mock openid),换回 Sa-Token 登录态。
    *
-   * ★ mock 阶段这个接口不校验 code,直接发假 token —— 「我的」页面因此可以完整跑通,
-   *   但**不代表登录逻辑已验证**。真实链路要等 tsa-api 提供 code2session,
-   *   见 docs/API.md 的「鉴权」一节。
+   * ★ 必须静默:这调用在每次冷启动都会发生(App.vue → silentLogin),后端未起时
+   *   弹脸 loading/toast 与「失败仅 console.warn」直接矛盾;失败表现由调用方
+   *   按 silentLogin 的三态返回值决定(修订 A3)。
    */
   wechatLogin: (code: string) =>
-    request<LoginResult>({ url: '/tsa/auth/wechat-login', method: 'POST', data: { code } }),
+    request<LoginResult>({
+      url: '/tsa/auth/wechat-login',
+      method: 'POST',
+      data: { code },
+      showLoading: false,
+      silentError: true,
+    }),
 
   /**
    * 乡会身份核验:把 getPhoneNumber 按钮的动态 code 交给后端换手机号、比对乡会名册。
@@ -34,10 +42,28 @@ export const authApi = {
       loadingText: '身份核验中',
     }),
 
-  getProfile: () => request<MemberDetail | null>({ url: '/tsa/user/me' }),
+  /**
+   * 当前登录会员资料(本人视角),data 可为 null = 已登录未建档。
+   * 静默:onShow 会反复拉,避免闪 loading/双 toast;token 失效由 request 层 401 自愈兜。
+   */
+  getProfile: () =>
+    request<MemberDetail | null>({ url: '/tsa/user/me', showLoading: false, silentError: true }),
 
-  /** 本地登出:只清本地 token,不需要请求后端 */
-  logout: () => {
-    uni.removeStorageSync(TOKEN_KEY)
+  /**
+   * 服务端注销(契约 C3):只注销当前 Bearer 会话,assoc 会话 loginId 不同、不受影响;
+   * 无 token 也幂等 200。fire-and-forget —— 后端不可达时吞错照常返回,
+   * 不能因网络问题把用户困在「已登录」。本地 storage 清理不在 api 层做,统一收口在 store。
+   */
+  logout: async (): Promise<void> => {
+    try {
+      await request<null>({
+        url: '/tsa/auth/logout',
+        method: 'POST',
+        showLoading: false,
+        silentError: true,
+      })
+    } catch {
+      // 注销失败说明会话本就不可达/已死,本地清理由 store.logout 无条件完成
+    }
   },
 }

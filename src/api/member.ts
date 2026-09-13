@@ -1,4 +1,5 @@
 import { request, ASSOC_TOKEN_HEADER, ASSOC_STORAGE_KEY } from '@/utils/request'
+import type { RequestOptions } from '@/utils/request'
 import type { PageResult } from '@/types/api'
 import type {
   MemberDetail,
@@ -8,7 +9,7 @@ import type {
   ProvinceStat,
 } from '@/types/member'
 
-/** 读取已核验的乡会身份令牌(没有则空串)。api 层直读 storage 有先例:authApi.logout 同款 */
+/** 读取已核验的乡会身份令牌(没有则空串)。assoc 头必须由 api 层显式带上 —— request() 只会注入登录态 Bearer */
 const assocTokenFromStorage = (): string => {
   try {
     const raw = uni.getStorageSync(ASSOC_STORAGE_KEY) as string
@@ -18,6 +19,9 @@ const assocTokenFromStorage = (): string => {
     return ''
   }
 }
+
+/** 列表/统计的展示控制:「我的」页 onShow 轮询要静默降级(失败显示 0),不能让 toast 与 loading 打断整页 */
+type SilentReadOptions = Partial<Pick<RequestOptions, 'showLoading' | 'silentError'>>
 
 /**
  * 成员相关的接口声明。
@@ -30,8 +34,8 @@ export const memberApi = {
   /** 地图专用:返回全部成员的轻量坐标点,不分页 */
   getMapData: () => request<MemberMapPoint[]>({ url: '/tsa/members/map-data', showLoading: false }),
 
-  getList: (params: MemberQuery = {}) =>
-    request<PageResult<MemberListItem>>({ url: '/tsa/members', data: params }),
+  getList: (params: MemberQuery = {}, opts?: SilentReadOptions) =>
+    request<PageResult<MemberListItem>>({ url: '/tsa/members', data: params, ...opts }),
 
   /**
    * 成员详情(乡会用户专享):带 X-Assoc-Token 头。
@@ -46,5 +50,6 @@ export const memberApi = {
     }),
 
   /** 按省统计成员数。第一阶段供排行榜用,将来供地图区域着色 */
-  getProvinceStats: () => request<ProvinceStat[]>({ url: '/tsa/members/stats/province' }),
+  getProvinceStats: (opts?: SilentReadOptions) =>
+    request<ProvinceStat[]>({ url: '/tsa/members/stats/province', ...opts }),
 }

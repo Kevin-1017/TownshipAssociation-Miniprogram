@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 
 /**
- * 社区首页 —— 只保留两个入口卡片:美食基地、校园广场。
+ * 广场首页 —— 三个入口卡片:美食基地、校园资讯、乡会流年志。
+ * 三页均为只读的编辑部官方采编内容(数据是示例稿,提审前替换定稿)。
+ * 原社区 UGC 链路(发布/动态/评论)因个人主体不可提供已整体删除,回归路径见 docs/API.md 社区节。
  */
 
 /** 本页路径:tab bar 高亮;tab 页常驻缓存,返回时按它复位 */
@@ -18,6 +20,10 @@ const goFood = () => {
 
 const goCampus = () => {
   uni.navigateTo({ url: '/pages/community/campus' })
+}
+
+const goChronicle = () => {
+  uni.navigateTo({ url: '/pages/community/chronicle' })
 }
 
 const onTabChange = (e: { value: string }) => {
@@ -38,15 +44,23 @@ onShow(() => {
       <view class="community-home__card" @click="goFood">
         <view class="community-home__card-main">
           <text class="community-home__card-title">美食基地</text>
-          <text class="community-home__card-desc">探索地道潮汕味道</text>
+          <text class="community-home__card-desc">校友私藏美食地图</text>
         </view>
         <t-icon class="community-home__card-arrow" name="chevron-right" size="48rpx" />
       </view>
 
       <view class="community-home__card" @click="goCampus">
         <view class="community-home__card-main">
-          <text class="community-home__card-title">校园广场</text>
-          <text class="community-home__card-desc">校友交流、活动召集</text>
+          <text class="community-home__card-title">校园资讯</text>
+          <text class="community-home__card-desc">工大风云尽在掌握</text>
+        </view>
+        <t-icon class="community-home__card-arrow" name="chevron-right" size="48rpx" />
+      </view>
+
+      <view class="community-home__card" @click="goChronicle">
+        <view class="community-home__card-main">
+          <text class="community-home__card-title">乡会流年志</text>
+          <text class="community-home__card-desc">一届一程皆故事</text>
         </view>
         <t-icon class="community-home__card-arrow" name="chevron-right" size="48rpx" />
       </view>
@@ -55,7 +69,7 @@ onShow(() => {
     <!-- 底部悬浮胶囊导航:theme="tag" 选中项带胶囊底色,split=false 去分隔线;文字放默认插槽显示在图标下方 -->
     <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
       <t-tab-bar-item value="/pages/index/index" icon="home">首页</t-tab-bar-item>
-      <t-tab-bar-item value="/pages/community/index" icon="chat">社区</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" icon="chat">广场</t-tab-bar-item>
       <t-tab-bar-item value="/pages/event/list" icon="app">事件</t-tab-bar-item>
       <t-tab-bar-item value="/pages/mine/index" icon="user">我的</t-tab-bar-item>
     </t-tab-bar>
@@ -87,7 +101,7 @@ onShow(() => {
   min-height: 240rpx;
   padding: 48rpx;
   background: #fff;
-  border-radius: 24rpx;
+  border-radius: var(--td-radius-large);
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
   transition:
     transform 150ms ease,

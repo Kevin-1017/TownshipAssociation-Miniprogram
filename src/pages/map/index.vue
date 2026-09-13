@@ -39,27 +39,38 @@ const shown = computed(() => points.value.length)
 /** 下标 → 成员。markertap 只回传 number id,靠这张表反查是谁 */
 const byIndex = computed(() => new Map(points.value.map((m, i) => [i, m])))
 
+/**
+ * callout/popup 第二行:「城市去市尾 · 行业」。
+ * member.province/city 本期起可 NULL(C7 本人建档只补资料不补地区,秘书处审核时才录),
+ * 类型上还是 string 是三方契约的已知谎 —— 这里运行时空安全,别再直接 .replace()。
+ */
+const metaLine = (city: string | null | undefined, industry: string | null | undefined): string =>
+  [city?.replace('市', ''), industryLabel(industry ?? '')].filter(Boolean).join(' · ')
+
 const markers = computed(() =>
-  points.value.map((m, i) => ({
-    id: i,
-    latitude: m.lat,
-    longitude: m.lng,
-    title: m.name,
-    // 不传 iconPath,用微信默认红色图钉。要换自有图标时补:
-    //   iconPath: '/static/marker/member.png', width: 28, height: 28
-    // 图标必须是 PNG(不支持 SVG),且放本地 /static 下。
-    joinCluster: true,
-    callout: {
-      content: `${m.name}\n${m.city.replace('市', '')} · ${industryLabel(m.industry)}`,
-      color: '#333333',
-      fontSize: 12,
-      borderRadius: 8,
-      bgColor: '#ffffff',
-      padding: 10,
-      textAlign: 'left',
-      display: 'BYCLICK',
-    },
-  })),
+  points.value.map((m, i) => {
+    const line = metaLine(m.city, m.industry)
+    return {
+      id: i,
+      latitude: m.lat,
+      longitude: m.lng,
+      title: m.name,
+      // 不传 iconPath,用微信默认红色图钉。要换自有图标时补:
+      //   iconPath: '/static/marker/member.png', width: 28, height: 28
+      // 图标必须是 PNG(不支持 SVG),且放本地 /static 下。
+      joinCluster: true,
+      callout: {
+        content: line ? `${m.name}\n${line}` : m.name,
+        color: '#333333',
+        fontSize: 12,
+        borderRadius: 8,
+        bgColor: '#ffffff',
+        padding: 10,
+        textAlign: 'left',
+        display: 'BYCLICK',
+      },
+    }
+  }),
 )
 
 const onMarkerTap = (e: MarkerTapDetail | { detail: MarkerTapDetail }) => {
@@ -182,7 +193,7 @@ onMounted(async () => {
       <cover-view class="map-page__popup-body">
         <cover-view class="map-page__popup-name">{{ selected.name }}</cover-view>
         <cover-view class="map-page__popup-meta">
-          {{ selected.city.replace('市', '') }} · {{ industryLabel(selected.industry) }}
+          {{ metaLine(selected.city, selected.industry) }}
         </cover-view>
         <cover-view class="map-page__popup-tip">乡会会员可看完整资料</cover-view>
       </cover-view>
@@ -214,7 +225,7 @@ onMounted(async () => {
   width: 48rpx;
   height: 48rpx;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 50%;
+  border-radius: var(--td-radius-circle);
   /* t-icon 内部是 view/子组件,text-align + line-height 不生效,改用 flex */
   display: flex;
   align-items: center;
@@ -225,7 +236,7 @@ onMounted(async () => {
   /* 让开左侧返回按钮:24 + 96 + 24 */
   left: 124rpx;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 14rpx;
+  border-radius: var(--td-radius-large);
   padding: 14rpx 22rpx;
 }
 .map-page__stat-num {
@@ -242,7 +253,7 @@ onMounted(async () => {
   position: absolute;
   right: 24rpx;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 14rpx;
+  border-radius: var(--td-radius-large);
   padding: 6rpx;
 }
 .map-page__view-btn {
@@ -251,7 +262,7 @@ onMounted(async () => {
   text-align: center;
   font-size: 24rpx;
   color: #4a4a4a;
-  border-radius: 10rpx;
+  border-radius: var(--td-radius-default);
 }
 .map-page__view-btn.is-on {
   background: #0052d9;
@@ -264,7 +275,7 @@ onMounted(async () => {
   bottom: 250rpx;
   display: flex;
   background: #0052d9;
-  border-radius: 40rpx;
+  border-radius: var(--td-radius-round);
   padding: 16rpx 26rpx;
 }
 .map-page__filter-text {
@@ -285,13 +296,13 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   background: #ffffff;
-  border-radius: 16rpx;
+  border-radius: var(--td-radius-large);
   padding: 24rpx;
 }
 .map-page__avatar {
   width: 84rpx;
   height: 84rpx;
-  border-radius: 42rpx;
+  border-radius: var(--td-radius-circle);
 }
 .map-page__avatar--char {
   background: #d9e1ff;

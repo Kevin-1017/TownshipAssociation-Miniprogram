@@ -8,10 +8,14 @@ import type {
   MemberQuery,
   ProvinceStat,
 } from '@/types/member'
-import type { EventDetail, EventListItem, EventQuery } from '@/types/event'
+import type { EventDetail, EventListItem, EventQuery, EventStatus } from '@/types/event'
 import type { NoticeItem } from '@/types/notice'
-import type { CommunityPost, CommunityQuery, CommentItem } from '@/types/community'
-import type { FoundationRewardItem, FoundationDonationItem, RewardRecord, DonationRecord } from '@/types/foundation'
+import type {
+  FoundationRewardItem,
+  FoundationDonationItem,
+  RewardRecord,
+  DonationRecord,
+} from '@/types/foundation'
 import { delay } from './delay'
 import membersRaw from './data/members.json'
 import eventsRaw from './data/events.json'
@@ -20,7 +24,6 @@ import rewardsRaw from './data/foundation-rewards.json'
 import donationsRaw from './data/foundation-donations.json'
 import rewardsExpanded from './data/foundation-rewards-expanded.json'
 import donationsExpanded from './data/foundation-donations-expanded.json'
-import communityRaw from './data/community.json'
 
 /**
  * 本地 mock 分发器。
@@ -34,38 +37,22 @@ import communityRaw from './data/community.json'
  */
 
 const members = membersRaw as MemberDetail[]
-const events = eventsRaw as EventDetail[]
+/**
+ * events.json 是 D2 改造前的旧行形状(city/quota/content 等字段仍躺在数据里,
+ * 等秘书处整理时自然会补 summary/article_url)。mock 只投影契约 C5/C6 用到的列。
+ */
+interface RawEventRow {
+  id: string
+  title: string
+  cover: string
+  startTime: string
+  summary?: string
+  articleUrl?: string | null
+}
+const events = eventsRaw as RawEventRow[]
 const notices = noticesRaw as NoticeItem[]
 const rewards = rewardsRaw as FoundationRewardItem[]
 const donations = donationsRaw as FoundationDonationItem[]
-
-// ---------- 社区动态 mock 数据（可变:点赞/评论就地改，模拟服务端状态） ----------
-const communityPosts = (communityRaw as unknown as CommunityPost[]).map((p) => ({ ...p }))
-
-const pageCommunityPosts = (q: CommunityQuery): PageResult<CommunityPost> => {
-  const { page = 1, pageSize = 20, type, cuisine, region, keyword } = q;
-  let list = communityPosts.filter((p) => {
-    if (type && p.type !== type) return false
-    if (cuisine && p.cuisine !== cuisine) return false
-    if (region && p.region !== region) return false
-    if (keyword) {
-      const kw = keyword.trim().toLowerCase()
-      if (!`${p.title}${p.content}`.toLowerCase().includes(kw)) return false
-    }
-    return true
-  })
-  list = list.sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime())
-  const total = list.length
-  list = list.slice((page - 1) * pageSize, page * pageSize)
-  // 列表不下发评论树（与后端契约一致）
-  return { list: list.map(({ commentsList: _drop, ...rest }) => rest), total, page, pageSize }
-}
-
-/** 详情页投影:补 commentsList（无登录，mock 里评论作者统一按数据自带） */
-const communityDetail = (id: string): CommunityPost | undefined => {
-  const p = communityPosts.find((x) => x.id === id)
-  return p ? { ...p, commentsList: p.commentsList ?? [] } : undefined
-}
 
 // ---------- 投影:全量成员 → 地图轻量点 ----------
 /**
@@ -73,35 +60,35 @@ const communityDetail = (id: string): CommunityPost | undefined => {
  * 后端实现 /members/map-data 时同样应该只 SELECT 这些列。
  */
 const toMapPoint = (m: MemberDetail): MemberMapPoint => ({
-    id: m.id,
-    name: m.name,
-    avatarUrl: m.avatarUrl,
-    lat: m.lat,
-    lng: m.lng,
-    province: m.province,
-    city: m.city,
-    industry: m.industry,
-  });
+  id: m.id,
+  name: m.name,
+  avatarUrl: m.avatarUrl,
+  lat: m.lat,
+  lng: m.lng,
+  province: m.province,
+  city: m.city,
+  industry: m.industry,
+})
 
 /** 显式列举,而不是解构丢弃 —— 契约变化时这里会第一时间暴露,而不是悄悄多传字段 */
 const toListItem = (m: MemberDetail): MemberListItem => ({
-    id: m.id,
-    name: m.name,
-    avatarUrl: m.avatarUrl,
-    lat: m.lat,
-    lng: m.lng,
-    province: m.province,
-    city: m.city,
-    industry: m.industry,
-    district: m.district,
-    company: m.company,
-    title: m.title,
-    graduationYear: m.graduationYear,
-  });
+  id: m.id,
+  name: m.name,
+  avatarUrl: m.avatarUrl,
+  lat: m.lat,
+  lng: m.lng,
+  province: m.province,
+  city: m.city,
+  industry: m.industry,
+  district: m.district,
+  company: m.company,
+  title: m.title,
+  graduationYear: m.graduationYear,
+})
 
 // ---------- 各接口的 mock 实现 ----------
 const pageMembers = (data: MemberQuery = {}): PageResult<MemberListItem> => {
-  const { page = 1, pageSize = 20, province, city, industry, keyword } = data;
+  const { page = 1, pageSize = 20, province, city, industry, keyword } = data
 
   let list = members.filter((m) => {
     if (province && m.province !== province) return false
@@ -121,54 +108,56 @@ const pageMembers = (data: MemberQuery = {}): PageResult<MemberListItem> => {
 }
 
 const countByProvince = (): ProvinceStat[] => {
-  const map = new Map<string, number>();
+  const map = new Map<string, number>()
   for (const m of members) map.set(m.province, (map.get(m.province) ?? 0) + 1)
   return [...map.entries()]
     .map(([province, count]) => ({ province, count }))
     .sort((a, b) => b.count - a.count)
 }
 
+/** C5:status 由服务端比较 start_time 与当前时间派生(客户端时间不可信的教训不变) */
+const deriveEventStatus = (startTime: string): EventStatus =>
+  new Date(startTime).getTime() > Date.now() ? 'upcoming' : 'past'
+
+/** 列表投影显式列举字段(契约变化这里第一时间暴露);summary/articleUrl 见 RawEventRow 注释 */
+const toEventListItem = (e: RawEventRow): EventListItem => ({
+  id: e.id,
+  title: e.title,
+  cover: e.cover,
+  summary: e.summary ?? null,
+  startTime: e.startTime,
+  status: deriveEventStatus(e.startTime),
+})
+
+/** C6:详情形状与列表不同源(status 只在列表),不能 spread 列表投影带出多余键 */
+const toEventDetail = (e: RawEventRow): EventDetail => ({
+  id: e.id,
+  title: e.title,
+  cover: e.cover,
+  summary: e.summary ?? null,
+  startTime: e.startTime,
+  articleUrl: e.articleUrl ?? null,
+})
+
+/**
+ * C5 语义:page(默认1)/pageSize(默认10,钳 1..50)/year(按 start_time 年份);
+ * 排序 start_time DESC —— 旧「未开始置顶」的排序随 status 筛选一起作废,与后端对齐。
+ */
 const pageEvents = (data: EventQuery = {}): PageResult<EventListItem> => {
-  const { page = 1, pageSize = 10, status, city } = data;
+  const { page = 1, pageSize = 10, year } = data
+  const size = Math.min(Math.max(pageSize, 1), 50)
   let list = events.filter((e) => {
-    if (status && e.status !== status) return false
-    if (city && e.city !== city) return false
+    if (year && new Date(e.startTime).getFullYear() !== year) return false
     return true
   })
-  // 未开始的排前面,越近越前;已结束的按时间倒序
-  list = list.sort((a, b) => {
-    if ((a.status === 'upcoming') !== (b.status === 'upcoming')) {
-      return a.status === 'upcoming' ? -1 : 1
-    }
-    const d = new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
-    return a.status === 'upcoming' ? d : -d
-  })
+  list = list.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
   const total = list.length
-  list = list.slice((page - 1) * pageSize, page * pageSize)
-  return {
-    total,
-    page,
-    pageSize,
-    list: list.map(toEventListItem),
-  }
+  list = list.slice((page - 1) * size, page * size)
+  return { list: list.map(toEventListItem), total, page, pageSize: size }
 }
 
-/** 列表接口不返回富文本正文与坐标,详情接口才返回 */
-const toEventListItem = (e: EventDetail): EventListItem => ({
-    id: e.id,
-    title: e.title,
-    cover: e.cover,
-    startTime: e.startTime,
-    endTime: e.endTime,
-    city: e.city,
-    address: e.address,
-    registeredCount: e.registeredCount,
-    quota: e.quota,
-    status: e.status,
-  });
-
-/** 当前登录成员。mock 阶段固定返回第一条,让「我的」页面有内容可看 */
-const currentUser = (): MemberDetail | null => members[0] ?? null;
+/** 当前登录成员。MOCK_PROFILE_NULL(m2)控制「已登录有档案/无档案」两态 */
+const currentUser = (): MemberDetail | null => (MOCK_PROFILE_NULL ? null : (members[0] ?? null))
 
 /**
  * 详情投影:显式列举字段(契约变化第一时间暴露),并按隐私规则
@@ -196,7 +185,7 @@ const toDetailProjection = (m: MemberDetail): MemberDetail => {
     intro: m.intro,
     contactVisible: m.contactVisible,
     createdAt: m.createdAt,
-  };
+  }
   if (m.contactVisible) {
     detail.wechatId = m.wechatId
     detail.phone = m.phone
@@ -207,6 +196,28 @@ const toDetailProjection = (m: MemberDetail): MemberDetail => {
 // ---------- 乡会身份 mock ----------
 /** mock 阶段固定令牌:verify-phone 下发它,详情接口认它 */
 const MOCK_ASSOC_TOKEN = 'mock-assoc-token'
+
+// ---------- 微信登录态 mock（契约 m1/m2/m3） ----------
+/**
+ * 「已登录无档案」演练开关(本期所有新用户的初始态):
+ * true 时 wechat-login 的 data.user 与 user/me 都回 null,可在纯 mock 下走查
+ * displayName「点击完善资料」→ profile 页无档案提示这条链路。验收完记得改回 false。
+ */
+const MOCK_PROFILE_NULL = false
+
+/** mock wechat-login 签发的令牌;request 的 mock 分支会把 storage token 拼成 Bearer 带头,与这里比对 */
+const MOCK_LOGIN_TOKEN = 'mock-token-for-development-only'
+
+/**
+ * 受保护接口的登录态校验(m1):头不对就回 401 壳 —— 与真后端 Sa-Token 拦截器同语义。
+ * 没有它,「401 → 静默重登 → 重放」整条自愈链路在 USE_MOCK=true 下演练不到(计划 §9.12)。
+ */
+const requireLoginBearer = (
+  o: RequestOptions,
+): { code: number; message: string; data: null } | null =>
+  (o.header ?? {})['Authorization'] === `Bearer ${MOCK_LOGIN_TOKEN}`
+    ? null
+    : { code: 401, message: '未登录或登录已过期', data: null }
 
 // ---------- 路由表 ----------
 type Handler = (opts: RequestOptions) => unknown
@@ -229,26 +240,17 @@ const staticRoutes: Record<string, Handler> = {
     const all = donationsExpanded as DonationRecord[]
     return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   },
-  'GET /tsa/user/me': () => currentUser(),
-  'GET /tsa/community/posts': (o) => pageCommunityPosts((o.data ?? {}) as CommunityQuery),
-  'POST /tsa/community/posts': (o) => {
-    const body = (o.data ?? {}) as Record<string, unknown>
-    const id = `p_${Date.now()}`
-    communityPosts.unshift({
-      id,
-      type: body.type as CommunityPost['type'],
-      author: (body.author as string) ?? '匿名',
-      avatar: (body.avatar as string) ?? '',
-      title: (body.title as string) ?? '',
-      content: (body.content as string) ?? '',
-      images: (body.images as string[]) ?? [],
-      publishTime: new Date().toISOString(),
-      likes: 0,
-      comments: 0,
-      cuisine: body.cuisine as string | undefined,
-      region: body.region as CommunityPost['region'],
-    })
-    return id
+  'GET /tsa/user/me': (o) => requireLoginBearer(o) ?? currentUser(),
+  // C3:无守卫、无 token 幂等 200 data:null(mock 无服务端会话可注销,直接回空壳)
+  'POST /tsa/auth/logout': () => null,
+  // C7 假合并:合法头时返回 currentUser() 按请求体覆盖后的 MemberDetail。
+  // 无档案(MOCK_PROFILE_NULL)时真后端会 INSERT 待审行;mock 直接拿 members[0] 打底覆盖,
+  // 只为让 profile 页在纯 mock 下能走通「提交→回显」,不模拟 status 语义
+  'PUT /tsa/user/profile': (o) => {
+    const denied = requireLoginBearer(o)
+    if (denied) return denied
+    const patch = (o.data ?? {}) as Partial<MemberDetail>
+    return { ...members[0], ...patch }
   },
   'POST /tsa/auth/verify-phone': (o) => {
     // mock 验证不了真实微信链路,职责是跑通「闸门与拒绝态」——
@@ -289,62 +291,28 @@ const dynamicRoutes: Array<{
   {
     method: 'GET',
     pattern: /^\/tsa\/events\/(e\d{3})$/,
-    handler: (m) => events.find((x) => x.id === m[1]) ?? null,
+    handler: (m) => {
+      const e = events.find((x) => x.id === m[1])
+      // C6:查无回 1002 壳,不能再「200 + data:null」装成功
+      if (!e) return { code: 1002, message: '数据不存在', data: null }
+      return toEventDetail(e)
+    },
   },
   {
     method: 'GET',
     pattern: /^\/tsa\/notices\/(n\d{3})$/,
     handler: (m) => notices.find((x) => x.id === m[1]) ?? null,
   },
-  {
-    method: 'GET',
-    pattern: /^\/tsa\/community\/posts\/([^/]+)$/,
-    handler: (m) => {
-      const post = communityDetail(m[1])
-      if (!post) return { code: 1002, message: '动态不存在', data: null }
-      return post
-    },
-  },
-  {
-    method: 'POST',
-    pattern: /^\/tsa\/community\/posts\/([^/]+)\/like$/,
-    handler: (m) => {
-      const post = communityPosts.find((x) => x.id === m[1])
-      if (!post) return { code: 1002, message: '动态不存在', data: null }
-      post.likes += 1
-      return post.likes
-    },
-  },
-  {
-    method: 'POST',
-    pattern: /^\/tsa\/community\/posts\/([^/]+)\/comments$/,
-    handler: (m, o) => {
-      const post = communityPosts.find((x) => x.id === m[1])
-      if (!post) return { code: 1002, message: '动态不存在', data: null }
-      const body = (o.data ?? {}) as Record<string, unknown>
-      const comment: CommentItem = {
-        id: `c_${Date.now()}`,
-        author: (body.author as string) ?? '我',
-        avatar: (body.avatar as string) ?? '',
-        content: (body.content as string) ?? '',
-        createTime: new Date().toISOString(),
-        likes: 0,
-      }
-      post.commentsList = [comment, ...(post.commentsList ?? [])]
-      post.comments += 1
-      return comment
-    },
-  },
-  // 登录/注册在 mock 阶段是假接口:不校验 code,直接发一个假 token
+  // 登录在 mock 阶段是假接口:不校验 code,直接发假 token;user 跟随 m2 开关回 null(新用户无档案态)
   {
     method: 'POST',
     pattern: /^\/tsa\/auth\/wechat-login$/,
-    handler: () => ({ token: 'mock-token-for-development-only', user: currentUser() }),
+    handler: () => ({ token: MOCK_LOGIN_TOKEN, user: currentUser() }),
   },
 ]
 
 const matchDynamic = (key: string): Handler | undefined => {
-  const [method, path] = key.split(' ');
+  const [method, path] = key.split(' ')
   for (const r of dynamicRoutes) {
     if (r.method !== method) continue
     const matched = path.match(r.pattern)
@@ -354,7 +322,7 @@ const matchDynamic = (key: string): Handler | undefined => {
 }
 
 export async function mockDispatch<T>(opts: RequestOptions): Promise<Result<T>> {
-  await delay();
+  await delay()
   const key = `${opts.method ?? 'GET'} ${opts.url}`
   const handler = staticRoutes[key] ?? matchDynamic(key)
 

@@ -155,7 +155,8 @@ const onReset = () => {
 .filter {
   padding: 32rpx 24rpx 8rpx;
   background: var(--td-bg-color-container);
-  border-radius: 24rpx 24rpx 0 0;
+  /* 弹层贴屏幕底边,底角直角是有意设计 */
+  border-radius: var(--td-radius-large) var(--td-radius-large) 0 0;
 }
 .filter__head {
   display: flex;

@@ -4,6 +4,7 @@ import { onShow } from '@dcloudio/uni-app'
 import AgreementPopup from '@/components/AgreementPopup/AgreementPopup.vue'
 import { memberApi } from '@/api/member'
 import { eventApi } from '@/api/event'
+import { buildFileUrl, isMockMode } from '@/utils/request'
 import { formatDate } from '@/utils/format'
 import type { EventListItem } from '@/types/event'
 import type { ProvinceStat } from '@/types/member'
@@ -12,10 +13,7 @@ import type { ProvinceStat } from '@/types/member'
 
 /** 本页路径:tab bar 高亮;tab 页常驻缓存,返回时按它复位 */
 const OWN_PATH = '/pages/index/index'
-const noticeContent = [
-  '王宇彬先生捐赠助力广工潮阳潮南校友会',
-  '坤坤爱心捐赠200万，创造乡会捐赠历史',
-]
+const noticeContent = ['王宇彬先生捐赠助力广工潮阳潮南校友会', '坤坤爱心捐赠，创造乡会捐赠历史']
 
 /** 负责人风采 —— 仅本页展示用,不接口化 */
 interface LeaderShowcase {
@@ -43,12 +41,16 @@ const activePage = ref(OWN_PATH)
 
 /** 协议弹窗显示态:Storage 未记录则强制显示 */
 const showAgreement = ref(uni.getStorageSync('community_agreement_accepted') !== true)
-const onAgree = () => { showAgreement.value = false }
+const onAgree = () => {
+  showAgreement.value = false
+}
 
 const events = ref<EventListItem[]>([])
 const topProvinces = ref<ProvinceStat[]>([])
 const memberTotal = ref(0)
 const upcomingCount = ref(0)
+/** 事件取数是否已落定(成功或失败):空列表时区分「还在拉」与「真没有」,不再无限转圈 */
+const eventsLoaded = ref(false)
 /** 负责人风采轮播当前下标,驱动字幕与缩放 */
 const leaderIndex = ref(0)
 
@@ -62,15 +64,39 @@ const latestEvents = computed(() =>
 /** 当前轮播到的负责人:字幕文字跟着 swiper 的 current 走 */
 const currentLeader = computed(() => LEADERS[leaderIndex.value])
 
-const load = async () => {
-  const [stats, eventList] = await Promise.all([
-    memberApi.getProvinceStats(),
-    eventApi.getList({ pageSize: 50 }),
-  ])
-  topProvinces.value = stats
-  memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
-  events.value = eventList.list
-  upcomingCount.value = eventList.list.filter((e) => e.status === 'upcoming').length
+/**
+ * 两路独立 try-catch —— 旧版 Promise.all 一路失败全卡白(F7 拆雷):
+ * stats 挂了不该把事件区拖没,反之亦然;silentError 让单点失败不打 toast 弹脸。
+ */
+const loadStats = async () => {
+  try {
+    const stats = await memberApi.getProvinceStats({ silentError: true })
+    topProvinces.value = stats
+    memberTotal.value = stats.reduce((s, p) => s + p.count, 0)
+  } catch (err) {
+    console.warn('[home] 乡贤统计拉取失败', err)
+  }
+}
+
+const loadEvents = async () => {
+  try {
+    const eventList = await eventApi.getList({ pageSize: 50 }, { silentError: true })
+    events.value = eventList.list
+    // status 只有 upcoming/past 两态(C5,服务端派生);upcoming 即「近期事件」
+    upcomingCount.value = eventList.list.filter((e) => e.status === 'upcoming').length
+  } catch (err) {
+    console.warn('[home] 事件拉取失败', err)
+    events.value = []
+    upcomingCount.value = 0
+  } finally {
+    eventsLoaded.value = true
+  }
+}
+
+const load = () => {
+  // 并发发出但不互相等待落定:两路各自兜底,谁先回来谁先渲染
+  loadStats()
+  loadEvents()
 }
 
 // 地图已移出 tabBar(原生 map 组件在 tab 页常驻会漏绘到其他页面),改用 navigateTo 入栈打开
@@ -78,6 +104,8 @@ const goMap = () => uni.navigateTo({ url: '/pages/map/index' })
 // 事件列表是 tab 页,只能用 switchTab 互切
 const goEventList = () => uni.switchTab({ url: '/pages/event/list' })
 const goEventDetail = (id: string) => uni.navigateTo({ url: `/pages/event/detail?id=${id}` })
+/** 后端 cover 可能是 /tsa/files 相对路径或外链,统一洗成可渲染地址(与事件列表/详情同款) */
+const coverSrc = (cover: string) => buildFileUrl(cover)
 const goFoundation = (tab: 'rewards' | 'donations') =>
   uni.navigateTo({ url: `/pages/foundation/index?tab=${tab}` })
 
@@ -104,7 +132,7 @@ onShow(() => {
   <view class="page home">
     <!-- 乡会简介 -->
     <view class="home__hero">
-      <text class="home__hero-title">广工潮阳潮南校友会</text>
+      <text class="home__hero-title">广工胶己人</text>
       <text class="home__hero-sub">同是一方水土人 相逢异方倍亲切</text>
       <view class="home__hero-stats">
         <view class="home__stat">
@@ -141,7 +169,9 @@ onShow(() => {
     </view>
     <view class="home__events">
       <view v-if="latestEvents.length === 0" class="home__events-loading">
-        <t-loading theme="circular" size="40rpx" text="加载中" />
+        <!-- 取数未落定转圈;落定后仍为空(失败降级或真没数据)给占位,不再无限转圈 -->
+        <t-loading v-if="!eventsLoaded" theme="circular" size="40rpx" text="加载中" />
+        <t-empty v-else description="暂无事件" />
       </view>
       <view
         v-for="(e, i) in latestEvents"
@@ -154,7 +184,7 @@ onShow(() => {
           v-if="e.cover"
           class="home__event__cover"
           mode="aspectFill"
-          :src="e.cover"
+          :src="coverSrc(e.cover)"
           lazy-load
         />
         <view v-else class="home__event__cover home__event__cover--empty" />
@@ -246,7 +276,14 @@ onShow(() => {
     </view>
 
     <view class="home__foot">
-      <text class="text-placeholder">本页面数据来自本地 mock,切换真后端只需改 .env 一个变量</text>
+      <!-- 文案必须跟着取数模式走:USE_MOCK=false 还说「来自本地 mock」就是提审包里的虚假陈述 -->
+      <text class="text-placeholder">
+        {{
+          isMockMode()
+            ? '本页面数据来自本地 mock,切换真后端只需改 .env 一个变量'
+            : '数据由乡会后台提供'
+        }}
+      </text>
     </view>
 
     <!-- ---- 首次启动协议弹窗 ---- -->
@@ -255,7 +292,7 @@ onShow(() => {
     <!-- 底部悬浮胶囊导航:theme="tag" 选中项带胶囊底色,split=false 去分隔线;文字放默认插槽显示在图标下方 -->
     <t-tab-bar :value="activePage" shape="round" theme="tag" :split="false" @change="onTabChange">
       <t-tab-bar-item value="/pages/index/index" icon="home">首页</t-tab-bar-item>
-      <t-tab-bar-item value="/pages/community/index" icon="chat">社区</t-tab-bar-item>
+      <t-tab-bar-item value="/pages/community/index" icon="chat">广场</t-tab-bar-item>
       <t-tab-bar-item value="/pages/event/list" icon="app">事件</t-tab-bar-item>
       <t-tab-bar-item value="/pages/mine/index" icon="user">我的</t-tab-bar-item>
     </t-tab-bar>
@@ -264,7 +301,7 @@ onShow(() => {
 
 <style lang="less" scoped>
 .home {
-  /* padding 计入 100vh,避免页面多出 40rpx 滚动空间(同社区页修复) */
+  /* padding 计入 100vh,避免页面多出 40rpx 滚动空间(同广场页修复) */
   box-sizing: border-box;
   padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
 }
@@ -503,7 +540,7 @@ onShow(() => {
 .leaders__dot {
   width: 12rpx;
   height: 12rpx;
-  border-radius: 50%;
+  border-radius: var(--td-radius-circle);
   background: var(--td-border-level-1-color);
 }
 .leaders__dot--active {

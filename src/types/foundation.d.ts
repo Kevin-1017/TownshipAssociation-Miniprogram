@@ -10,7 +10,8 @@ export interface FoundationRewardItem {
 export interface FoundationDonationItem {
   id: string
   donorName: string // 捐赠人姓名
-  amount: number // 捐赠金额(元)
+  /** 捐赠金额(元)。秘书处保密口径:默认不下发金额,仅显式公开的记录才有值 */
+  amount?: number
   date: string // ISO 8601
 }
 
@@ -35,6 +36,7 @@ export interface RewardRecord {
 export interface DonationRecord {
   id: string
   donorName: string
-  amount: number // 捐赠金额(元)
+  /** 捐赠金额(元)。后端按保密口径决定下不下发,null=该笔致谢不展示金额 */
+  amount?: number
   date: string
 }

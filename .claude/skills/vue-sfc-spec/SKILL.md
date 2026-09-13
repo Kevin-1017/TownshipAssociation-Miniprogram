@@ -162,6 +162,9 @@ stores/      → 只放跨页面共享状态
 - **只用 Less**,不要引入 Sass/scss(与 TDesign 一致;`src/uni.scss` 是 preset 自带,保留但别往里加东西)。
 - 颜色/圆角等一律用 TDesign CSS 变量 `var(--td-*)`,**不要硬编码色值**。
   - 例外:`cover-view` 内因原生层渲染,变量透传未真机验证,可暂用字面值并注明原因。
+- **所有组件表面必须圆角,禁止直角**:卡片级 `var(--td-radius-large)`,小块 `var(--td-radius-default)`,
+  胶囊 `var(--td-radius-round)`,圆形 `var(--td-radius-circle)`;禁止字面 rpx 值和 `0`。
+  TDesign 组件自带圆角(shape="round"/t-card/t-avatar)时信任组件默认,不要再包一层或 `!important` 覆盖。详见 DEVELOPMENT.md §7。
 - 尺寸用 `rpx`,不用 `px`。
 - 页面私有样式留在页面;跨页面复用的才进 `src/styles/common.less`。
 

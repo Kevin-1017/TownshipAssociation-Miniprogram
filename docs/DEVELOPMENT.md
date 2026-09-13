@@ -385,6 +385,14 @@ if (res.data.code === 0) use(res.data.data)
 - 颜色/圆角/边框一律走 TDesign CSS 变量 `var(--td-*)`,**禁止硬编码色值**。
   - **唯一例外**:`cover-view` 由原生层渲染,CSS 变量是否透传**未在本项目真机验证**,
     必要时可写字面值,但必须在旁边注明原因。
+- **所有组件表面必须圆角,禁止直角**(卡片、弹层、图片容器、输入区、徽标等)。
+  圆角取值只能用 TDesign 主题变量(已在 `tdesign-override.less` 校准):
+  卡片级容器用 `var(--td-radius-large)`,小块元素用 `var(--td-radius-default)`,
+  胶囊形用 `var(--td-radius-round)`,圆形(头像/图标底)用 `var(--td-radius-circle)`。
+  - TDesign 组件自带圆角(t-button `shape="round"`、t-card、t-avatar 等)时**信任组件默认**,
+    不要在外层再包一个圆角或写 `!important` 覆盖。
+  - 禁止 `border-radius: 16rpx` 这类字面值和 `0` 直角;新增表面在 Code Review 时
+    按「有没有圆角、是不是变量」两问验收。
 - 主题色改动只在 `src/styles/tdesign-override.less` 一处。
 - 页面私有样式留在页面;跨页面复用的才进 `src/styles/common.less`,
   且该类工具类**总数超过 20 条时应当抽象成组件**。
@@ -543,6 +551,7 @@ pnpm run type-check && pnpm run lint
 | 手动改 `@dcloudio/*`、`vite`、`vue`、`pinia` 的版本号 | 版本被交叉约束锁死,见 `docs/TECHNOLOGY.md` 版本表               |
 | 在页面里 `uni.request`                                | 绕过统一拆壳、token 注入、mock 分流                             |
 | TDesign 已有 `t-*` 控件还手绘 view+CSS 做等价物       | 丢设计 token/暗色适配/无障碍语义,状态与交互还得自己维护          |
+| 新增表面用直角或硬编码 `border-radius` 字面值         | 全项目圆角靠 `--td-radius-*` 变量统一,字面值会让主题改动失效     |
 | 组件里 import api 发请求                              | 组件不可复用、难测试                                            |
 | `any` 满天飞                                          | 类型是这个项目分层设计的地基                                    |
 | 页面私有状态进 store                                  | store 会变成全局变量垃圾桶                                      |

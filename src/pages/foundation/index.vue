@@ -42,11 +42,16 @@ onLoad((query) => {
 
 /** 按类别分组获奖记录（返回数组避免 v-for 直接遍历对象 key 的 Vue 警告） */
 const groupedRewards = computed(() =>
-  Object.entries(rewardRecords.value.reduce((groups, r) => {
-    if (!groups[r.categoryName]) groups[r.categoryName] = []
-    groups[r.categoryName].push(r)
-    return groups
-  }, {} as Record<string, RewardRecord[]>)).map(([category, records]) => ({ category, records })),
+  Object.entries(
+    rewardRecords.value.reduce(
+      (groups, r) => {
+        if (!groups[r.categoryName]) groups[r.categoryName] = []
+        groups[r.categoryName].push(r)
+        return groups
+      },
+      {} as Record<string, RewardRecord[]>,
+    ),
+  ).map(([category, records]) => ({ category, records })),
 )
 </script>
 
@@ -65,12 +70,22 @@ const groupedRewards = computed(() =>
 
     <!-- Tab 0: 校内奖励 -->
     <view v-else-if="activeTab === 'rewards'" class="foundation-detail__tab">
-      <view v-for="{ category, records } in groupedRewards" :key="category" class="foundation-detail__group">
+      <view
+        v-for="{ category, records } in groupedRewards"
+        :key="category"
+        class="foundation-detail__group"
+      >
         <view class="foundation-detail__group-title">{{ category }}</view>
-        <view v-for="r in records" :key="r.id" class="card foundation-detail__item foundation-detail__item--top">
+        <view
+          v-for="r in records"
+          :key="r.id"
+          class="card foundation-detail__item foundation-detail__item--top"
+        >
           <view class="row row--between">
             <text class="foundation-detail__name">{{ r.recipient }}</text>
-            <text v-if="r.amount" class="foundation-detail__amount">{{ formatAmount(r.amount) }}</text>
+            <text v-if="r.amount" class="foundation-detail__amount">
+              {{ formatAmount(r.amount) }}
+            </text>
           </view>
           <text class="foundation-detail__sub">所属项目 · {{ r.categoryName }}</text>
         </view>
@@ -80,10 +95,17 @@ const groupedRewards = computed(() =>
 
     <!-- Tab 1: 捐赠致谢 -->
     <view v-else class="foundation-detail__tab">
-      <view v-for="d in donationRecords" :key="d.id" class="card foundation-detail__item foundation-detail__item--top">
+      <view
+        v-for="d in donationRecords"
+        :key="d.id"
+        class="card foundation-detail__item foundation-detail__item--top"
+      >
         <view class="row row--between">
           <text class="foundation-detail__name">{{ d.donorName }}</text>
-          <text class="foundation-detail__amount">{{ formatAmount(d.amount) }}</text>
+          <!-- 金额保密口径:后端只下发显式公开的记录(见 FoundationServiceImpl.visibleAmount) -->
+          <text v-if="d.amount" class="foundation-detail__amount">
+            {{ formatAmount(d.amount) }}
+          </text>
         </view>
         <text class="foundation-detail__sub">捐赠日期：{{ formatDate(d.date) }}</text>
       </view>
